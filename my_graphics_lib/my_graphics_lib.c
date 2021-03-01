@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_graphics_lib.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 00:22:38 by razin-ivan9       #+#    #+#             */
-/*   Updated: 2021/02/04 15:01:23 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/03/01 21:10:29 by ldeirdre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void		mgl_run(t_mgl *mgl, void (*run_callback)(void *, int *),
 	{
 		while (SDL_PollEvent(&event))
 		{
-			if (event.type == SDL_QUIT)
+			if (event.type == SDL_QUIT || (SDLK_ESCAPE == \
+		event.key.keysym.sym && event.type == SDL_KEYDOWN))
 				quit = 1;
 			event_callback(&event, param, &quit);
 		}
