@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 14:10:02 by Chorange          #+#    #+#             */
-/*   Updated: 2021/01/15 19:22:07 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/03/01 22:21:30 by ldeirdre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,12 @@ void		mouse_button_down(t_map_editor *ed)
 		ed->player = (t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
 					(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0};
 	else if (ed->step == STEP_8_AIM)
+	{
 		ed->aim = (t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
 					(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0};
+		add_object((t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
+	(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0}, ed->curr_object, ed);
+	}
 	else if (ed->step == STEP_6_AMMO)
 		add_ammo((t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
 					(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0}, ed);

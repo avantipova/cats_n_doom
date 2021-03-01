@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_elements_to_map.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 14:35:35 by Chorange          #+#    #+#             */
-/*   Updated: 2021/01/15 19:22:48 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/03/01 22:34:39 by ldeirdre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,13 @@ void	add_object(t_vertex pos, int number, t_map_editor *ed)
 		return ;
 	}
 	ed->objects[ed->objects_count] = (t_m_e_object){pos, number};
+	if (ed->step == STEP_8_AIM)
+	{
+		ed->objects[ed->objects_count].index = 4;
+	}
+	else if (ed->step == STEP_8_AIM)
+	{
+		ed->objects[ed->objects_count].index = 0;
+	}
 	ed->objects_count++;
 }
