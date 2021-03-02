@@ -40,9 +40,9 @@
 # define MAP_EDITOR_SCALE 10
 
 # include "my_graphics_lib.h"
-# include "../data_types.h"
+# include "data_types.h"
 # include "bsp_helpers.h"
-# include "../duke.h"
+# include "duke.h"
 
 typedef struct		s_bs_cc
 {

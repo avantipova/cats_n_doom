@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../duke.h"
+#include "duke.h"
 #include "editor.h"
 
 int		hash(const char *str)

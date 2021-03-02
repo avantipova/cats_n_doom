@@ -29,7 +29,7 @@
 #define V_SIZE 1
 #define PROJ_PLANE_Z 1
 
-#include "my_graphics_lib/my_graphics_lib.h"
+#include "my_graphics_lib.h"
 
 #include "data.h"
 #include "helpers.h"
@@ -38,8 +38,8 @@
 #include <string.h>
 #include <pthread.h>
 #include <fcntl.h>
-#include "libft/libft.h"
-#include "get_next_line/get_next_line.h"
+#include "libft.h"
+#include "get_next_line.h"
 
 
 void	render_init(t_scene *scene);

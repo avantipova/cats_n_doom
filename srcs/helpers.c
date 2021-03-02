@@ -1,5 +1,6 @@
 int get_i_plus_1(int i, int max)
 {
+	int k;
 	return ((i + 1) % max);
 }
 int get_i_minus_1(int i, int max)
