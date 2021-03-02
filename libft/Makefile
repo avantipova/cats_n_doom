@@ -31,15 +31,15 @@ OBJECTS  = ft_memset.o ft_bzero.o ft_memcpy.o ft_memmove.o ft_memchr.o \
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	ar -rcs $(NAME) $(OBJECTS)
+	@ar -rcs $(NAME) $(OBJECTS)
 
 $(OBJECTS): %.o: %.c
-	gcc -c $(FLAGS) $< -o $@
+	@gcc -c $(FLAGS) $< -o $@
 
 clean:
-	/bin/rm -f $(OBJECTS)
+	@/bin/rm -f $(OBJECTS)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME)
 
 re: fclean all

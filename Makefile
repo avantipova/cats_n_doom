@@ -36,15 +36,20 @@ $(LIBRARY):
 $(NAME): $(OBJECTS) $(LIBRARY)
 	@clang $(LIBRARY) $(FLAGS) $(LIBS) $(FRAMEWORKS) $^ -o $@ $(INCLUDES)
 
+BUILD_PRINT = \x1b[32;01mbuilding...
+CLEAN_PRINT = \x1b[31;01mdeleted all object files
+FCLEAN_PRINT = \x1b[31;01mand executable file
+
 $(OBJECTS_DIR)/%.o: $(SOURCES_DIR)/%.c
 	@mkdir $(OBJECTS_DIR) 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/get_next_line 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/Editor 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/my_graphics_lib 2> /dev/null || true
+	@echo "$(BUILD_PRINT)\n"
 	@clang $(FLAGS) -c $< $(INCLUDES) -o $@
-	
 
 clean:
+	@echo "$(CLEAN_PRINT)\n"
 	@make -C libft clean
 	@rm -rf $(OBJECTS)
 	@rm -rf $(OBJECTS_DIR)/get_next_line 2> /dev/null || true
@@ -52,6 +57,7 @@ clean:
 	@rm -rf $(OBJECTS_DIR)/my_graphics_lib 2> /dev/null || true
 
 fclean: clean
+	@echo "$(FCLEAN_PRINT)\n"
 	@make -C libft fclean
 	@rm -rf $(NAME)
 
