@@ -1,4 +1,5 @@
 #include "duke.h"
+#include "mixer_init.h"
 int		find_place_for_bullet(t_doom *doom)
 {
 	int i;
@@ -1570,12 +1571,14 @@ void	drb_init(t_doom *doom)
 
 int		main(int ac, char **av)
 {
-	t_mgl			mgl;
+	t_mgl	mgl;
+	t_doom	doom;
+	t_music	*music;
 
-	t_doom			doom;
-
+	music = 0;
 	mgl = mgl_init("Doom_Quaekem", W, H, SCREEN_MULTIPLICATOR);
-	
+	music = sound_init();
+	play_music(music->background, PLAY_FOREVER);
 	if (ac < 2)
 		exit(-2);
 
@@ -1713,7 +1716,7 @@ int		main(int ac, char **av)
 
 
 	mgl_run(&mgl, update, event_handle, &doom);
-
+	music_close(music);
 	mgl_quit(&mgl);
 
 	return (0);

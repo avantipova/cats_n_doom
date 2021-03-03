@@ -13,8 +13,8 @@
 #ifndef MY_GRAPHICS_LIB_H
 # define MY_GRAPHICS_LIB_H
 
-# include "../frameworks/SDL2.framework/Headers/SDL.h"
-# include "../frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h"
+# include <SDL2/SDL.h>
+# include <SDL2/SDL_ttf.h>
 
 # include "../libft/libft.h"
 
