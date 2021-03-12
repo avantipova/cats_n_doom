@@ -1,5 +1,6 @@
 #include "duke.h"
 #include "mixer_init.h"
+#include <SDL2/SDL_mixer.h>
 int		find_place_for_bullet(t_doom *doom)
 {
 	int i;
@@ -42,7 +43,10 @@ void	fire(t_doom *doom)
 	doom->drb_anim.curr = 0;
 	doom->drb_anim.curr_f = 0.0;
 	
-
+	if (Mix_PlayChannelTimed(1, doom->music->shotgun, 1, 500) == -1)
+	{
+		ft_putstr(Mix_GetError());
+	}
 }
 void	clean_anim(t_anim *anim)
 {
@@ -1573,12 +1577,11 @@ int		main(int ac, char **av)
 {
 	t_mgl	mgl;
 	t_doom	doom;
-	t_music	*music;
 
-	music = 0;
+	doom.music = 0;
 	mgl = mgl_init("Doom_Quaekem", W, H, SCREEN_MULTIPLICATOR);
-	music = sound_init();
-	play_music(music->background, PLAY_FOREVER);
+	doom.music = sound_init();
+	play_music(doom.music->background, PLAY_FOREVER);
 	if (ac < 2)
 		exit(-2);
 
@@ -1716,7 +1719,7 @@ int		main(int ac, char **av)
 
 
 	mgl_run(&mgl, update, event_handle, &doom);
-	music_close(music);
+	music_close(doom.music);
 	mgl_quit(&mgl);
 
 	return (0);

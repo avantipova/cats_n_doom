@@ -2,7 +2,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-t_music *sound_init(void)
+t_music	*sound_init(void)
 {
 	t_music	*music;
 
@@ -12,6 +12,7 @@ t_music *sound_init(void)
 		exit(EXIT_FAILURE);
 	}
 	mixer_init();
-	music->background = load_music();
+	load_sound(music);
+	load_music(music);
 	return (music);
 }

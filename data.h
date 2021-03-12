@@ -3,6 +3,7 @@
 
 # include "data_types.h"
 # include "my_graphics_lib/my_graphics_lib.h"
+# include "mixer_init.h"
 
 typedef struct	s_plane
 {
@@ -352,7 +353,7 @@ typedef struct	s_doom
 	int			objects_count;
 
 	t_mgl		*mgl;
-
+	t_music		*music;
 }				t_doom;
 
 
