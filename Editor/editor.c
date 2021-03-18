@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   editor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 19:42:13 by Chorange          #+#    #+#             */
-/*   Updated: 2021/02/04 15:01:18 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/03/18 17:38:09 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./editor.h"
+#include "../includes/editor.h"
 
 void	bsp_compile(t_map_editor *ed)
 {
