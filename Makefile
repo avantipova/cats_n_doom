@@ -11,6 +11,8 @@ SRC_NAMES = main.c image_handle.c draw.c interpolate.c linear_algebra.c depth_bu
 				get_next_line/get_next_line.c load_obj.c my_graphics_lib/my_graphics_lib.c\
 				render_init.c textures_handling.c clip_triangle_by_planes.c \
 				clip_1_outside.c clip_2_outsides.c render_triangle.c read_bsp.c ftoa.c Editor/hash.c Editor/hash_2.c \
+				sound/mixer_init.c sound/sound_init.c sound/load_music.c sound/play_music.c sound/music_close.c \
+                sound/load_sound.c
 
 OBJ = $(SRC_NAMES:.c=.o)
 
@@ -21,7 +23,8 @@ OBJECTS = $(addprefix $(OBJECTS_DIR)/,$(OBJ))
 LIBS = -L./libft -lft -lm -framework OpenGL\
 	-framework AppKit -framework OpenCL -framework OpenGL
 
-INCLUDES = -I includes -I./libft/ -I./frameworks/SDL2.framework/Headers -I./my_graphics_lib
+INCLUDES = -I includes -I./libft/ -I./frameworks/SDL2.framework/Headers -I./my_graphics_lib \
+			-I./frameworks/SDL2_mixer.framework/Headers -I./srcs/sound
 
 FRAMEWORKS = -F./frameworks -rpath ./frameworks -framework SDL2 \
 	-framework SDL2_ttf -framework SDL2_mixer -framework SDL2_image
@@ -45,6 +48,7 @@ $(OBJECTS_DIR)/%.o: $(SOURCES_DIR)/%.c
 	@mkdir $(OBJECTS_DIR)/get_next_line 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/Editor 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/my_graphics_lib 2> /dev/null || true
+	@mkdir $(OBJECTS_DIR)/sound 2> /dev/null || true
 	@echo "$(BUILD_PRINT)\n"
 	@clang $(FLAGS) -c $< $(INCLUDES) -o $@
 
@@ -55,6 +59,7 @@ clean:
 	@rm -rf $(OBJECTS_DIR)/get_next_line 2> /dev/null || true
 	@rm -rf $(OBJECTS_DIR)/Editor 2> /dev/null || true
 	@rm -rf $(OBJECTS_DIR)/my_graphics_lib 2> /dev/null || true
+	@rm -rf $(OBJECTS_DIR)/sound 2> /dev/null || true
 
 fclean: clean
 	@echo "$(FCLEAN_PRINT)\n"
