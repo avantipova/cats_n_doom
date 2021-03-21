@@ -1345,7 +1345,6 @@ t_object	create_object(t_vertex pos, int index)
 	object.sprite.instance.position = pos;
 	object.sprite.instance.orientation = make_oy_rot_matrix(0.0);
 	object.sprite.instance.model.anim = NULL;
-	printf("check");
 
 	return (object);
 }
