@@ -20,12 +20,12 @@ SOURCES = main.c image_handle.c draw.c interpolate.c linear_algebra.c depth_buff
 				sound/mixer_init.c sound/sound_init.c sound/load_music.c sound/play_music.c sound/music_close.c \
 				sound/load_sound.c
 
-LIBS = -L./libft -lft -lm -lSDL2 -lSDL2_ttf -lSDL2_mixer -lpthread
+LIBS = -L./libft -lft -lm
 
-INCLUDES = -I./libft/ -I./my_graphics_lib -I./sound #-I./frameworks/SDL2.framework/Headers
+INCLUDES = -I./libft/ -I./my_graphics_lib -I./sound -I./frameworks/SDL2.framework/Headers
 
-#FRAMEWORKS = -F./frameworks -rpath ./frameworks -framework SDL2 \
-#	-framework SDL2_ttf -framework SDL2_mixer -framework SDL2_image
+FRAMEWORKS = -F./frameworks -rpath ./frameworks -framework SDL2 \
+	-framework SDL2_ttf -framework SDL2_mixer -framework SDL2_image
 
 FTPATH = ./libft
 

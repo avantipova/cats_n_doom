@@ -1,8 +1,19 @@
-#include <SDL2/SDL_mixer.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_sound.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjoss <mjoss@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/21 15:52:40 by mjoss             #+#    #+#             */
+/*   Updated: 2021/03/21 15:52:44 by mjoss            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mixer_init.h"
 #include "libft.h"
 
-void load_sound(t_music *music)
+void	load_sound(t_music *music)
 {
 	Mix_Chunk	*shotgun;
 

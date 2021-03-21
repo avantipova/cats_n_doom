@@ -1,7 +1,19 @@
-#ifndef CATS_N_DOOM_MIXER_INIT
-# define CATS_N_DOOM_MIXER_INIT
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mixer_init.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjoss <mjoss@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/21 15:53:04 by mjoss             #+#    #+#             */
+/*   Updated: 2021/03/21 15:54:59 by mjoss            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-# include <SDL2/SDL_mixer.h>
+#ifndef MIXER_INIT_H
+# define MIXER_INIT_H
+
+# include "../frameworks/SDL2_mixer.framework/Headers/SDL_mixer.h"
 
 # define CHUNK_SIZE 4096
 # define CHANNELS 1

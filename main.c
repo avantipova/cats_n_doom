@@ -1,6 +1,6 @@
 #include "duke.h"
 #include "mixer_init.h"
-#include <SDL2/SDL_mixer.h>
+#include "frameworks/SDL2_mixer.framework/Headers/SDL_mixer.h"
 int		find_place_for_bullet(t_doom *doom)
 {
 	int i;

@@ -6,15 +6,15 @@
 /*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 00:05:10 by razin-ivan9       #+#    #+#             */
-/*   Updated: 2021/01/23 12:14:30 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/03/21 15:24:49 by mjoss            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MY_GRAPHICS_LIB_H
 # define MY_GRAPHICS_LIB_H
 
-# include <SDL2/SDL.h>
-# include <SDL2/SDL_ttf.h>
+# include "../frameworks/SDL2.framework/Headers/SDL.h"
+# include "../frameworks/SDL2_ttf.framework/Headers/SDL_ttf.h"
 
 # include "../libft/libft.h"
 
