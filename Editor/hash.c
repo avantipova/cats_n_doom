@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 03:50:48 by razin-ivan9       #+#    #+#             */
-/*   Updated: 2021/01/15 19:21:55 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/03/21 19:22:39 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		hash(const char *str)
 {
-	unsigned int	hash;
+	unsigned int hash;
 
 	hash = 0;
 	while (*str)

@@ -2,7 +2,7 @@
 #ifndef DUKE_H
 # define DUKE_H
 
-# define SCREEN_MULTIPLICATOR 1
+# define SCREEN_MULTIPLICATOR 2
 
 
 

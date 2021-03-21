@@ -1,8 +1,7 @@
 
 NAME = Editor
 
-FLAGS = -Wextra -Wall -Werror
-
+FLAGS = -Wextra -Wall -Werror -fsanitize=address
 
 OBJECTS = editor.o my_graphics_lib.o image_handle.o linear_algebra.o \
 				ftoa.o helpers.o bsp_helpers.o export.o export1.o export2.o export3.o \
@@ -25,29 +24,33 @@ SOURCES = editor.c ../srcs/my_graphics_lib/my_graphics_lib.c ../srcs/image_handl
 LIBS = -L ../libft -lft -lm -framework OpenGL\
 	-framework AppKit -framework OpenCL -framework OpenGL
 
-INCLUDES = -I ../includes -I ../libft -I ../frameworks/SDL2.framework/Headers
+INCLUDES = -I ../includes/ -I../libft/ -I ../frameworks/SDL2.framework/Headers -I ../my_graphics_lib
 
 FRAMEWORKS = -F ../frameworks -rpath ../frameworks -framework SDL2 \
 	-framework SDL2_ttf -framework SDL2_mixer -framework SDL2_image
 
 FTPATH = ../libft
 
-all: $(NAME)
+LIBRARY = ./libft/libft.a
 
-$(NAME): $(OBJECTS)
-	clang $(FLAGS) $(OBJECTS) $(INCLUDES) $(LIBS) $(FRAMEWORKS) -o $@ $<
+$(LIBRARY):
+	@make -C ../libft
 
+all: $(LIBRARY) $(NAME)
 
-$(OBJECTS): $(SOURCES)
-	make -C $(FTPATH)
-	clang $(FLAGS) $(INCLUDES) -o $@ -c $<
+$(NAME): $(OBJECTS) $(LIBRARY)
+	@gcc $(FLAGS) $(OBJECTS) $(INCLUDES) $(LIBS) $(FRAMEWORKS) -o $(NAME)
+
+$(OBJECTS):
+	@gcc $(FLAGS) $(INCLUDES) -c $(SOURCES) 
+	
 
 clean:
-	make -C $(FTPATH) clean
-	/bin/rm -f $(OBJECTS)
+	@make -C $(FTPATH) clean
+	@/bin/rm -f $(OBJECTS)
 
 fclean: clean
-	make -C $(FTPATH) fclean
-	/bin/rm -f $(NAME)
+	@make -C $(FTPATH) fclean
+	@/bin/rm -f $(NAME)
 
 re: fclean all
