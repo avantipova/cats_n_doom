@@ -64,7 +64,7 @@ $(OBJECTS_DIR)/%.o: %.c Compile_print
 clean: Clean_print
 	@make -C libft clean
 	@cd Editor && make clean
-	@rm -rf $(OBJECTS)
+	@rm -rf $(OBJECTS_DIR)
 
 fclean: clean Fclean_print
 	@make -C libft fclean
