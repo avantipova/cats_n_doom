@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_json_3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 22:52:01 by Chorange          #+#    #+#             */
-/*   Updated: 2021/03/01 22:28:30 by ldeirdre         ###   ########.fr       */
+/*   Updated: 2021/03/27 21:24:49 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	check_objects(t_map_editor *ed, int fd)
 	{
 		ft_putstr_fd("{\n\t\t\t\"index\":", fd);
 		printf("%d\n\n",ed->objects[i].index);
-		ed->objects[i].index = 4;
+		ed->objects[i].index = 7;
 		itoa(ed->objects[i].index, str);
 		ft_putstr_fd(str, fd);
 		ft_putstr_fd(", ", fd);

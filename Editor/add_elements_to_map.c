@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 14:35:35 by Chorange          #+#    #+#             */
-/*   Updated: 2021/03/27 19:45:11 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/03/27 21:24:45 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	add_object(t_vertex pos, int number, t_map_editor *ed)
 	ed->objects[ed->objects_count] = (t_m_e_object){pos, number};
 	if (ed->step == STEP_8_AIM)
 	{
-		ed->objects[ed->objects_count].index = 4;
+		ed->objects[ed->objects_count].index = 7;
 	}
 	else if (ed->step == STEP_8_AIM)
 	{
