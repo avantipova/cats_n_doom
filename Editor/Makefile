@@ -1,7 +1,7 @@
 
 NAME = Editor
 
-FLAGS = -Wextra -Wall -Werror -fsanitize=address
+FLAGS = -Wextra -Wall -Werror
 
 OBJECTS = editor.o my_graphics_lib.o image_handle.o linear_algebra.o \
 				ftoa.o helpers.o bsp_helpers.o export.o export1.o export2.o export3.o \
@@ -33,17 +33,16 @@ FTPATH = ../libft
 
 LIBRARY = ./libft/libft.a
 
-$(LIBRARY):
-	@make -C ../libft
-
 all: $(LIBRARY) $(NAME)
 
 $(NAME): $(OBJECTS) $(LIBRARY)
 	@gcc $(FLAGS) $(OBJECTS) $(INCLUDES) $(LIBS) $(FRAMEWORKS) -o $(NAME)
 
-$(OBJECTS):
-	@gcc $(FLAGS) $(INCLUDES) -c $(SOURCES) 
-	
+$(OBJECTS): $(SOURCES)
+	@gcc $(FLAGS) $(INCLUDES) -c $(SOURCES)
+
+$(LIBRARY):
+	@make -C ../libft
 
 clean:
 	@make -C $(FTPATH) clean
@@ -54,3 +53,5 @@ fclean: clean
 	@/bin/rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re NAME
