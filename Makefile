@@ -34,8 +34,8 @@ LIBRARY = ./libft/libft.a
 all: $(LIBRARY) $(NAME) Build_print
 
 $(LIBRARY):
-	@cd Editor && make
-	@make -C libft
+	cd Editor && make
+	make -C libft
 
 $(NAME): $(OBJECTS) $(LIBRARY) 
 	@clang $(LIBRARY) $(FLAGS) $(LIBS) $(FRAMEWORKS) $^ -o $@ $(INCLUDES)
