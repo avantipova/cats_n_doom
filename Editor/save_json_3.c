@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 22:52:01 by Chorange          #+#    #+#             */
-/*   Updated: 2021/03/27 21:24:49 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/03/27 21:30:31 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ void	check_objects(t_map_editor *ed, int fd)
 	while (i < ed->objects_count)
 	{
 		ft_putstr_fd("{\n\t\t\t\"index\":", fd);
-		printf("%d\n\n",ed->objects[i].index);
-		ed->objects[i].index = 7;
+		if (ed->objects[i].exir == 1)
+			ed->objects[i].index = 8;
+		else 
+			ed->objects[i].index = (i + 8) % 8; 
 		itoa(ed->objects[i].index, str);
 		ft_putstr_fd(str, fd);
 		ft_putstr_fd(", ", fd);
