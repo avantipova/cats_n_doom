@@ -178,6 +178,11 @@ void	event_handle(SDL_Event *event, void *doom_ptr, int *quit)
 					exit(-2);
 				}
 			}
+			else if (event->key.keysym.sym == SDLK_ESCAPE)
+			{
+				*quit = 1;
+				exit(-2);
+			}
 		}
 		return ;
 	}
