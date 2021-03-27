@@ -6,7 +6,7 @@
 /*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 14:35:35 by Chorange          #+#    #+#             */
-/*   Updated: 2021/03/01 22:34:39 by ldeirdre         ###   ########.fr       */
+/*   Updated: 2021/03/27 19:37:55 by ldeirdre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,25 @@ void	add_enemy(t_vertex pos, t_map_editor *ed)
 
 void	add_object(t_vertex pos, int number, t_map_editor *ed)
 {
+	int i;
+
+	i = 0;
 	if (ed->objects_count == 39)
 	{
 		ft_putendl("Больше нельзя");
 		return ;
 	}
-	ed->objects[ed->objects_count] = (t_m_e_object){pos, number};
+	ed->objects[ed->objects_count] = (t_m_e_object){pos, number, i};
 	if (ed->step == STEP_8_AIM)
 	{
 		ed->objects[ed->objects_count].index = 4;
+		ed->objects[ed->objects_count].exir = 1;
 	}
-	else if (ed->step == STEP_8_AIM)
+	else if (ed->step != STEP_8_AIM)
 	{
 		ed->objects[ed->objects_count].index = 0;
+		ed->objects[ed->objects_count].exir = 0;
+		
 	}
 	ed->objects_count++;
 }
