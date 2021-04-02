@@ -2,7 +2,7 @@
 #ifndef DUKE_H
 # define DUKE_H
 
-# define SCREEN_MULTIPLICATOR 1
+# define SCREEN_MULTIPLICATOR 2
 
 
 
@@ -28,6 +28,8 @@
 #define CW 1
 #define V_SIZE 1
 #define PROJ_PLANE_Z 1
+
+#include "assets_folder_name.h"
 
 #include "my_graphics_lib.h"
 

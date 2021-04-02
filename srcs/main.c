@@ -1,6 +1,7 @@
 #include "duke.h"
 #include "mixer_init.h"
 #include "SDL_mixer.h"
+#include "archiver.h"
 int		find_place_for_bullet(t_doom *doom)
 {
 	int i;
@@ -123,6 +124,11 @@ void	restart(t_doom *doom)
 	// read_bsp(doom, "bsp_test/new_saved_bsp.json");
 }
 
+void	remove_files()
+{
+	system("rm -rf " ASSETS_FOLDER_NAME);
+}
+
 void	event_handle(SDL_Event *event, void *doom_ptr, int *quit)
 {
 	t_doom *doom;
@@ -172,14 +178,16 @@ void	event_handle(SDL_Event *event, void *doom_ptr, int *quit)
 					}
 					
 				}
-				else if (doom->menu.active == 2)
+				else if (doom->menu.active == 2) //////выход (наеврно надо сделать отдельную функцию на это)
 				{
+					remove_files();
 					*quit = 1;
 					exit(-2);
 				}
 			}
-			else if (event->key.keysym.sym == SDLK_ESCAPE)
+			else if (event->key.keysym.sym == SDLK_ESCAPE) ///////выход (наеврно надо сделать отдельную функцию на это)
 			{
+				remove_files();
 				*quit = 1;
 				exit(-2);
 			}
@@ -628,7 +636,7 @@ void	update_enemies(t_doom *doom)
 	t_vertex		new_pos;
 	int				fd;
 
-	fd = open("/dev/urandom", O_RDONLY);
+	fd = open("/dev/urandom", O_RDONLY); ///////
 	read(fd, str, 160);
 	close(fd);
 
@@ -720,7 +728,7 @@ int		check_enemies(t_doom *doom, t_vertex pos)
 			{
 				damage = 100 / length(sub(doom->scene.camera.position,
 				pos));
-				printf("damage: %d\n", damage);
+				printf("damage: %d\n", damage);////////запрещенная функция
 				doom->enemies[i].health -= damage;
 				if (doom->enemies[i].health <= 0)
 					doom->kills++;
@@ -828,7 +836,7 @@ void	update_ammo(t_doom *doom)
 				doom->scene.camera.position)) < 1.5)
 			{
 				doom->player_ammo += 10;
-				printf("ammo: %d\n", doom->player_ammo);
+				printf("ammo: %d\n", doom->player_ammo);////////запрещенная функция
 				doom->ammo[i].enable = 0;
 			}
 		}
@@ -848,7 +856,7 @@ void	update_aid(t_doom *doom)
 				doom->scene.camera.position)) < 1.5)
 			{
 				doom->health += 30;
-				printf("health: %d\n", doom->health);
+				printf("health: %d\n", doom->health);////////запрещенная функция
 				doom->aid[i].enable = 0;
 			}
 		}
@@ -862,7 +870,7 @@ SDL_Surface* renderText(char *message, char *font_file,
         //Открываем шрифт
         TTF_Font *font = TTF_OpenFont(font_file, fontSize);
         if (font == NULL){
-                puts("TTF_OpenFontError");
+                puts("TTF_OpenFontError"); ////////запрещенная функция
                 return NULL;
         }       
 
@@ -926,14 +934,14 @@ void	draw_hud(t_doom *doom)
 	itoa(doom->health, str2);
 	ft_strcat(str, str2);
 	
-	doom->health_bar = renderText(str, "fonts/DoomsDay.ttf", color, 50);
+	doom->health_bar = renderText(str, ASSETS_FOLDER_NAME "/fonts/DoomsDay.ttf", color, 50);
 	ft_strcpy(str, "||| ");
 	itoa(doom->player_ammo, str2);
 	ft_strcat(str, str2);
 	color.r = 188;
 	color.g = 143;
 	color.b = 43;
-	doom->ammo_bar = renderText(str, "fonts/DoomsDay.ttf", color, 50);
+	doom->ammo_bar = renderText(str, ASSETS_FOLDER_NAME "/fonts/DoomsDay.ttf", color, 50);
 	ft_strcpy(str, "KILLS ");
 	itoa(doom->kills, str2);
 	ft_strcat(str, str2);
@@ -941,7 +949,7 @@ void	draw_hud(t_doom *doom)
 	color.r = 94;
 	color.g = 6;
 	color.b = 6;
-	doom->kills_bar = renderText(str, "fonts/DoomsDay.ttf", color, 50);
+	doom->kills_bar = renderText(str, ASSETS_FOLDER_NAME "/fonts/DoomsDay.ttf", color, 50);
 
 	SDL_Rect rect;
 
@@ -1272,18 +1280,18 @@ t_enemy	create_enemy(t_vertex pos, float beta)
 
 	enemy.beta = beta;
 
-	enemy.walking_anims[0] = load_anim("textures/animm/front/", 4.0, 0xff00ffff);
-	enemy.walking_anims[1] = load_anim("textures/animm/front-left/", 4.0, 0xff00ffff);
-	enemy.walking_anims[2] = load_anim("textures/animm/left/", 4.0, 0xff00ffff);
-	enemy.walking_anims[3] = load_anim("textures/animm/back-left/", 4.0, 0xff00ffff);
-	enemy.walking_anims[4] = load_anim("textures/animm/back/", 4.0, 0xff00ffff);
-	enemy.walking_anims[5] = load_anim("textures/animm/back-right/", 4.0, 0xff00ffff);
-	enemy.walking_anims[6] = load_anim("textures/animm/right/", 4.0, 0xff00ffff);
-	enemy.walking_anims[7] = load_anim("textures/animm/front-right/", 4.0, 0xff00ffff);
+	enemy.walking_anims[0] = load_anim(ASSETS_FOLDER_NAME "/textures/animm/front/", 4.0, 0xff00ffff);
+	enemy.walking_anims[1] = load_anim(ASSETS_FOLDER_NAME "/textures/animm/front-left/", 4.0, 0xff00ffff);
+	enemy.walking_anims[2] = load_anim(ASSETS_FOLDER_NAME "/textures/animm/left/", 4.0, 0xff00ffff);
+	enemy.walking_anims[3] = load_anim(ASSETS_FOLDER_NAME "/textures/animm/back-left/", 4.0, 0xff00ffff);
+	enemy.walking_anims[4] = load_anim(ASSETS_FOLDER_NAME "/textures/animm/back/", 4.0, 0xff00ffff);
+	enemy.walking_anims[5] = load_anim(ASSETS_FOLDER_NAME "/textures/animm/back-right/", 4.0, 0xff00ffff);
+	enemy.walking_anims[6] = load_anim(ASSETS_FOLDER_NAME "/textures/animm/right/", 4.0, 0xff00ffff);
+	enemy.walking_anims[7] = load_anim(ASSETS_FOLDER_NAME "/textures/animm/front-right/", 4.0, 0xff00ffff);
 
-	enemy.attak_anim = load_anim("textures/attak/", 4.0, 0xff00ffff);
-	enemy.damage_anim = load_anim("textures/damage/", 4.0, 0xff00ffff);
-	enemy.death_anim = load_anim("textures/death/", 4.0, 0xff00ffff);
+	enemy.attak_anim = load_anim(ASSETS_FOLDER_NAME "/textures/attak/", 4.0, 0xff00ffff);
+	enemy.damage_anim = load_anim(ASSETS_FOLDER_NAME "/textures/damage/", 4.0, 0xff00ffff);
+	enemy.death_anim = load_anim(ASSETS_FOLDER_NAME "/textures/death/", 4.0, 0xff00ffff);
 
 	enemy.sprite.instance.model.anim = &enemy.walking_anims[0];
 	enemy.sprite.instance.model.new_tex[0] = enemy.sprite.instance.model.anim->frames[0];
@@ -1338,7 +1346,7 @@ t_object	create_object(t_vertex pos, int index)
 	char str[64];
 	char str2[64];
 
-	ft_strcpy(str, "textures/sprites/");
+	ft_strcpy(str, ASSETS_FOLDER_NAME "/textures/sprites/");
 	itoa(index, str2);
 	ft_strcat(str, str2);
 	ft_strcat(str, ".bmp");
@@ -1384,7 +1392,7 @@ void	create_tv(t_doom *doom)
 	tv_model.triangles[1].uvs[2] = (t_point) {1.0, 1.0,0.0};
 
 	
-	doom->tv.anim = load_anim("textures/anim1/", 15.0, 0);
+	doom->tv.anim = load_anim(ASSETS_FOLDER_NAME "/textures/anim1/", 15.0, 0);
 	doom->tv.anim.played = 1;
 	doom->tv.sprite.instance.model.anim = &doom->tv.anim;
 	doom->tv.anim.curr_f = 0.0;
@@ -1435,7 +1443,7 @@ void	bullets_init(t_doom *doom)
 	bullet_model.triangles[1].uvs[1] = (t_point) {1.0, 0.0,0.0};
 	bullet_model.triangles[1].uvs[2] = (t_point) {1.0, 1.0,0.0};
 
-	bullet_model.new_tex[0] = create_texture("textures/bullet.bmp", 0xfffaff08);
+	bullet_model.new_tex[0] = create_texture(ASSETS_FOLDER_NAME "/textures/bullet.bmp", 0xfffaff08);
 	bullet_model.new_tex[0]->flags = 0xfffaff08;
 
 	bullet_model.anim = NULL;
@@ -1492,7 +1500,7 @@ void	ammo_init(t_doom *doom)
 	ammo_model.triangles[1].uvs[1] = (t_point) {1.0, 0.0,0.0};
 	ammo_model.triangles[1].uvs[2] = (t_point) {1.0, 1.0,0.0};
 
-	ammo_model.new_tex[0] = create_texture("textures/ammo.bmp", 0xff00feff);/////
+	ammo_model.new_tex[0] = create_texture(ASSETS_FOLDER_NAME "/textures/ammo.bmp", 0xff00feff);/////
 	ammo_model.new_tex[0]->flags = 0xff00feff;
 
 	ammo_model.anim = NULL;
@@ -1549,7 +1557,7 @@ void	aid_init(t_doom *doom)
 	aid_model.triangles[1].uvs[1] = (t_point) {1.0, 0.0,0.0};
 	aid_model.triangles[1].uvs[2] = (t_point) {1.0, 1.0,0.0};
 
-	aid_model.new_tex[0] = create_texture("textures/aid.bmp", 0xff00feff);
+	aid_model.new_tex[0] = create_texture(ASSETS_FOLDER_NAME "/textures/aid.bmp", 0xff00feff);
 	aid_model.new_tex[0]->flags = 0xff00feff;
 
 	aid_model.anim = NULL;
@@ -1571,7 +1579,7 @@ void	aid_init(t_doom *doom)
 
 void	drb_init(t_doom *doom)
 {
-	doom->drb_anim = load_anim("textures/drb/", 15, 0xff00ffff);
+	doom->drb_anim = load_anim(ASSETS_FOLDER_NAME "/textures/drb/", 15, 0xff00ffff);
 	
 	doom->drb_anim.curr = -1;
 }
@@ -1583,11 +1591,28 @@ int		main(int ac, char **av)
 	t_doom	doom;
 
 	doom.music = 0;
-	mgl = mgl_init("Doom_Quaekem", W, H, SCREEN_MULTIPLICATOR);
-	doom.music = sound_init();
-	play_music(doom.music->background, PLAY_FOREVER);
+
 	if (ac < 2)
 		exit(-2);
+
+	dearchivate(av[1]);
+
+	if (!check_hash(ASSETS_FOLDER_NAME "/"))
+	{
+		ft_putendl("Файлы повреждены");
+		exit(-2);
+	}
+	puts("OK");
+
+	mgl = mgl_init("Doom_Quaekem", W, H, SCREEN_MULTIPLICATOR);
+	doom.music = sound_init();
+
+//загрузка музона
+
+
+
+	play_music(doom.music->background, PLAY_FOREVER);
+	
 
 
 	mgl.show_fps = 1;
@@ -1604,12 +1629,12 @@ int		main(int ac, char **av)
 
 
 	doom.scene.level.instance.model.anim = NULL;
-	doom.scene.level.instance.model.new_tex[0] = create_texture("textures/1.bmp", 0);
-	doom.scene.level.instance.model.new_tex[1] = create_texture("textures/2.bmp", 0);
-	doom.scene.level.instance.model.new_tex[2] = create_texture("textures/3.bmp", 0);
-	doom.scene.level.instance.model.new_tex[3] = create_texture("textures/4.bmp", 0);
-	doom.scene.level.instance.model.new_tex[4] = create_texture("textures/5.bmp", 0);
-	doom.scene.level.instance.model.new_tex[5] = create_texture("textures/6.bmp", 0);
+	doom.scene.level.instance.model.new_tex[0] = create_texture(ASSETS_FOLDER_NAME "/textures/1.bmp", 0);////
+	doom.scene.level.instance.model.new_tex[1] = create_texture(ASSETS_FOLDER_NAME "/textures/2.bmp", 0);////
+	doom.scene.level.instance.model.new_tex[2] = create_texture(ASSETS_FOLDER_NAME "/textures/3.bmp", 0);////
+	doom.scene.level.instance.model.new_tex[3] = create_texture(ASSETS_FOLDER_NAME "/textures/4.bmp", 0);////
+	doom.scene.level.instance.model.new_tex[4] = create_texture(ASSETS_FOLDER_NAME "/textures/5.bmp", 0); ////
+	doom.scene.level.instance.model.new_tex[5] = create_texture(ASSETS_FOLDER_NAME "/textures/6.bmp", 0); ////
 
 	
 
@@ -1647,22 +1672,15 @@ int		main(int ac, char **av)
 
 
 	
-	if (!check_hash(av[1]))
-	{
-		ft_putendl("Файлы повреждены");
-		exit(-2);
-	}
-	puts("OK");
-		
-	
 
+		
 
 	bullets_init(&doom);
 	ammo_init(&doom);
 	aid_init(&doom);
 	drb_init(&doom);
 
-	level_init(&doom, av[1]);
+	level_init(&doom, ASSETS_FOLDER_NAME "/");
 	render_init(&doom.scene);
 	clipping_planes_init(&doom.scene);
 	controls_init(&doom);
@@ -1677,22 +1695,22 @@ int		main(int ac, char **av)
 
 	SDL_Surface *temp;
 
-	doom.menu_back = create_texture("textures/menu.bmp", 0);//renderText("lol", "fonts/DoomsDay.ttf", color, 300);
+	doom.menu_back = create_texture(ASSETS_FOLDER_NAME "/textures/menu.bmp", 0);
 
 	doom.menu.active = 0;
-	doom.menu.play = renderText("PLAY", "fonts/DoomsDay.ttf", color, 100);
-	doom.menu.difficulty_1 = renderText("DIFFICULTY LVL 1", "fonts/DoomsDay.ttf", color, 100);
-	doom.menu.difficulty_2 = renderText("DIFFICULTY LVL 2", "fonts/DoomsDay.ttf", color, 100);
-	doom.menu.difficulty_3 = renderText("DIFFICULTY LVL 3", "fonts/DoomsDay.ttf", color, 100);
-	doom.menu.exit_b = renderText("EXIT", "fonts/DoomsDay.ttf", color, 100);
+	doom.menu.play = renderText("PLAY", ASSETS_FOLDER_NAME "/fonts/DoomsDay.ttf", color, 100);
+	doom.menu.difficulty_1 = renderText("DIFFICULTY LVL 1", ASSETS_FOLDER_NAME "/fonts/DoomsDay.ttf", color, 100);
+	doom.menu.difficulty_2 = renderText("DIFFICULTY LVL 2", ASSETS_FOLDER_NAME "/fonts/DoomsDay.ttf", color, 100);
+	doom.menu.difficulty_3 = renderText("DIFFICULTY LVL 3", ASSETS_FOLDER_NAME "/fonts/DoomsDay.ttf", color, 100);
+	doom.menu.exit_b = renderText("EXIT", ASSETS_FOLDER_NAME "/fonts/DoomsDay.ttf", color, 100);
 	color.r = 255;
-	color.g =255;
+	color.g = 255;
 	color.b = 255;
-	doom.press_f = renderText("Press F", "fonts/DoomsDay.ttf", color, 70);
+	doom.press_f = renderText("Press F", ASSETS_FOLDER_NAME "/fonts/DoomsDay.ttf", color, 70);
 
 
-	doom.win_surface = create_texture("textures/menu.bmp", 0);
-	doom.lose_surface = create_texture("textures/menu.bmp", 0);
+	doom.win_surface = create_texture(ASSETS_FOLDER_NAME "/textures/menu.bmp", 0);
+	doom.lose_surface = create_texture(ASSETS_FOLDER_NAME "/textures/menu.bmp", 0);
 
 
 	SDL_Rect rect;
@@ -1707,7 +1725,7 @@ int		main(int ac, char **av)
 	color.g = 151;
 	color.b = 35;
 	
-	temp = renderText("WIN", "fonts/DoomsDay.ttf", color, 300);
+	temp = renderText("WIN", ASSETS_FOLDER_NAME "/fonts/DoomsDay.ttf", color, 300);
 	SDL_BlitScaled(temp, &rect, doom.win_surface, NULL);
 	
 	color.r = 94;
@@ -1715,7 +1733,7 @@ int		main(int ac, char **av)
 	color.b = 6;
 
 	SDL_FreeSurface(temp);
-	temp = renderText("LOSE", "fonts/DoomsDay.ttf", color, 300);
+	temp = renderText("LOSE", ASSETS_FOLDER_NAME "/fonts/DoomsDay.ttf", color, 300);
 	SDL_BlitScaled(temp, &rect, doom.lose_surface, NULL);
 
 	SDL_FreeSurface(temp);

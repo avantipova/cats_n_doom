@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mixer_init.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjoss <mjoss@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 15:53:04 by mjoss             #+#    #+#             */
-/*   Updated: 2021/03/21 15:54:59 by mjoss            ###   ########.fr       */
+/*   Updated: 2021/04/03 01:22:02 by Chorange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 # define MIXER_INIT_H
 
 # include "../frameworks/SDL2_mixer.framework/Headers/SDL_mixer.h"
+# include "assets_folder_name.h"
+
 
 # define CHUNK_SIZE 4096
 # define CHANNELS 1
-# define BACKGROUND_MUSIC "sounds/E2M3_intermission.mp3"
-# define SHOTGUN_SOUND "sounds/shotgun.wav"
+# define BACKGROUND_MUSIC ASSETS_FOLDER_NAME "/sounds/E2M3_intermission.mp3"
+# define SHOTGUN_SOUND ASSETS_FOLDER_NAME "/sounds/shotgun.wav"
 # define PLAY_FOREVER -1
 
 typedef struct	s_music

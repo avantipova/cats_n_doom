@@ -6,7 +6,7 @@
 /*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 19:42:13 by Chorange          #+#    #+#             */
-/*   Updated: 2021/02/04 15:01:18 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/04/03 01:46:19 by Chorange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		main(void)
 	mgl = mgl_init("Map Editor BSP", W, H, SCREEN_MULTIPLICATOR);
 
 	mgl.show_fps = 0;
-	map_editor.cursor_surface = SDL_LoadBMP("../textures/cursor.bmp");
+	map_editor.cursor_surface = SDL_LoadBMP("textures/cursor.bmp");
 	map_editor.cursor =
 			SDL_CreateColorCursor(map_editor.cursor_surface, 0, 0);
 	SDL_SetCursor(map_editor.cursor);

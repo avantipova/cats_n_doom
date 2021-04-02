@@ -10,7 +10,7 @@ OBJECTS = editor.o my_graphics_lib.o image_handle.o linear_algebra.o \
 				console_instructions_1.o console_instructions_2.o cursor_on_line_on_point.o \
 				new_sector_new_point.o select_sector_by_bsp.o plus_minus_enter_keys.o bsp_recurse.o\
 				reconstruct_circuits.o key_down.o get_cutter.o computing_walls_1.o computing_walls_2.o \
-				save_json_1.o save_json_2.o save_json_3.o hash_2.o \
+				save_json_1.o save_json_2.o save_json_3.o hash_2.o archiver.o get_next_line.o\
 
 SOURCES = editor.c ../srcs/my_graphics_lib/my_graphics_lib.c ../srcs/image_handle.c ../srcs/linear_algebra.c \
 				../srcs/ftoa.c ../srcs/helpers.c bsp_helpers.c export.c export1.c export2.c export3.c \
@@ -19,12 +19,12 @@ SOURCES = editor.c ../srcs/my_graphics_lib/my_graphics_lib.c ../srcs/image_handl
 				console_instructions_1.c console_instructions_2.c cursor_on_line_on_point.c \
 				new_sector_new_point.c select_sector_by_bsp.c plus_minus_enter_keys.c bsp_recurse.c \
 				reconstruct_circuits.c key_down.c get_cutter.c computing_walls_1.c computing_walls_2.c \
-				save_json_1.c save_json_2.c save_json_3.c hash_2.c \
+				save_json_1.c save_json_2.c save_json_3.c hash_2.c ../Archiver/archiver.c ../srcs/get_next_line/get_next_line.c\
 
 LIBS = -L ../libft -lft -lm -framework OpenGL\
 	-framework AppKit -framework OpenCL -framework OpenGL
 
-INCLUDES = -I ../includes/ -I../libft/ -I ../frameworks/SDL2.framework/Headers -I ../my_graphics_lib
+INCLUDES = -I ../includes/ -I../libft/ -I ../frameworks/SDL2.framework/Headers -I ../my_graphics_lib -I ../Archiver
 
 FRAMEWORKS = -F ../frameworks -rpath ../frameworks -framework SDL2 \
 	-framework SDL2_ttf -framework SDL2_mixer -framework SDL2_image
@@ -36,10 +36,10 @@ LIBRARY = ./libft/libft.a
 all: $(LIBRARY) $(NAME)
 
 $(NAME): $(OBJECTS) $(LIBRARY)
-	@gcc $(FLAGS) $(OBJECTS) $(INCLUDES) $(LIBS) $(FRAMEWORKS) -o $(NAME)
+	@gcc $(FLAGS) $(OBJECTS) $(INCLUDES) $(LIBS) $(FRAMEWORKS) -g3 -fsanitize=address -o $(NAME)
 
 $(OBJECTS): $(SOURCES)
-	@gcc $(FLAGS) $(INCLUDES) -c $(SOURCES)
+	@gcc $(FLAGS) $(INCLUDES) -g3 -fsanitize=address -c $(SOURCES)
 
 $(LIBRARY):
 	@make -C ../libft
