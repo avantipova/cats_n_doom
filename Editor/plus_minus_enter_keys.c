@@ -6,7 +6,7 @@
 /*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 14:12:35 by Chorange          #+#    #+#             */
-/*   Updated: 2021/04/03 01:42:42 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/04/03 02:26:42 by Chorange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,10 +147,6 @@ void			key_enter_down(t_map_editor *ed)
 	}
 	else if (ed->step == STEP_12_SAVE)
 	{
-		// export_map(ed);
-		// save_json(&ed->root, ed);
-		// set_hash();
-		// archivate(files_names_init());
 		save_archive(ed);
 		ed->mode = RENDER_MODE_TRS;
 	}

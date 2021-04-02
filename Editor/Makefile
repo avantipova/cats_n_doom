@@ -36,10 +36,10 @@ LIBRARY = ./libft/libft.a
 all: $(LIBRARY) $(NAME)
 
 $(NAME): $(OBJECTS) $(LIBRARY)
-	@gcc $(FLAGS) $(OBJECTS) $(INCLUDES) $(LIBS) $(FRAMEWORKS) -g3 -fsanitize=address -o $(NAME)
+	@gcc $(FLAGS) $(OBJECTS) $(INCLUDES) $(LIBS) $(FRAMEWORKS) -o $(NAME)
 
 $(OBJECTS): $(SOURCES)
-	@gcc $(FLAGS) $(INCLUDES) -g3 -fsanitize=address -c $(SOURCES)
+	@gcc $(FLAGS) $(INCLUDES) -c $(SOURCES)
 
 $(LIBRARY):
 	@make -C ../libft
