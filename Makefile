@@ -14,7 +14,7 @@ SRC_NAMES = srcs/main.c srcs/image_handle.c srcs/draw.c srcs/interpolate.c srcs/
 				Editor/hash.c Editor/hash_2.c \
 				srcs/sound/mixer_init.c srcs/sound/sound_init.c srcs/sound/load_music.c \
 				srcs/sound/play_music.c srcs/sound/music_close.c \
-                srcs/sound/load_sound.c \
+                srcs/sound/load_sound.c Archiver/dearchiver.c\
 
 OBJ = $(SRC_NAMES:.c=.o)
 
@@ -24,7 +24,7 @@ LIBS = -L./libft -lft -lm -framework OpenGL\
 	-framework AppKit -framework OpenCL -framework OpenGL
 
 INCLUDES = -I includes -I Editor -I./libft/ -I./frameworks/SDL2.framework/Headers -I./my_graphics_lib \
-			-I./frameworks/SDL2_mixer.framework/Headers -I./srcs/sound
+			-I./frameworks/SDL2_mixer.framework/Headers -I./srcs/sound -I./Archiver
 
 FRAMEWORKS = -F./frameworks -rpath ./frameworks -framework SDL2 \
 	-framework SDL2_ttf -framework SDL2_mixer -framework SDL2_image
@@ -61,6 +61,7 @@ $(OBJECTS_DIR)/%.o: %.c Compile_print
 	@mkdir $(OBJECTS_DIR) 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/srcs 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/Editor 2> /dev/null || true
+	@mkdir $(OBJECTS_DIR)/Archiver 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/srcs/get_next_line 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/srcs/my_graphics_lib 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/srcs/sound 2> /dev/null || true

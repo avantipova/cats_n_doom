@@ -6,7 +6,7 @@
 /*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 02:41:02 by Chorange          #+#    #+#             */
-/*   Updated: 2021/01/15 02:47:29 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/04/03 00:31:06 by Chorange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ void	set_hash_2(char *str1, char *str2, int hash_n)
 	close(fd2);
 	free(str1);
 	free(str2);
-	ft_putendl("Сохранено!");
+	ft_putendl("Защитный хеш создан!");
+	ft_putendl("Архивация...");
+
 }

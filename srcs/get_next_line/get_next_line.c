@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chorange <chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 18:27:42 by chorange          #+#    #+#             */
-/*   Updated: 2019/04/17 18:27:43 by chorange         ###   ########.fr       */
+/*   Updated: 2021/04/03 00:44:58 by Chorange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,18 @@ static t_list	*get_struct(t_list **file, int fd)
 			return (tmp);
 		tmp = tmp->next;
 	}
-	tmp = ft_lstnew("\0", fd);
+	if (fd == 0)
+	{
+		tmp = ft_lstnew(NULL, fd);
+		if ((tmp->content = malloc(1)) == NULL)
+		{
+			free(tmp);
+			return (NULL);
+		}
+		ft_memcpy(tmp->content, "", 1);
+	}
+	else
+		tmp = ft_lstnew("", fd);
 	ft_lstadd(file, tmp);
 	*file = tmp;
 	return (*file);

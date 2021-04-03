@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 14:10:02 by Chorange          #+#    #+#             */
-/*   Updated: 2021/03/27 19:43:06 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/04/03 01:46:08 by Chorange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		mouse_motion(t_map_editor *ed)
 	{
 		SDL_FreeSurface(ed->cursor_surface);
 		SDL_FreeCursor(ed->cursor);
-		ed->cursor_surface = SDL_LoadBMP("../textures/cursor-2.bmp");
+		ed->cursor_surface = SDL_LoadBMP("textures/cursor-2.bmp");
 		ed->cursor = SDL_CreateColorCursor(ed->cursor_surface, 5, 5);
 		SDL_SetCursor(ed->cursor);
 	}
@@ -26,7 +26,7 @@ void		mouse_motion(t_map_editor *ed)
 	{
 		SDL_FreeSurface(ed->cursor_surface);
 		SDL_FreeCursor(ed->cursor);
-		ed->cursor_surface = SDL_LoadBMP("../textures/cursor.bmp");
+		ed->cursor_surface = SDL_LoadBMP("textures/cursor.bmp");
 		ed->cursor = SDL_CreateColorCursor(ed->cursor_surface, 5, 5);
 		SDL_SetCursor(ed->cursor);
 	}

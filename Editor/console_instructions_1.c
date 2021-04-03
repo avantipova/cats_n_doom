@@ -6,7 +6,7 @@
 /*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 14:29:11 by Chorange          #+#    #+#             */
-/*   Updated: 2021/01/15 19:22:42 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/04/03 00:30:34 by Chorange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	write_instructions(t_map_editor *ed)
 	else if (ed->step == STEP_11_ENEMIES)
 		ft_putendl("Расположите врагов на карте");
 	else if (ed->step == STEP_12_SAVE)
-		ft_putendl("Сохранение...");
+		ft_putendl("Файл сохранен!");
 }
 
 void	write_object_num(t_map_editor *ed)
