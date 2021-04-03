@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clip_triangle_by_planes.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjoss <mjoss@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/27 20:15:24 by mjoss             #+#    #+#             */
+/*   Updated: 2021/04/03 19:44:31 by mjoss            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "duke.h"
 
 void	classify_vertexes(t_clip_triangle *cl, t_model *model, int k, int i)
@@ -45,7 +57,6 @@ int		clip_tr(t_clip_triangle *cl, t_model *model, int k, int i)
 	cl->inside_count = 0;
 
 	classify_vertexes(cl, model, k, i);
-
 	if (cl->outside_count > 2)
 	{
 		return(0);
@@ -70,16 +81,13 @@ int		clip_triangle(t_triangle *trs, t_plane *planes, t_model *model)///count unu
 {
 	int				k;
 	int				i;
-	
+	int 			r;
 	t_clip_triangle	cl;
-
 	int				l_prev;
 	
 	cl.crop[0][0] = trs[0];
 	cl.planes = planes;
-
 	l_prev = 1;
-
 	k = 0;
 	while (k < 5)
 	{	
@@ -97,11 +105,13 @@ int		clip_triangle(t_triangle *trs, t_plane *planes, t_model *model)///count unu
 		l_prev = cl.l;
 		k++;
 	}
-	for (int r = 0; r < l_prev; r++)
+	r = 0;
+	while (r < l_prev)
 	{
 		model->triangles[model->triangles_count] = cl.crop[5][r];
 		model->triangles[model->triangles_count].used = r;
 		model->triangles_count++;
+		r++;
 	}
 	return (0);
 }

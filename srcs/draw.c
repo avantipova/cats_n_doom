@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjoss <mjoss@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/27 20:23:59 by mjoss             #+#    #+#             */
+/*   Updated: 2021/04/03 19:44:31 by mjoss            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "duke.h"
 
-void render_model(int *image_data, t_model *model, t_scene *scene)
+void	render_model(int *image_data, t_model *model, t_scene *scene)
 {
 	int i;
 
@@ -12,14 +24,14 @@ void render_model(int *image_data, t_model *model, t_scene *scene)
 	}
 	i = 0;
 	while (i < model->triangles_count)
-	{	
+	{
 		render_triangle(image_data, model, &model->triangles[i], scene);
 		i++;
 	}
 }
 
-
-int		check_bounds_radius(t_instance *instance, t_scene *scene, t_mat4x4 *transform)
+int		check_bounds_radius(t_instance *instance, t_scene *scene,
+									t_mat4x4 *transform)
 {
 	t_vertex4	tmp;
 	t_vertex	center;
@@ -28,15 +40,12 @@ int		check_bounds_radius(t_instance *instance, t_scene *scene, t_mat4x4 *transfo
 	float		distance2;
 
 	radius2 = instance->model.bounds_radius * instance->scale;
-	
 	tmp = multiply_m_v(*transform, (t_vertex4){
 									instance->model.bounds_center.x,
 									instance->model.bounds_center.y,
 									instance->model.bounds_center.z,
 									1.0
 									});
-
-
 	center = (t_vertex){tmp.x, tmp.y, tmp.z};
 	i = 0;
 	while (i < 5)
@@ -50,7 +59,8 @@ int		check_bounds_radius(t_instance *instance, t_scene *scene, t_mat4x4 *transfo
 	return (1);
 }
 
-void	transform_vertexes(t_model *model, t_instance *instance, t_mat4x4 *transform)
+void	transform_vertexes(t_model *model, t_instance *instance,
+								t_mat4x4 *transform)
 {
 	int			i;
 	t_vertex4	tmp;
@@ -71,12 +81,13 @@ void	transform_vertexes(t_model *model, t_instance *instance, t_mat4x4 *transfor
 	}
 }
 
-void	clip_triangles( t_model *model, t_instance *instance, t_scene *scene, int lol)///////
+void	clip_triangles(t_model *model, t_instance *instance,
+							t_scene *scene, int lol)
 {
 	int			i;
 	t_triangle	curr;
 	t_vertex	centre;
-	
+
 	i = 0;
 	while (i < instance->model.triangles_count)
 	{
@@ -84,7 +95,6 @@ void	clip_triangles( t_model *model, t_instance *instance, t_scene *scene, int l
 		centre = multiply(sub(instance->model.vertexes[curr.indexes[0]],
 			scene->camera.position), -1.0);
 		curr.tex = instance->model.new_tex[0];
-
 		if (dot(centre, curr.normal) >= 0.0 || lol)
 		{
 			clip_triangle(&curr, scene->clipping_planes, model);
@@ -93,24 +103,22 @@ void	clip_triangles( t_model *model, t_instance *instance, t_scene *scene, int l
 	}
 }
 
-int classify_point(t_vertex cam, t_vertex line, t_vertex normal)
+int		classify_point(t_vertex cam, t_vertex line, t_vertex normal)
 {
-	t_vertex new;
+	t_vertex	new;
 
 	cam.z = 0.0;
 	normal.z = 0.0;
-
 	new = (t_vertex){cam.x, line.x * cam.x + line.y, 0.0};
-
 	if (dot(sub(new, cam), normal) < 0.0)
 		return (BACK);
 	return (FRONT);
 }
 
-
-void	bsp_render_traversal(t_bsp *node, t_scene *scene, t_instance *instance, t_model *model)
+void	bsp_render_traversal(t_bsp *node, t_scene *scene,
+								t_instance *instance, t_model *model)
 {
-	int i;
+	int			i;
 	t_triangle	curr;
 	t_vertex	centre;
 
@@ -123,11 +131,9 @@ void	bsp_render_traversal(t_bsp *node, t_scene *scene, t_instance *instance, t_m
 			curr.indexes[0] = node->vt_trs[i].ids[0];
 			curr.indexes[1] = node->vt_trs[i].ids[1];
 			curr.indexes[2] = node->vt_trs[i].ids[2];
-
 			curr.uvs[0] = instance->model.uvs[node->vt_trs[i].uv_ids[0]];
 			curr.uvs[1] = instance->model.uvs[node->vt_trs[i].uv_ids[1]];
 			curr.uvs[2] = instance->model.uvs[node->vt_trs[i].uv_ids[2]];
-
 			centre = multiply(sub(instance->model.vertexes[curr.indexes[0]],
 				scene->camera.position), -1.0);
 			if (node->vt_trs[i].type == TR_TYPE_WALL)
@@ -136,7 +142,6 @@ void	bsp_render_traversal(t_bsp *node, t_scene *scene, t_instance *instance, t_m
 				curr.tex = instance->model.new_tex[node->floor_tex];
 			else
 				curr.tex = instance->model.new_tex[node->ceil_tex];
-
 			if (dot(centre, curr.normal) >= 0.0)
 			{
 				clip_triangle(&curr, scene->clipping_planes, model);
@@ -160,29 +165,24 @@ void	bsp_render_traversal(t_bsp *node, t_scene *scene, t_instance *instance, t_m
 	}
 }
 
-
-t_model	*transform_and_clip(t_instance *instance,t_mat4x4 transform, t_scene *scene, int mode)
+t_model	*transform_and_clip(t_instance *instance, t_mat4x4 transform,
+							t_scene *scene, int mode)
 {
 	t_model		*model;
 
 	model = &scene->render_tr->rendered;
-
 	model->vertexes_count = 0;
 	model->triangles_count = 0;
 	model->uvs_count = 0;
-
 	if (!check_bounds_radius(instance, scene, &transform))
 	{
 		return (NULL);
 	}
-
 	transform_vertexes(model, instance, &transform);
-	
-	if (mode == 1)//////bsp
+	if (mode == 1)
 		bsp_render_traversal(&scene->level.root, scene, instance, model);
 	else
 		clip_triangles(model, instance, scene, 1);
-
 	return (model);
 }
 
@@ -192,17 +192,17 @@ void	render_level(int *image_data, t_scene *scene, t_mat4x4 camera_mat)
 	t_model		*model;
 
 	update_instance_transform(&scene->level.instance);
-
-	transform = multiply_m_m(camera_mat, 
+	transform = multiply_m_m(camera_mat,
 							scene->level.instance.transform);
-
-	if (!(model = transform_and_clip(&scene->level.instance, transform, scene, 1)))
+	if (!(model = transform_and_clip(&scene->level.instance,
+										transform, scene, 1)))
 	{
 		return ;
 	}
 	scene->depth_mode = 1;
 	render_model(image_data, model, scene);
 }
+
 void	render_sprites(int *image_data, t_scene *scene, t_mat4x4 camera_mat)
 {
 	t_mat4x4	transform;
@@ -210,19 +210,18 @@ void	render_sprites(int *image_data, t_scene *scene, t_mat4x4 camera_mat)
 	int			i;
 
 	i = 0;
-
 	while (i < scene->sprites_count)
 	{
 		update_instance_transform(&scene->sprites[i].instance);
-
-		transform = multiply_m_m(camera_mat, scene->sprites[i].instance.transform);
-		if (!(model = transform_and_clip(&scene->sprites[i].instance, transform, scene, 0)))
+		transform = multiply_m_m(camera_mat,
+								scene->sprites[i].instance.transform);
+		if (!(model = transform_and_clip(&scene->sprites[i].instance,
+											transform, scene, 0)))
 		{
 			i++;
 			continue ;
 		}
 		scene->depth_mode = 0;
-
 		render_model(image_data, model, scene);
 		i++;
 	}
@@ -234,52 +233,36 @@ void	render_scene(int *image_data, t_scene *scene)
 
 	camera_mat = multiply_m_m(transposed_m(scene->camera.orientation),
 		make_translation_matrix(multiply(scene->camera.position, -1.0)));
-
 	render_level(image_data, scene, camera_mat);
 	render_sprites(image_data, scene, camera_mat);
 }
 
-
-
 void	*pthread_fun(void *ptr)
 {
-	t_pthread_data *data;
+	t_pthread_data	*data;
 
 	data = (t_pthread_data *)ptr;
-
 	render_scene(data->image_data, &data->scene);
 	return (NULL);
 }
 
 void	pthread_render(int *image_data, t_doom *doom)
 {
-	t_pthread_data f;
-	t_pthread_data s;
-	pthread_t thread1;
-	pthread_t thread2;
+	t_pthread_data	f;
+	t_pthread_data	s;
+	pthread_t		thread1;
+	pthread_t		thread2;
 
 	f.scene = doom->scene;
 	s.scene = doom->scene;
-
 	f.image_data = image_data;
 	s.image_data = image_data;
-
-
-	f.scene.clipping_planes[4] = (t_plane){(t_vertex){0.0,1.0,0.0}, 0.0};//bottom
-	s.scene.clipping_planes[3] = (t_plane){(t_vertex){0.0,-1.0,0.0}, 0.0};//top
-
+	f.scene.clipping_planes[4] = (t_plane){(t_vertex){0.0, 1.0, 0.0}, 0.0};
+	s.scene.clipping_planes[3] = (t_plane){(t_vertex){0.0, -1.0, 0.0}, 0.0};
 	f.scene.render_tr = &s.scene.f_render_tr;
 	s.scene.render_tr = &s.scene.s_render_tr;
-
-
-
-
-
-
 	pthread_create(&(thread1), NULL, pthread_fun, &f);
 	pthread_create(&(thread2), NULL, pthread_fun, &s);
-
 	pthread_join(thread1, NULL);
 	pthread_join(thread2, NULL);
 }
-
