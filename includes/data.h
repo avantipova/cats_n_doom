@@ -33,6 +33,8 @@ typedef struct	s_anim
 	int			curr;
 	float		curr_f;
 	int			played;
+	int			i;
+	char		*ptr;
 }				t_anim;
 
 

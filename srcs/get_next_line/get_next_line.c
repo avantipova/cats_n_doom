@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 18:27:42 by chorange          #+#    #+#             */
-/*   Updated: 2021/04/03 00:44:58 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/04/11 18:15:10 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static t_list	*get_struct(t_list **file, int fd)
 	if (fd == 0)
 	{
 		tmp = ft_lstnew(NULL, fd);
-		if ((tmp->content = malloc(1)) == NULL)
+		tmp->content = malloc(1);
+		if (tmp->content == NULL)
 		{
 			free(tmp);
 			return (NULL);
@@ -48,7 +49,7 @@ static t_list	*get_struct(t_list **file, int fd)
 ** ft_strplus - create fresh string with size = old_size + add
 */
 
-static int		ft_strplus(char **str, size_t add)
+static int	ft_strplus(char **str, size_t add)
 {
 	char	*tmp;
 	size_t	len;
@@ -69,7 +70,7 @@ static int		ft_strplus(char **str, size_t add)
 ** 79-80 add every character in destination
 */
 
-static int		copy_to_chr(char **dst, char **src, char c)
+static int	copy_to_chr(char **dst, char **src, char c)
 {
 	int		i;
 	int		count;
@@ -83,7 +84,8 @@ static int		copy_to_chr(char **dst, char **src, char c)
 		if (tmp[i] == c)
 			break ;
 	pos = i;
-	if (!(*dst = ft_strnew(i + 1)))
+	*dst = ft_strnew(i + 1);
+	if (!dst)
 		return (0);
 	while (tmp[count] && count < i)
 	{
@@ -97,7 +99,7 @@ static int		copy_to_chr(char **dst, char **src, char c)
 ** ft_strsupersub - analogue of ft_strsub, but delete input string
 */
 
-char			*ft_strsupersub(char *s, unsigned int start, size_t len)
+char	*ft_strsupersub(char *s, unsigned int start, size_t len)
 {
 	char	*str;
 	int		i;
@@ -105,10 +107,11 @@ char			*ft_strsupersub(char *s, unsigned int start, size_t len)
 
 	if (s == NULL || start > ft_strlen(s))
 		return (NULL);
-	if (!(str = (char*)malloc(len + 1)))
+	str = (char *)malloc(len + 1);
+	if (!str)
 		return (NULL);
 	s_for_del = s;
-	i = 0;
+	i = -1;
 	while (start != 0)
 	{
 		s++;
@@ -116,8 +119,7 @@ char			*ft_strsupersub(char *s, unsigned int start, size_t len)
 	}
 	while (len != '\0')
 	{
-		*(str + i) = *s;
-		i++;
+		*(str + ++i) = *s;
 		s++;
 		len--;
 	}
@@ -140,30 +142,30 @@ char			*ft_strsupersub(char *s, unsigned int start, size_t len)
 **		 structure
 */
 
-int				get_next_line(const int fd, char **line)
+int	get_next_line(const int fd, char **line)
 {
 	char			buf[BUFF_SIZE + 1];
 	static t_list	*fd_lst;
 	t_list			*curr;
-	int				read_bytes;
-	int				i;
 
 	VAL_FILE(fd, line, read(fd, buf, 0));
 	curr = get_struct(&fd_lst, fd);
-	while ((read_bytes = read(fd, buf, BUFF_SIZE)))
+	curr->read_bytes = read(fd, buf, BUFF_SIZE);
+	while (curr->read_bytes)
 	{
-		buf[read_bytes] = '\0';
-		MALL_CHECK(ft_strplus((char**)(&curr->content), read_bytes));
-		ft_strncat((char*)curr->content, buf, read_bytes);
+		buf[curr->read_bytes] = '\0';
+		MALL_CHECK(ft_strplus((char **)(&curr->content), curr->read_bytes));
+		ft_strncat((char *)curr->content, buf, curr->read_bytes);
 		if (ft_strchr(buf, '\n'))
 			break ;
+		curr->read_bytes = read(fd, buf, BUFF_SIZE);
 	}
-	if (read_bytes < BUFF_SIZE && !ft_strlen((char*)curr->content))
+	if (curr->read_bytes < BUFF_SIZE && !ft_strlen((char *)curr->content))
 		return (0);
-	i = copy_to_chr(line, (char**)&curr->content, '\n');
-	if (i < (int)ft_strlen(curr->content))
-		curr->content = ft_strsupersub(curr->content, i + 1,
-							ft_strlen(curr->content + i));         //ft_strlen(&(curr->content[i + 1]) - 1));
+	curr->read_bytes = copy_to_chr(line, (char **)&curr->content, '\n');
+	if (curr->read_bytes < (int)ft_strlen(curr->content))
+		curr->content = ft_strsupersub(curr->content, curr->read_bytes + 1, \
+							ft_strlen(curr->content + curr->read_bytes));
 	else
 		ft_strclr(curr->content);
 	return (1);

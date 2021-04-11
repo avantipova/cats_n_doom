@@ -6,18 +6,18 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 00:22:38 by razin-ivan9       #+#    #+#             */
-/*   Updated: 2021/03/21 17:53:46 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/04/11 19:22:27 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "my_graphics_lib.h"
 
-t_mgl		mgl_init(char *win_name, int w, int h, int multiplicator)
+t_mgl	mgl_init(char *win_name, int w, int h, int multiplicator)
 {
-	t_mgl mgl;
+	t_mgl	mgl;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
-	mgl.window = SDL_CreateWindow(win_name, 50, 50, w / multiplicator,
+	mgl.window = SDL_CreateWindow(win_name, 50, 50, w / multiplicator, \
 							h / multiplicator, SDL_WINDOW_SHOWN);
 	mgl.windows_count = 1;
 	mgl.renderer = SDL_CreateRenderer(mgl.window, -1, 0);
@@ -27,7 +27,7 @@ t_mgl		mgl_init(char *win_name, int w, int h, int multiplicator)
 	return (mgl);
 }
 
-void		mgl_quit(t_mgl *mgl)
+void	mgl_quit(t_mgl *mgl)
 {
 	SDL_FreeSurface(mgl->screen_surface);
 	SDL_DestroyRenderer(mgl->renderer);
@@ -37,7 +37,7 @@ void		mgl_quit(t_mgl *mgl)
 
 SDL_Rect	get_rect(t_mgl *mgl)
 {
-	SDL_Rect rect;
+	SDL_Rect	rect;
 
 	rect.h = mgl->screen_surface->h;
 	rect.w = mgl->screen_surface->w;
@@ -46,7 +46,7 @@ SDL_Rect	get_rect(t_mgl *mgl)
 	return (rect);
 }
 
-void		time_handle(t_mgl *mgl, int *frame)
+void	time_handle(t_mgl *mgl, int *frame)
 {
 	mgl->lst_time = mgl->curr_time;
 	mgl->curr_time = SDL_GetTicks() / 1000.0;
@@ -61,7 +61,7 @@ void		time_handle(t_mgl *mgl, int *frame)
 	(*frame)++;
 }
 
-void		mgl_run(t_mgl *mgl, void (*run_callback)(void *, int *),
+void	mgl_run(t_mgl *mgl, void (*run_callback)(void *, int *), \
 			void (*event_callback)(SDL_Event *, void *, int *), void *param)
 {
 	SDL_Event	event;
@@ -83,7 +83,7 @@ void		mgl_run(t_mgl *mgl, void (*run_callback)(void *, int *),
 		time_handle(mgl, &frame);
 		rect = get_rect(mgl);
 		SDL_RenderClear(mgl->renderer);
-		mgl->screen_texture = SDL_CreateTextureFromSurface(mgl->renderer,
+		mgl->screen_texture = SDL_CreateTextureFromSurface(mgl->renderer, \
 							mgl->screen_surface);
 		SDL_RenderCopy(mgl->renderer, mgl->screen_texture, NULL, &rect);
 		SDL_RenderPresent(mgl->renderer);

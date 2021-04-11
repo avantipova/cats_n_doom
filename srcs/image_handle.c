@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjoss <mjoss@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 21:04:34 by mjoss             #+#    #+#             */
-/*   Updated: 2021/04/03 19:44:31 by mjoss            ###   ########.fr       */
+/*   Updated: 2021/04/11 17:16:55 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 void	put_pixel(int *image_data, int x, int y, int color)
 {
-	int index;
+	int	index;
 
 	index = ((H_2 - y - 1) * W + W_2 + x);
 	if (index >= 0 && index < HxW && x > -W_2 && x < W_2)
 		image_data[index] = color;
 }
 
-int		get_texel(SDL_Surface *image_data, float u, float v)
+int	get_texel(SDL_Surface *image_data, float u, float v)
 {
-	int pitch;
-	int index;
-	int *pixels;
+	int	pitch;
+	int	index;
+	int	*pixels;
 
 	pitch = image_data->w;
 	u = u - floor(u);
 	v = v - floor(v);
-	index = (int)(image_data->h * v) * pitch + (int)(pitch * u);
+	index = (int)(image_data->h *v) *pitch + (int)(pitch *u);
 	pixels = (int *)image_data->pixels;
 	if (index >= 0 && index < image_data->w * image_data->h)
 		return (pixels[index]);

@@ -55,7 +55,7 @@ void	clip_1_outside(t_clip_triangle *cl, t_model *model, int k, int i);
 void	clip_2_outsides(t_clip_triangle *cl, t_model *model, int k, int i);
 
 
-int		clip_triangle(t_triangle *trs, t_plane *planes, t_model *model);
+void		clip_triangle(t_triangle *trs, t_plane *planes, t_model *model);
 
 void	render_triangle(int *image_data, t_model *model, t_triangle *tr, t_scene *scene);
 
@@ -63,7 +63,7 @@ t_object	create_object(t_vertex pos, int index);
 
 
 void put_pixel(int *image_data, int x, int y, int color);
-void interpolate(float i0, float d0, float i1, float d1, t_float_array *dst);
+void	interpolate(t_e_i_input in, t_float_array *dst);
 
 void edge_interpolate(t_e_i_input in, t_render *render, t_edge_interpolate *edge);
 t_e_i_output get_edge_inter(t_e_i_input in);
@@ -74,6 +74,23 @@ void concat(t_float_array *first, t_float_array *second);
 
 float *create_z_buffer();
 float *clear_z_buffer(float *z_buffer);
+char *read_node(t_bsp *node, char *str);
+char *add_vt_tr(t_bsp *node, char *str);
+char *add_wall(t_bsp *node, char *str);
+char	*add_enemy(t_doom *doom, char *ptr);
+char	*add_object(t_doom *doom, char *ptr);
+char	*add_ammo(t_doom *doom, char *ptr, int *ammo_count);
+char	*add_aid(t_doom *doom, char *ptr, int *aid_count);
+char	*read_enemies(t_doom *doom, char *ptr);
+char *read_node(t_bsp *node, char *str);
+char *read_vt_trs(t_bsp *node, char *str);
+char *read_walls(t_bsp *node, char *str);
+char *read_property(t_bsp *node, char *str);
+char	*read_aid(t_doom *doom, char *ptr);
+char	*read_ammo(t_doom *doom, char *ptr);
+char	*read_tv(t_doom *doom, char *ptr);
+char	*read_objects(t_doom *doom, char *ptr);
+char *read_data_property(t_doom *doom, char *str);
 int set_z_buffer(float *z_buffer, int x, int y, float value);
 int set_z_buffer_bsp(float *z_buffer, int x, int y, float value);
 t_mat4x4 update_instance_transform(t_instance *instance);
@@ -83,14 +100,23 @@ t_mat4x4 update_instance_transform(t_instance *instance);
 int get_texel(SDL_Surface *image_data, float u, float v);
 int get_texel_n(int **image_data, float u, float v, int pitch);
 
+void	bsp_render_traversal(t_bsp *node, t_scene *scene,
+								t_instance *instance, t_model *model);
+
+t_model	*transform_and_clip(t_instance *instance, t_mat4x4 transform,
+							t_scene *scene, int mode);
+
 void render_scene(int *image_data, t_scene *scene);
 void	pthread_render(int *image_data, t_doom *doom);
 
 float get_inter_d(float i0, float d0, float i1, float d1);
 
+void get_normals(t_vertex *normals, int *count, char *file_name);
+void get_uvss(t_model *model, char *file_name);
+t_vertex	read_coords(char *line);
 void read_obj(t_model *model, char *file_name);
 void read_bsp(t_doom *doom, char *filename);
-
+float	ft_atof(char *str);
 int classify_point(t_vertex cam, t_vertex line, t_vertex normal);
 
 t_enemy	create_enemy(t_vertex pos, float beta);

@@ -4,6 +4,7 @@ NAME = Editor
 FLAGS = -Wextra -Wall -Werror
 
 OBJECTS = editor.o my_graphics_lib.o image_handle.o linear_algebra.o \
+				linear_algebra_1.o linear_algebra_2.o linear_algebra_3.o matrix.o \
 				ftoa.o helpers.o bsp_helpers.o export.o export1.o export2.o export3.o \
 				hash.o init.o \
 				draw_elements.o draw.o draw_trs_by_bsp.o mouse_handle.o add_elements_to_map.o\
@@ -12,8 +13,10 @@ OBJECTS = editor.o my_graphics_lib.o image_handle.o linear_algebra.o \
 				reconstruct_circuits.o key_down.o get_cutter.o computing_walls_1.o computing_walls_2.o \
 				save_json_1.o save_json_2.o save_json_3.o hash_2.o archiver.o get_next_line.o\
 
-SOURCES = editor.c ../srcs/my_graphics_lib/my_graphics_lib.c ../srcs/image_handle.c ../srcs/linear_algebra.c \
-				../srcs/ftoa.c ../srcs/helpers.c bsp_helpers.c export.c export1.c export2.c export3.c \
+SOURCES = editor.c ../srcs/my_graphics_lib/my_graphics_lib.c ../srcs/image_handle.c ../srcs/math/linear_algebra.c \
+				../srcs/math/linear_algebra.c ../srcs/math/linear_algebra_1.c \
+				../srcs/math/linear_algebra_2.c ../srcs/math/linear_algebra_3.c ../srcs/math/matrix.c \
+				../srcs/helpers/ftoa.c ../srcs/helpers/helpers.c bsp_helpers.c export.c export1.c export2.c export3.c \
 				hash.c init.c \
 				draw_elements.c draw.c draw_trs_by_bsp.c mouse_handle.c add_elements_to_map.c \
 				console_instructions_1.c console_instructions_2.c cursor_on_line_on_point.c \

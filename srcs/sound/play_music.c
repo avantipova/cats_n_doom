@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   play_music.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjoss <mjoss@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 15:53:52 by mjoss             #+#    #+#             */
-/*   Updated: 2021/03/21 15:53:52 by mjoss            ###   ########.fr       */
+/*   Updated: 2021/04/11 19:25:21 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	play_music(Mix_Music *music, int loops)
 {
-	int status;
+	int	status;
 
 	status = Mix_PlayMusic(music, loops);
 	if (status < 0)

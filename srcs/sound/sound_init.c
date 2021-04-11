@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sound_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjoss <mjoss@student.42.fr>                +#+  +:+       +#+        */
+/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 15:54:00 by mjoss             #+#    #+#             */
-/*   Updated: 2021/03/21 15:54:00 by mjoss            ###   ########.fr       */
+/*   Updated: 2021/04/11 19:33:17 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ t_music	*sound_init(void)
 {
 	t_music	*music;
 
-	if ((music = (t_music*)malloc(sizeof(t_music))) == NULL)
+	music = (t_music *)malloc(sizeof(t_music));
+	if (music == NULL)
 	{
 		ft_putstr("malloc returns NULL\n");
 		exit(EXIT_FAILURE);
