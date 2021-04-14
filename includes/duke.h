@@ -141,5 +141,32 @@ int		check_hash(char *foldername);
 
 void	draw_pixel(t_scene *scene, int *image_data, t_triangle *tr, int y_it);
 void	sort_vertex_indexes(t_triangle *triangle, t_point *projected);
+void	aid_init(t_doom *doom);
+void	ammo_init(t_doom *doom);
+void	bullets_init(t_doom *doom);
+void	drb_init(t_doom *doom);
+void	clean_anim(t_anim *anim);
+void	clean_enemies(t_doom *doom);
+void	remove_files();
+void	draw_hud(t_doom *doom);
+void	draw_press_f(t_doom *doom);
+void	draw_lose(t_doom *doom);
+void	draw_win(t_doom *doom);
+void	draw_menu(t_doom *doom);
+void	event_hand(SDL_Event *event, void *doom_ptr, int *quit);
+void	restart(t_doom *doom);
+SDL_Surface* renderText(char *message, char *font_file,
+        SDL_Color color, int fontSize);
+void	drb_animation_update(t_doom *doom);
+void	update_sprites(t_doom *doom, float gamma);
+void	update_aid(t_doom *doom);
+void	update_ammo(t_doom *doom);
+void	animation_update(t_scene *scene, float curr_time);
+void	update_bullets(t_doom *doom);
+void	update_enemies(t_doom *doom);
+void	update(void *doom_ptr, int *pixels);
+int		check_leaf(t_bsp *node, t_vertex pos);
+int		check_enemy(t_doom *doom, t_vertex pos);
+void	fire(t_doom *doom);
 
 #endif

@@ -8,8 +8,20 @@ OBJECTS_DIR = objs
 SOURCES_DIR = srcs
 
 SRC_NAMES = srcs/main.c srcs/image_handle.c \
+				srcs/bullet_helpers.c \
+				srcs/check_enemies.c \
+				srcs/some_func.c \
+				srcs/traversal.c \
+				srcs/updates/drb_animation_update.c \
+				srcs/updates/update.c \
+				srcs/updates/update_aid.c \
+				srcs/updates/update_ammo.c \
+				srcs/updates/update_animations.c \
+ 				srcs/updates/update_bullets.c \
+				srcs/updates/update_enemies.c \
+				srcs/updates/update_sprites.c \
 				srcs/draw/draw.c srcs/draw/transforms.c srcs/draw/render_scene.c \
-				srcs/draw/pthread.c \
+				srcs/draw/pthread.c srcs/draw/draw_hud.c srcs/draw/draw_smth.c\
 				srcs/math/interpolate.c srcs/math/linear_algebra.c \
 				srcs/math/linear_algebra_1.c srcs/math/linear_algebra_2.c \
 				srcs/math/linear_algebra_3.c srcs/math/matrix.c \
@@ -20,6 +32,7 @@ SRC_NAMES = srcs/main.c srcs/image_handle.c \
 				srcs/render/render_init.c srcs/render/render_init_1.c \
 				srcs/render/render_triangle.c \
 				srcs/render/draw_pixel.c srcs/render/vertex.c \
+				srcs/render/render_text.c \
 				srcs/textures_handling.c \
 				srcs/clips/clip_triangle_by_planes.c \
 				srcs/clips/clip_1_outside.c srcs/clips/clip_2_outsides.c \
@@ -31,6 +44,11 @@ SRC_NAMES = srcs/main.c srcs/image_handle.c \
 				srcs/sound/mixer_init.c srcs/sound/sound_init.c srcs/sound/load_music.c \
 				srcs/sound/play_music.c srcs/sound/music_close.c \
                 srcs/sound/load_sound.c Archiver/dearchiver.c\
+				srcs/init/aid_init.c srcs/init/ammo_init.c srcs/init/bullets_init.c srcs/init/drb_init.c \
+				srcs/creates/create_enemies.c srcs/creates/create_objects.c srcs/creates/create_tv.c \
+				srcs/events/event_handle.c srcs/events/restart.c \
+				srcs/clear/clean_objects.c \
+
 
 OBJ = $(SRC_NAMES:.c=.o)
 
@@ -76,6 +94,7 @@ Fclean_print:
 $(OBJECTS_DIR)/%.o: %.c Compile_print
 	@mkdir $(OBJECTS_DIR) 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/srcs 2> /dev/null || true
+	@mkdir $(OBJECTS_DIR)/srcs/init 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/Editor 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/Archiver 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/srcs/get_next_line 2> /dev/null || true
@@ -88,6 +107,11 @@ $(OBJECTS_DIR)/%.o: %.c Compile_print
 	@mkdir $(OBJECTS_DIR)/srcs/read_bsp 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/srcs/load_obj 2> /dev/null || true
 	@mkdir $(OBJECTS_DIR)/srcs/draw 2> /dev/null || true
+	@mkdir $(OBJECTS_DIR)/srcs/clear 2> /dev/null || true
+	@mkdir $(OBJECTS_DIR)/srcs/creates 2> /dev/null || true
+	@mkdir $(OBJECTS_DIR)/srcs/events 2> /dev/null || true
+	@mkdir $(OBJECTS_DIR)/srcs/updates 2> /dev/null || true
+
 	@clang $(FLAGS) -c $< $(INCLUDES) -o $@
 
 clean: Clean_print
