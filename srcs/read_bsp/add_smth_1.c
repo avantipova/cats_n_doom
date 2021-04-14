@@ -6,13 +6,13 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 19:30:03 by npetrell          #+#    #+#             */
-/*   Updated: 2021/04/11 19:54:38 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/04/14 16:02:40 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "duke.h"
 
-char	*add_enemy(t_doom *doom, char *ptr)
+char	*add_enemy_d(t_doom *doom, char *ptr)
 {
 	t_vertex	pos;
 
@@ -24,7 +24,7 @@ char	*add_enemy(t_doom *doom, char *ptr)
 	return (ft_strchr(ptr, ']') + 1);
 }
 
-char	*add_object(t_doom *doom, char *ptr)
+char	*add_object_d(t_doom *doom, char *ptr)
 {
 	t_vertex	pos;
 	int			index;
@@ -40,7 +40,7 @@ char	*add_object(t_doom *doom, char *ptr)
 	return (ft_strchr(ptr, '}') + 1);
 }
 
-char	*add_ammo(t_doom *doom, char *ptr, int *ammo_count)
+char	*add_ammo_d(t_doom *doom, char *ptr, int *ammo_count)
 {
 	t_vertex	pos;
 
@@ -54,7 +54,7 @@ char	*add_ammo(t_doom *doom, char *ptr, int *ammo_count)
 	return (ft_strchr(ptr, ']') + 1);
 }
 
-char	*add_aid(t_doom *doom, char *ptr, int *aid_count)
+char	*add_aid_d(t_doom *doom, char *ptr, int *aid_count)
 {
 	t_vertex	pos;
 

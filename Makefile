@@ -17,13 +17,15 @@ SRC_NAMES = srcs/main.c srcs/image_handle.c \
 				srcs/get_next_line/get_next_line.c \
 				srcs/load_obj/load_obj.c srcs/load_obj/get_smth.c \
 				srcs/my_graphics_lib/my_graphics_lib.c\
-				srcs/render/render_init.c srcs/render/render_triangle.c \
+				srcs/render/render_init.c srcs/render/render_init_1.c \
+				srcs/render/render_triangle.c \
+				srcs/render/draw_pixel.c srcs/render/vertex.c \
 				srcs/textures_handling.c \
 				srcs/clips/clip_triangle_by_planes.c \
 				srcs/clips/clip_1_outside.c srcs/clips/clip_2_outsides.c \
 				srcs/read_bsp/read_bsp.c srcs/read_bsp/add_smth.c srcs/read_bsp/add_smth_1.c \
 				srcs/read_bsp/read_smth.c srcs/read_bsp/read_smth_1.c srcs/read_bsp/read_property.c \
-				srcs/read_bsp/read_data_property.c \
+				srcs/read_bsp/read_data_property.c srcs/read_bsp/add_walls.c\
 				srcs/helpers/ftoa.c srcs/helpers/ft_atof.c\
 				Editor/hash.c Editor/hash_2.c \
 				srcs/sound/mixer_init.c srcs/sound/sound_init.c srcs/sound/load_music.c \

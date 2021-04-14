@@ -2,6 +2,8 @@
     "files.associations": {
         "duke.h": "c",
         "helpers.h": "c",
-        "linear_algebra.h": "c"
+        "linear_algebra.h": "c",
+        "editor.h": "c",
+        "data.h": "c"
     }
 }

@@ -5,6 +5,13 @@
 # include "my_graphics_lib.h"
 # include "mixer_init.h"
 
+typedef struct	s_uv
+{
+	float		u;
+	float		v;
+	int			x_it;
+}				t_uv;
+
 typedef struct	s_plane
 {
 	t_vertex	normal;

@@ -77,10 +77,10 @@ float *clear_z_buffer(float *z_buffer);
 char *read_node(t_bsp *node, char *str);
 char *add_vt_tr(t_bsp *node, char *str);
 char *add_wall(t_bsp *node, char *str);
-char	*add_enemy(t_doom *doom, char *ptr);
-char	*add_object(t_doom *doom, char *ptr);
-char	*add_ammo(t_doom *doom, char *ptr, int *ammo_count);
-char	*add_aid(t_doom *doom, char *ptr, int *aid_count);
+char	*add_enemy_d(t_doom *doom, char *ptr);
+char	*add_object_d(t_doom *doom, char *ptr);
+char	*add_ammo_d(t_doom *doom, char *ptr, int *ammo_count);
+char	*add_aid_d(t_doom *doom, char *ptr, int *aid_count);
 char	*read_enemies(t_doom *doom, char *ptr);
 char *read_node(t_bsp *node, char *str);
 char *read_vt_trs(t_bsp *node, char *str);
@@ -139,5 +139,7 @@ void clear_bsp(t_bsp *node);
 
 int		check_hash(char *foldername);
 
+void	draw_pixel(t_scene *scene, int *image_data, t_triangle *tr, int y_it);
+void	sort_vertex_indexes(t_triangle *triangle, t_point *projected);
 
 #endif

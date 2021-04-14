@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 19:38:54 by npetrell          #+#    #+#             */
-/*   Updated: 2021/04/11 19:50:31 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/04/14 16:01:57 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*read_objects(t_doom *doom, char *ptr)
 			ptr++;
 		if (*ptr == '{')
 		{
-			ptr = add_object(doom, ptr + 1);
+			ptr = add_object_d(doom, ptr + 1);
 		}
 		else if (*ptr == ']')
 			break ;
@@ -55,7 +55,7 @@ char	*read_ammo(t_doom *doom, char *ptr)
 			ptr++;
 		if (*ptr == '[')
 		{
-			ptr = add_ammo(doom, ptr + 1, &ammo_count);
+			ptr = add_ammo_d(doom, ptr + 1, &ammo_count);
 		}
 		else if (*ptr == ']')
 			break ;
@@ -75,7 +75,7 @@ char	*read_aid(t_doom *doom, char *ptr)
 			ptr++;
 		if (*ptr == '[')
 		{
-			ptr = add_aid(doom, ptr + 1, &aid_count);
+			ptr = add_aid_d(doom, ptr + 1, &aid_count);
 		}
 		else if (*ptr == ']')
 			break ;

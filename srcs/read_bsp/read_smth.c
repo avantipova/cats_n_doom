@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 19:33:37 by npetrell          #+#    #+#             */
-/*   Updated: 2021/04/11 19:52:24 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/04/14 16:01:04 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*read_enemies(t_doom *doom, char *ptr)
 			ptr++;
 		if (*ptr == '[')
 		{
-			ptr = add_enemy(doom, ptr + 1);
+			ptr = add_enemy_d(doom, ptr + 1);
 		}
 		else if (*ptr == ']')
 			break ;
