@@ -21,12 +21,15 @@
 # define CHANNELS 1
 # define BACKGROUND_MUSIC ASSETS_FOLDER_NAME "/sounds/E2M3_intermission.mp3"
 # define SHOTGUN_SOUND ASSETS_FOLDER_NAME "/sounds/shotgun.wav"
+# define NARUTO_SOUND ASSETS_FOLDER_NAME "/sounds/naruto.wav"
 # define PLAY_FOREVER -1
 
 typedef struct	s_music
 {
 	Mix_Music	*background;
 	Mix_Chunk	*shotgun;
+	Mix_Chunk	*naruto;
+	int			playing_naruto;
 }				t_music;
 
 void			mixer_init(void);

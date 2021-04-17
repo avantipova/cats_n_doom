@@ -16,6 +16,7 @@
 void	load_sound(t_music *music)
 {
 	Mix_Chunk	*shotgun;
+	Mix_Chunk	*naruto;
 
 	shotgun = Mix_LoadWAV(SHOTGUN_SOUND);
 	if (shotgun == NULL)
@@ -25,4 +26,12 @@ void	load_sound(t_music *music)
 		exit(EXIT_FAILURE);
 	}
 	music->shotgun = shotgun;
+	naruto = Mix_LoadWAV(NARUTO_SOUND);
+	if (naruto == NULL)
+	{
+		ft_putstr("Error load naruto sound\n");
+		ft_putstr(Mix_GetError());
+		exit(EXIT_FAILURE);
+	}
+	music->naruto = naruto;
 }

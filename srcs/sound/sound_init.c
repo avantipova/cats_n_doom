@@ -27,5 +27,6 @@ t_music	*sound_init(void)
 	mixer_init();
 	load_sound(music);
 	load_music(music);
+	music->playing_naruto = 0;
 	return (music);
 }

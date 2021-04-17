@@ -212,4 +212,19 @@ void	event_hand(SDL_Event *event, void *doom_ptr, int *quit)
 			doom->run = 0;
 		}
 	}
+	if (doom->music->playing_naruto == 0 &&
+		length(sub(doom->objects[4].sprite.instance.position,
+				   doom->scene.camera.position)) <= 3.0)
+	{
+		doom->music->playing_naruto = 1;
+		if (Mix_PlayChannelTimed(2, doom->music->naruto, 1, 1300) == -1)
+		{
+			ft_putstr(Mix_GetError());
+		}
+	}
+	else if ((length(sub(doom->objects[4].sprite.instance.position,
+						 doom->scene.camera.position)) > 3.0) && doom->music->playing_naruto == 1)
+	{
+		doom->music->playing_naruto = 0;
+	}
 }
