@@ -6,40 +6,29 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 21:00:18 by npetrell          #+#    #+#             */
-/*   Updated: 2021/04/14 21:01:16 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/04/24 21:59:06 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "duke.h"
 
-int		classify_point_s(t_vertex cam, t_vertex line, t_vertex normal)
+int	classify_point_s(t_vertex cam, t_vertex line, t_vertex normal)
 {
-	t_vertex new;
-	t_vertex ort;
+	t_vertex	new;
+	t_vertex	ort;
 
 	cam.z = 0.0;
 	normal.z = 0.0;
-
 	ort = get_ort_line_by_point(line, cam);
 	new = lines_intersect(line, ort);
-
-	// printf("line %f\t%f\t%f\n", line.x, line.y, line.z);
-	// printf("ort %f\t%f\t%f\n", ort.x, ort.y, ort.z);
-
 	new.z = 0.0;
-
 	new = sub(cam, new);
-	
-	// printf("%f\t%f\t%f\n", new.x, new.y, new.z);
-	// printf("%f\t%f\t%f\n", normal.x, normal.y, normal.z);
-	// printf("%f\n\n", dot(new, normal));
-
 	if (dot(new, normal) < 0.0)
 		return (BACK);
 	return (FRONT);
 }
 
-int		check_leaf(t_bsp *node, t_vertex pos)
+int	check_leaf(t_bsp *node, t_vertex pos)
 {
 	int			i;
 	t_vertex	line;
@@ -51,7 +40,7 @@ int		check_leaf(t_bsp *node, t_vertex pos)
 		if (node->walls[i].type == WALL_TYPE_WALL)
 		{
 			node->walls[i].failed = 1;
-			line = get_line_by_points(node->walls[i].points[0],
+			line = get_line_by_points(node->walls[i].points[0], \
 							node->walls[i].points[1]);
 			if (classify_point_s(pos, line, node->walls[i].normal) == BACK)
 			{
