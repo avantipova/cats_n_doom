@@ -6,7 +6,7 @@
 /*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:46:29 by npetrell          #+#    #+#             */
-/*   Updated: 2021/04/24 21:13:00 by ldeirdre         ###   ########.fr       */
+/*   Updated: 2021/04/24 21:15:18 by ldeirdre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	update(void *doom_ptr, int *pixels)
 			SDL_RenderCopy(doom->mgl->renderer, tex, NULL, NULL);
 			SDL_RenderPresent(doom->mgl->renderer);
 			SDL_Delay(3000);
+			SDL_DestroyTexture(tex);
 
 			doom->flag = 1;
 		}
