@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:46:29 by npetrell          #+#    #+#             */
-/*   Updated: 2021/04/24 21:53:31 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/04/24 22:25:04 by npetrell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,21 @@ void	update(void *doom_ptr, int *pixels)
 	float floor;
 	float ceil;
 	float path;
+	SDL_Surface *haha;
 
+	haha = SDL_LoadBMP("/Editor/textures/lol.bmp");
 	doom = (t_doom *)doom_ptr;
 	if (doom->menu_opened)
 	{
 		if (doom->flag == 0)
 		{
 			SDL_Delay(2000);
+			SDL_Texture *tex = SDL_CreateTextureFromSurface(doom->mgl->renderer, haha);
+			SDL_RenderCopy(doom->mgl->renderer, tex, NULL, NULL);
+			SDL_RenderPresent(doom->mgl->renderer);
+			SDL_Delay(3000);
+			SDL_DestroyTexture(tex);
+
 			doom->flag = 1;
 		}
 		draw_menu(doom);
