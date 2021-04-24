@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:46:29 by npetrell          #+#    #+#             */
-/*   Updated: 2021/04/14 20:46:44 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/04/24 19:06:17 by ldeirdre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ void	update(void *doom_ptr, int *pixels)
 {
 	t_doom *doom;
 
-	
-
 	doom = (t_doom *)doom_ptr;
 
 	if (doom->menu_opened)
 	{
+		if (doom->flag == 0)
+		{
+			SDL_Delay(2000);
+			doom->flag = 1;
+		}
 		draw_menu(doom);
 		return;
 	}

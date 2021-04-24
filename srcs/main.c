@@ -113,7 +113,12 @@ int		main(int ac, char **av)
 
 	SDL_Surface *temp;
 
+	doom.flag = 0;
 	doom.menu_back = create_texture(ASSETS_FOLDER_NAME "/textures/menu.bmp", 0);
+	doom.open_menu = SDL_LoadBMP("/Editor/textures/good_trip.bmp");
+	if (doom.open_menu == NULL){
+	return 1;
+}
 
 	doom.menu.active = 0;
 	doom.menu.play = renderText("PLAY", ASSETS_FOLDER_NAME "/fonts/DoomsDay.ttf", color, 100);
@@ -155,12 +160,13 @@ int		main(int ac, char **av)
 	SDL_BlitScaled(temp, &rect, doom.lose_surface, NULL);
 
 	SDL_FreeSurface(temp);
-
-
+	SDL_Texture *tex = SDL_CreateTextureFromSurface(doom.mgl->renderer, doom.open_menu);
+	SDL_RenderCopy(doom.mgl->renderer, tex, NULL, NULL);
+	SDL_RenderPresent(doom.mgl->renderer);
 
 	mgl_run(&mgl, update, event_hand, &doom);
 	music_close(doom.music);
+	SDL_DestroyTexture(tex);
 	mgl_quit(&mgl);
-
 	return (0);
 }

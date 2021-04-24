@@ -316,6 +316,8 @@ typedef struct	s_doom
 	t_vertex	aim;
 
 	SDL_Surface *menu_back;
+	SDL_Surface *open_menu;
+	int			flag;
 
 	SDL_Surface *health_bar;
 	SDL_Surface *ammo_bar;
