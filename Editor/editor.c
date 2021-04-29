@@ -14,26 +14,24 @@
 
 void	bsp_compile(t_map_editor *ed)
 {
-	t_circuit *circuits;
+	t_circuit	*circuits;
 
-	if (!(circuits = malloc(sizeof(t_circuit) * ed->map.circuits_count)))
+	circuits = malloc(sizeof(t_circuit) * ed->map.circuits_count);
+	if (!(circuits))
 		exit(-2);
-
 	transform_data(ed);
-	ft_memcpy(circuits, ed->map.circuits, sizeof(t_circuit) *
+	ft_memcpy(circuits, ed->map.circuits, sizeof(t_circuit) * \
 				ed->map.circuits_count);
 	bsp_recurse(&ed->root, circuits, ed->map.circuits_count, &ed->map);
 }
 
-void event_handle(SDL_Event *event, void *ed_ptr)
+void	event_handle(SDL_Event *event, void *ed_ptr)
 {
-	t_map_editor *ed;
+	t_map_editor	*ed;
 
 	ed = (t_map_editor *)ed_ptr;
-
 	ed->prev_x = event->button.x * SCREEN_MULTIPLICATOR;
 	ed->prev_y = event->button.y * SCREEN_MULTIPLICATOR;
-
 	if (event->type == SDL_MOUSEMOTION)
 	{
 		mouse_motion(ed);
@@ -48,7 +46,7 @@ void event_handle(SDL_Event *event, void *ed_ptr)
 	}
 }
 
-void update(void *map_editor, int *pixels)
+void	update(void *map_editor, int *pixels)
 {
 	t_map_editor	*ed;
 	int				i;
@@ -69,16 +67,15 @@ void update(void *map_editor, int *pixels)
 	draw_elements(map_editor, pixels);
 }
 
-int		main(void)
+int	main(void)
 {
-	t_map_editor map_editor;
-	t_mgl mgl;
-	
-	mgl = mgl_init("Map Editor BSP", W, H, SCREEN_MULTIPLICATOR);
+	t_map_editor	map_editor;
+	t_mgl			mgl;
 
+	mgl = mgl_init("Map Editor BSP", W, H, SCREEN_MULTIPLICATOR);
 	mgl.show_fps = 0;
 	map_editor.cursor_surface = SDL_LoadBMP("textures/cursor.bmp");
-	map_editor.cursor =
+	map_editor.cursor = \
 			SDL_CreateColorCursor(map_editor.cursor_surface, 0, 0);
 	SDL_SetCursor(map_editor.cursor);
 	editor_init(&map_editor);
