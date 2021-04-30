@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:55:14 by npetrell          #+#    #+#             */
-/*   Updated: 2021/04/14 21:14:27 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/04/30 22:06:09 by maxim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,5 +226,21 @@ void	event_hand(SDL_Event *event, void *doom_ptr, int *quit)
 						 doom->scene.camera.position)) > 3.0) && doom->music->playing_naruto == 1)
 	{
 		doom->music->playing_naruto = 0;
+	}
+
+	if (doom->music->playing_tyan == 0 &&
+		length(sub(doom->objects[7].sprite.instance.position,
+				   doom->scene.camera.position)) <= 3.0)
+	{
+		doom->music->playing_tyan = 1;
+		if (Mix_PlayChannelTimed(3, doom->music->anime_tyan, 1, 500) == -1)
+		{
+			ft_putstr(Mix_GetError());
+		}
+	}
+	else if ((length(sub(doom->objects[7].sprite.instance.position,
+						 doom->scene.camera.position)) > 3.0) && doom->music->playing_tyan == 1)
+	{
+		doom->music->playing_tyan = 0;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 15:53:04 by mjoss             #+#    #+#             */
-/*   Updated: 2021/04/03 01:22:02 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/04/29 22:04:53 by maxim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define BACKGROUND_MUSIC ASSETS_FOLDER_NAME "/sounds/E2M3_intermission.mp3"
 # define SHOTGUN_SOUND ASSETS_FOLDER_NAME "/sounds/shotgun.wav"
 # define NARUTO_SOUND ASSETS_FOLDER_NAME "/sounds/naruto.wav"
+# define ANIME_TYAN ASSETS_FOLDER_NAME "/sounds/anime_tyan.wav"
 # define PLAY_FOREVER -1
 
 typedef struct	s_music
@@ -29,7 +30,9 @@ typedef struct	s_music
 	Mix_Music	*background;
 	Mix_Chunk	*shotgun;
 	Mix_Chunk	*naruto;
+	Mix_Chunk	*anime_tyan;
 	int			playing_naruto;
+	int			playing_tyan;
 }				t_music;
 
 void			mixer_init(void);

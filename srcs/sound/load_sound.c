@@ -6,7 +6,7 @@
 /*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 15:52:40 by mjoss             #+#    #+#             */
-/*   Updated: 2021/04/03 01:05:29 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/04/30 21:32:17 by maxim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	load_sound(t_music *music)
 {
 	Mix_Chunk	*shotgun;
 	Mix_Chunk	*naruto;
+	Mix_Chunk	*anime_tyan;
 
 	shotgun = Mix_LoadWAV(SHOTGUN_SOUND);
 	if (shotgun == NULL)
@@ -34,4 +35,12 @@ void	load_sound(t_music *music)
 		exit(EXIT_FAILURE);
 	}
 	music->naruto = naruto;
+	anime_tyan = Mix_LoadWAV(ANIME_TYAN);
+	if (anime_tyan == NULL)
+	{
+		ft_putstr("Error load anime_tyan sound\n");
+		ft_putstr(Mix_GetError());
+		exit(EXIT_FAILURE);
+	}
+	music->anime_tyan = anime_tyan;
 }

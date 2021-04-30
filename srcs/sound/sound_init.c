@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 15:54:00 by mjoss             #+#    #+#             */
-/*   Updated: 2021/04/11 19:33:17 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/04/29 08:29:42 by maxim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ t_music	*sound_init(void)
 	load_sound(music);
 	load_music(music);
 	music->playing_naruto = 0;
+	music->playing_tyan = 0;
 	return (music);
 }
