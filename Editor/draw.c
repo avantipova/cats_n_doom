@@ -14,14 +14,20 @@
 
 void	draw_line(int *pixels, t_int_v f, t_int_v s, int color)
 {
-	t_int_v		delta;
-	t_int_v		sign;
-	int			error;
-	int			error2;
+	t_int_v	delta;
+	t_int_v	sign;
+	int		error;
+	int		error2;
 
 	delta = (t_int_v){abs(s.x - f.x), abs(s.y - f.y)};
-	sign.x = f.x < s.x ? 1 : -1;
-	sign.y = f.y < s.y ? 1 : -1;
+	if (f.x < s.x)
+		sign.x = 1;
+	else
+		sign.x = -1;
+	if (f.y < s.y)
+		sign.y = 1;
+	else
+		sign.y = -1;
 	error = delta.x - delta.y;
 	put_pixel(pixels, s.x, s.y, color);
 	while (f.x != s.x || f.y != s.y)
@@ -43,9 +49,9 @@ void	draw_line(int *pixels, t_int_v f, t_int_v s, int color)
 
 void	draw_in_points_mode(int i, int *pixels, t_map_editor *ed)
 {
-	int			j;
-	t_int_v		p1;
-	t_int_v		p2;
+	int		j;
+	t_int_v	p1;
+	t_int_v	p2;
 
 	j = 1;
 	while (j < ed->map.circuits[i].points_count)
@@ -55,15 +61,14 @@ void	draw_in_points_mode(int i, int *pixels, t_map_editor *ed)
 		p2.x = (int)(ed->map.circuits[i].points[j].x * MAP_EDITOR_SCALE);
 		p2.y = (int)(ed->map.circuits[i].points[j].y * MAP_EDITOR_SCALE);
 		draw_line(pixels, p1, p2, 0xFFFFFF);
-
-		draw_line(pixels, (t_int_v){p1.x + (p2.x - p1.x) / 2, p1.y +
+		draw_line(pixels, (t_int_v){p1.x + (p2.x - p1.x) / 2, p1.y + \
 												(p2.y - p1.y) / 2},
-			(t_int_v){p1.x + (p2.x - p1.x) / 2 + 30 * cos(atan2(p2.y -
-												p1.y, p2.x - p1.x) +
-			(float)ed->map.circuits[i].normal_dir * M_PI / 2),
-			p1.y + (p2.y - p1.y) / 2 + 30 * sin(atan2(p2.y - p1.y,
-														p2.x - p1.x) +
-			(float)ed->map.circuits[i].normal_dir * M_PI / 2)},
+			(t_int_v){p1.x + (p2.x - p1.x) / 2 + 30 * cos(atan2(p2.y - \
+												p1.y, p2.x - p1.x) + \
+			(float)ed->map.circuits[i].normal_dir * M_PI / 2), \
+			p1.y + (p2.y - p1.y) / 2 + 30 * sin(atan2(p2.y - p1.y, \
+														p2.x - p1.x) + \
+			(float)ed->map.circuits[i].normal_dir * M_PI / 2)}, \
 			0xff0000);
 		j++;
 	}
@@ -80,16 +85,19 @@ void	draw_in_walls_mode(int i, int *pixels, t_map_editor *ed)
 	j = -1;
 	while (j++ < ed->map.circuits[i].walls_count)
 	{
-		p1.x = (int)(ed->map.circuits[i].walls[j].points[0].x *
+		p1.x = (int)(ed->map.circuits[i].walls[j].points[0].x * \
 				MAP_EDITOR_SCALE);
-		p1.y = (int)(ed->map.circuits[i].walls[j].points[0].y *
+		p1.y = (int)(ed->map.circuits[i].walls[j].points[0].y * \
 				MAP_EDITOR_SCALE);
-		p2.x = (int)(ed->map.circuits[i].walls[j].points[1].x *
+		p2.x = (int)(ed->map.circuits[i].walls[j].points[1].x * \
 				MAP_EDITOR_SCALE);
-		p2.y = (int)(ed->map.circuits[i].walls[j].points[1].y *
+		p2.y = (int)(ed->map.circuits[i].walls[j].points[1].y * \
 				MAP_EDITOR_SCALE);
 		n = ed->map.circuits[i].walls[j].normal;
-		color = (i == ed->map.selected_circuit ? 0xFF0000 : 0xFFFF00);
+		if (i == ed->map.selected_circuit)
+			color = 0xFF0000;
+		else
+			color = 0xFFFF00;
 		draw_line(pixels, p1, p2, color);
 		draw_line(pixels,
 			(t_int_v){p1.x + (p2.x - p1.x) / 2, p1.y + (p2.y - p1.y) / 2},
@@ -118,8 +126,8 @@ void	draw_elements(t_map_editor *ed, int *pixels)
 
 void	draw_point(t_vertex pos, int color, int *pixels)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = pos.x - 3;
 	while (i < pos.x + 4)

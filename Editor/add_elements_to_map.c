@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "editor.h"
 
 void	add_aid(t_vertex pos, t_map_editor *ed)
@@ -48,7 +47,7 @@ void	add_enemy(t_vertex pos, t_map_editor *ed)
 
 void	add_object(t_vertex pos, int number, t_map_editor *ed)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ed->objects_count == 39)
@@ -66,7 +65,6 @@ void	add_object(t_vertex pos, int number, t_map_editor *ed)
 	{
 		ed->objects[ed->objects_count].index = 0;
 		ed->objects[ed->objects_count].exir = 0;
-		
 	}
 	ed->objects_count++;
 }

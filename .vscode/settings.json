@@ -5,5 +5,7 @@
         "linear_algebra.h": "c",
         "editor.h": "c",
         "data.h": "c"
-    }
+    },
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1
 }

@@ -42,7 +42,7 @@ void	write_instructions(t_map_editor *ed)
 
 void	write_object_num(t_map_editor *ed)
 {
-	char str[64];
+	char	str[64];
 
 	ft_putstr("Тип объекта: ");
 	itoa(ed->curr_object, str);
