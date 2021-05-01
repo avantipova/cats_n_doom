@@ -3,19 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   event_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:55:14 by npetrell          #+#    #+#             */
-/*   Updated: 2021/04/30 22:06:09 by maxim            ###   ########.fr       */
+/*   Updated: 2021/05/01 22:12:04 by ldeirdre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "duke.h"
+# include "../frameworks/SDL2_image.framework/Headers/SDL_image.h"
+
+static char		*get_name(int nmb)
+{
+	char		*tmp;
+
+	tmp = ft_itoa(nmb);
+	tmp = ft_strjoin(tmp, "_doom_screenshot.png");
+	if (!tmp)
+		return (NULL);
+	return (tmp);
+}
+
+void            screen_png(SDL_Surface *srf, int num)
+{
+	char        *name;
+
+	name = get_name(num);
+    IMG_SavePNG(srf, name);
+    free(name);
+}
+
 
 void	event_hand(SDL_Event *event, void *doom_ptr, int *quit)
 {
 	t_doom *doom;
-
+	
 	doom = (t_doom *)doom_ptr;
 
 	if (doom->menu_opened)
@@ -172,6 +194,12 @@ void	event_hand(SDL_Event *event, void *doom_ptr, int *quit)
 		{
 			doom->solid = (doom->solid ? 0 : 1);
 		}
+		else if (event->key.keysym.sym == SDLK_p)
+    	{
+			doom->screen_nmb++;
+        	ft_putstr("Saved image in png");
+        	screen_png(doom->mgl->screen_surface, doom->screen_nmb);
+    	}
 		else if (event->key.keysym.sym == SDLK_w  || event->key.keysym.sym == SDLK_UP)
 		{
 			doom->w_pressed = 1;

@@ -348,6 +348,7 @@ typedef struct	s_doom
 
 	float		g_speed;
 	int			on_ground;
+	int			screen_nmb;
 
 	
 
