@@ -16,7 +16,7 @@ t_wall	get_big_wall(t_wall wall, t_bsp *bsp, t_vertex *line)
 {
 	line->x = wall.points[0].y - wall.points[1].y;
 	line->y = wall.points[1].x - wall.points[0].x;
-	line->z = wall.points[0].x * wall.points[1].y - wall.points[1].x *
+	line->z = wall.points[0].x * wall.points[1].y - wall.points[1].x * \
 								wall.points[0].y;
 	bsp->line.x = -(line->x / line->y);
 	bsp->line.y = -(line->z / line->y);
@@ -47,9 +47,9 @@ void	check_wall(t_vertex line, t_wall *wall, t_w_zz *z)
 	z->p = wall->points[1];
 }
 
-int		classify_wall(t_vertex line, t_vertex n, t_wall wall, t_vertex *inter)
+int	classify_wall(t_vertex line, t_vertex n, t_wall wall, t_vertex *inter)
 {
-	t_w_zz z;
+	t_w_zz	z;
 
 	check_wall(line, &wall, &z);
 	z.ort_line.z = -line.x * wall.points[1].y + line.y * wall.points[1].x;
@@ -59,21 +59,21 @@ int		classify_wall(t_vertex line, t_vertex n, t_wall wall, t_vertex *inter)
 	z.dot2 = dot(normalize(z.ort2), normalize(n));
 	if (length(z.ort1) < 0.01 && length(z.ort2) < 0.01)
 		return (COMPLANAR);
-	else if (((z.dot1 < 0.0 && z.dot2 > 0.0) || (z.dot1 > 0.0 &&
-								z.dot2 < 0.0)) &&
+	else if (((z.dot1 < 0.0 && z.dot2 > 0.0) || (z.dot1 > 0.0 && \
+								z.dot2 < 0.0)) && \
 				length(z.ort1) > 0.01 && length(z.ort2) > 0.01)
 	{
 		z.ort_line = get_line_by_points(wall.points[0], wall.points[1]);
 		*inter = lines_intersect(line, z.ort_line);
 		return (CUTTED);
 	}
-	else if ((length(z.ort1) > 0.01 && z.dot1 > 0.0) ||
+	else if ((length(z.ort1) > 0.01 && z.dot1 > 0.0) || \
 				(length(z.ort2) > 0.01 && z.dot2 > 0.0))
 		return (FRONT);
 	return (BACK);
 }
 
-int		sign(float a)
+int	sign(float a)
 {
 	if (a == 0.0)
 		return (0);

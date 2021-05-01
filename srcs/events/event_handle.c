@@ -6,7 +6,7 @@
 /*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:55:14 by npetrell          #+#    #+#             */
-/*   Updated: 2021/05/01 22:12:04 by ldeirdre         ###   ########.fr       */
+/*   Updated: 2021/05/01 22:17:14 by ldeirdre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,43 @@ void            screen_png(SDL_Surface *srf, int num)
 }
 
 
-void	event_hand(SDL_Event *event, void *doom_ptr, int *quit)
+void	event_naruto(t_doom *doom)
 {
+<<<<<<< HEAD
 	t_doom *doom;
 	
 	doom = (t_doom *)doom_ptr;
+=======
+	if (doom->music->playing_naruto == 0 && \
+		length(sub(doom->objects[4].sprite.instance.position,
+				   doom->scene.camera.position)) <= 3.0)
+	{
+		doom->music->playing_naruto = 1;
+		if (Mix_PlayChannelTimed(2, doom->music->naruto, 1, 1300) == -1)
+			ft_putstr(Mix_GetError());
+	}
+	else if ((length(sub(doom->objects[4].sprite.instance.position, \
+						doom->scene.camera.position)) > 3.0) && \
+						 		doom->music->playing_naruto == 1)
+		doom->music->playing_naruto = 0;
+}
+>>>>>>> fba2423282e5f18c7d6168a4b296e4004b66f7c2
 
+void	doom_menu(SDL_Event *event, t_doom *doom, int *quit)
+{
 	if (doom->menu_opened)
 	{
 		if (event->type == SDL_KEYDOWN)
 		{
-			if (event->key.keysym.sym == SDLK_w || event->key.keysym.sym == SDLK_UP)
+			if (event->key.keysym.sym == SDLK_w || \
+								event->key.keysym.sym == SDLK_UP)
 			{
 				doom->menu.active--;
 				if (doom->menu.active < 0)
 					doom->menu.active = 2;
 			}
-			else if (event->key.keysym.sym == SDLK_s || event->key.keysym.sym == SDLK_DOWN)
+			else if (event->key.keysym.sym == SDLK_s || \
+								event->key.keysym.sym == SDLK_DOWN)
 			{
 				doom->menu.active++;
 				if (doom->menu.active > 2)
@@ -83,14 +103,14 @@ void	event_hand(SDL_Event *event, void *doom_ptr, int *quit)
 					}
 					
 				}
-				else if (doom->menu.active == 2) //////выход (наеврно надо сделать отдельную функцию на это)
+				else if (doom->menu.active == 2)
 				{
 					remove_files();
 					*quit = 1;
 					exit(-2);
 				}
 			}
-			else if (event->key.keysym.sym == SDLK_ESCAPE) ///////выход (наеврно надо сделать отдельную функцию на это)
+			else if (event->key.keysym.sym == SDLK_ESCAPE)
 			{
 				remove_files();
 				*quit = 1;
@@ -99,7 +119,31 @@ void	event_hand(SDL_Event *event, void *doom_ptr, int *quit)
 		}
 		return ;
 	}
+}
 
+void	arrow_keys(t_doom *doom, SDL_Event *event, int value)
+{
+	if (event->key.keysym.sym == SDLK_w || \
+							event->key.keysym.sym == SDLK_UP)
+		doom->w_pressed = value;
+	else if (event->key.keysym.sym == SDLK_s || \
+						event->key.keysym.sym == SDLK_DOWN)
+		doom->s_pressed = value;
+	else if (event->key.keysym.sym == SDLK_a || \
+						event->key.keysym.sym == SDLK_LEFT)
+		doom->a_pressed = value;
+	else if (event->key.keysym.sym == SDLK_d || \
+						event->key.keysym.sym == SDLK_RIGHT)
+		doom->d_pressed = value;
+}
+
+void	event_hand(SDL_Event *event, void *doom_ptr, int *quit)
+{
+	t_doom		*doom;
+	t_vertex	new_pos;
+
+	doom = (t_doom *)doom_ptr;
+	doom_menu(event, doom, quit);
 	if (doom->win || doom->lose)
 	{
 		if (event->type == SDL_KEYDOWN && event->key.keysym.sym == SDLK_RETURN)
@@ -111,12 +155,8 @@ void	event_hand(SDL_Event *event, void *doom_ptr, int *quit)
 		}
 		return ;
 	}
-
 	if (event->type == SDL_MOUSEBUTTONDOWN)
-	{
-
 		fire(doom);
-	}
 	else if (event->type == SDL_MOUSEBUTTONUP)
 	{
 		doom->mouse_pressed = 0;
@@ -129,20 +169,21 @@ void	event_hand(SDL_Event *event, void *doom_ptr, int *quit)
 		doom->prev_x = event->motion.xrel;
 		doom->prev_y = event->motion.yrel;
 	}
-	else if (event->type == SDL_KEYDOWN )
+	else if (event->type == SDL_KEYDOWN)
 	{
 		if (event->key.keysym.sym == SDLK_f)
 		{
-			if (length(sub(doom->tv.sprite.instance.position, 
+			if (length(sub(doom->tv.sprite.instance.position, \
 				doom->scene.camera.position)) < 2.0)
 			{
-				doom->tv.enable = doom->tv.enable ? 0 : 1;
+				if (doom->tv.enable)
+					doom->tv.enable = 0;
+				else
+					doom->tv.enable = 1;
 			}					
 		}
 		else if (event->key.keysym.sym == SDLK_ESCAPE)
-		{
 			doom->menu_opened = 1;
-		}
 		else if (event->key.keysym.sym == SDLK_SPACE)
 		{
 			if (doom->on_ground)
@@ -150,13 +191,13 @@ void	event_hand(SDL_Event *event, void *doom_ptr, int *quit)
 		}
 		else if (event->key.keysym.sym == SDLK_LSHIFT)
 		{
-			t_vertex new_pos = (t_vertex)
-				{
-					doom->scene.camera.position.x,
-					doom->scene.camera.position.z,
-					doom->scene.camera.position.y + 0.6,
-				};
-			if (if_possible_to_move(new_pos, &doom->scene.level.root,
+			new_pos = (t_vertex) \
+			{
+				doom->scene.camera.position.x, \
+				doom->scene.camera.position.z, \
+				doom->scene.camera.position.y + 0.6, \
+			};
+			if (if_possible_to_move(new_pos, &doom->scene.level.root, \
 				PHISICS_MODE_PLAYER, 1.7))
 			{
 				doom->sit = 0;
@@ -176,14 +217,14 @@ void	event_hand(SDL_Event *event, void *doom_ptr, int *quit)
 			}
 			else
 			{
-				t_vertex new_pos = (t_vertex)
-					{
-						doom->scene.camera.position.x,
-						doom->scene.camera.position.z,
-						doom->scene.camera.position.y + 0.6,
-					};
-				if (if_possible_to_move(new_pos, &doom->scene.level.root,
-					PHISICS_MODE_PLAYER, 1.7))
+				new_pos = (t_vertex) \
+				{
+					doom->scene.camera.position.x, \
+					doom->scene.camera.position.z, \
+					doom->scene.camera.position.y + 0.6
+				};
+				if (if_possible_to_move(new_pos, &doom->scene.level.root, \
+				PHISICS_MODE_PLAYER, 1.7))
 				{
 					doom->sit = 0;
 					doom->height = 1.7;
@@ -216,59 +257,15 @@ void	event_hand(SDL_Event *event, void *doom_ptr, int *quit)
 		{
 			doom->d_pressed = 1;
 		}
+		else
+			arrow_keys(doom, event, 1);
 	}
 	else if (event->type == SDL_KEYUP)
 	{
-		if (event->key.keysym.sym == SDLK_w  || event->key.keysym.sym == SDLK_UP)
-		{
-			doom->w_pressed = 0;
-		}
-		else if (event->key.keysym.sym == SDLK_s || event->key.keysym.sym == SDLK_DOWN)
-		{
-			doom->s_pressed = 0;
-		}
-		else if (event->key.keysym.sym == SDLK_a || event->key.keysym.sym == SDLK_LEFT)
-		{
-			doom->a_pressed = 0;
-		}
-		else if (event->key.keysym.sym == SDLK_d || event->key.keysym.sym == SDLK_RIGHT)
-		{
-			doom->d_pressed = 0;
-		}
-		else if (event->key.keysym.sym == SDLK_LSHIFT)
-		{
+		if (event->key.keysym.sym == SDLK_LSHIFT)
 			doom->run = 0;
-		}
+		else
+			arrow_keys(doom, event, 0);
 	}
-	if (doom->music->playing_naruto == 0 &&
-		length(sub(doom->objects[4].sprite.instance.position,
-				   doom->scene.camera.position)) <= 3.0)
-	{
-		doom->music->playing_naruto = 1;
-		if (Mix_PlayChannelTimed(2, doom->music->naruto, 1, 1300) == -1)
-		{
-			ft_putstr(Mix_GetError());
-		}
-	}
-	else if ((length(sub(doom->objects[4].sprite.instance.position,
-						 doom->scene.camera.position)) > 3.0) && doom->music->playing_naruto == 1)
-	{
-		doom->music->playing_naruto = 0;
-	}
-
-	if (doom->music->playing_tyan == 0 &&
-		length(sub(doom->objects[7].sprite.instance.position,
-				   doom->scene.camera.position)) <= 3.0)
-	{
-		doom->music->playing_tyan = 1;
-		if (Mix_PlayChannelTimed(3, doom->music->anime_tyan, 1, 500) == -1)
-		{
-			ft_putstr(Mix_GetError());
-		}
-	}
-	else if ((length(sub(doom->objects[7].sprite.instance.position,
-						 doom->scene.camera.position)) > 3.0) && doom->music->playing_tyan == 1)
-	{
-		doom->music->playing_tyan = 0;
-	}
+	event_naruto(doom);
 }

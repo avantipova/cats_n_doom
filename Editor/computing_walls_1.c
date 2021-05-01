@@ -12,24 +12,24 @@
 
 #include "editor.h"
 
-int			walls_cmp(t_wall w1, t_wall w2)
+int	walls_cmp(t_wall w1, t_wall w2)
 {
-	if ((w1.points[0].x == w2.points[0].x &&
-				w1.points[0].y == w2.points[0].y &&
-		w1.points[1].x == w2.points[1].x &&
-				w1.points[1].y == w2.points[1].y) ||
-		(w1.points[0].x == w2.points[1].x &&
-				w1.points[0].y == w2.points[1].y &&
-		w1.points[1].x == w2.points[0].x
+	if ((w1.points[0].x == w2.points[0].x && \
+				w1.points[0].y == w2.points[0].y && \
+		w1.points[1].x == w2.points[1].x && \
+				w1.points[1].y == w2.points[1].y) || \
+		(w1.points[0].x == w2.points[1].x && \
+				w1.points[0].y == w2.points[1].y && \
+		w1.points[1].x == w2.points[0].x \
 				&& w1.points[1].y == w2.points[0].y))
 		return (1);
 	return (0);
 }
 
-void		analyze_wall(t_wall *wall, t_map_editor *ed, int n)
+void	analyze_wall(t_wall *wall, t_map_editor *ed, int n)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < ed->map.circuits_count)
@@ -52,25 +52,25 @@ void		analyze_wall(t_wall *wall, t_map_editor *ed, int n)
 
 t_vertex	get_face_normal(t_map_editor *editor, int i, int j)
 {
-	t_vertex ret;
-	t_vertex p1;
-	t_vertex p2;
+	t_vertex	ret;
+	t_vertex	p1;
+	t_vertex	p2;
 
 	p1 = editor->map.circuits[i].points[j - 1];
 	p2 = editor->map.circuits[i].points[j];
-	ret.x = cos(atan2(p2.y - p1.y, p2.x - p1.x) +
+	ret.x = cos(atan2(p2.y - p1.y, p2.x - p1.x) + \
 			(float)editor->map.circuits[i].normal_dir * M_PI / 2);
-	ret.y = sin(atan2(p2.y - p1.y, p2.x - p1.x) +
+	ret.y = sin(atan2(p2.y - p1.y, p2.x - p1.x) + \
 			(float)editor->map.circuits[i].normal_dir * M_PI / 2);
 	ret.z = 0.0;
 	return (normalize(ret));
 }
 
-t_wall		inside_cycle(t_wall *curr, t_map_editor *ed,
+t_wall	inside_cycle(t_wall *curr, t_map_editor *ed,
 							int *walls_count)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < ed->map.circuits_count)
@@ -96,7 +96,7 @@ t_wall		inside_cycle(t_wall *curr, t_map_editor *ed,
 	return (*curr);
 }
 
-void		transform_data(t_map_editor *ed)
+void	transform_data(t_map_editor *ed)
 {
 	t_wall	curr;
 	int		walls_count;
