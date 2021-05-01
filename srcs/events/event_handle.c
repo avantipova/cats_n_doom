@@ -6,7 +6,7 @@
 /*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:55:14 by npetrell          #+#    #+#             */
-/*   Updated: 2021/05/01 22:17:14 by ldeirdre         ###   ########.fr       */
+/*   Updated: 2021/05/01 22:33:48 by ldeirdre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ void            screen_png(SDL_Surface *srf, int num)
 
 void	event_naruto(t_doom *doom)
 {
-<<<<<<< HEAD
-	t_doom *doom;
-	
-	doom = (t_doom *)doom_ptr;
-=======
 	if (doom->music->playing_naruto == 0 && \
 		length(sub(doom->objects[4].sprite.instance.position,
 				   doom->scene.camera.position)) <= 3.0)
@@ -54,7 +49,6 @@ void	event_naruto(t_doom *doom)
 						 		doom->music->playing_naruto == 1)
 		doom->music->playing_naruto = 0;
 }
->>>>>>> fba2423282e5f18c7d6168a4b296e4004b66f7c2
 
 void	doom_menu(SDL_Event *event, t_doom *doom, int *quit)
 {
@@ -267,5 +261,35 @@ void	event_hand(SDL_Event *event, void *doom_ptr, int *quit)
 		else
 			arrow_keys(doom, event, 0);
 	}
-	event_naruto(doom);
+	if (doom->music->playing_naruto == 0 &&
+		length(sub(doom->objects[4].sprite.instance.position,
+				   doom->scene.camera.position)) <= 3.0)
+	{
+		doom->music->playing_naruto = 1;
+		if (Mix_PlayChannelTimed(2, doom->music->naruto, 1, 1300) == -1)
+		{
+			ft_putstr(Mix_GetError());
+		}
+	}
+	else if ((length(sub(doom->objects[4].sprite.instance.position,
+						 doom->scene.camera.position)) > 3.0) && doom->music->playing_naruto == 1)
+	{
+		doom->music->playing_naruto = 0;
+	}
+
+	if (doom->music->playing_tyan == 0 &&
+		length(sub(doom->objects[7].sprite.instance.position,
+				   doom->scene.camera.position)) <= 3.0)
+	{
+		doom->music->playing_tyan = 1;
+		if (Mix_PlayChannelTimed(3, doom->music->anime_tyan, 1, 500) == -1)
+		{
+			ft_putstr(Mix_GetError());
+		}
+	}
+	else if ((length(sub(doom->objects[7].sprite.instance.position,
+						 doom->scene.camera.position)) > 3.0) && doom->music->playing_tyan == 1)
+	{
+		doom->music->playing_tyan = 0;
+	}
 }

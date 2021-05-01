@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 	puts("OK");
 	mgl = mgl_init("Doom_Quaekem", W, H, SCREEN_MULTIPLICATOR);
 	doom.music = sound_init();
-	doom.screen_nmb = 1;
+	doom.screen_nmb = 0;
 
 //загрузка музона
 
