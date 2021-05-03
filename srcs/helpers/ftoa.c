@@ -59,16 +59,14 @@ int	insert_zeros(int ival, int decimals, char *buf)
 	return (res);
 }
 
-static int	ival_count(int decimals)
+static void	roundg(int decimals, float *rounding, float *value)
 {
-	int	ival;
-	int	d;
+	int		d;
 
-	ival = 1;
 	d = -1;
 	while (++d < decimals)
-		ival *= 10;
-	return (ival);
+		*rounding /= 10.0;
+	*value += *rounding;
 }
 
 char	*ftoa(float value, int decimals, char *buf)
@@ -79,23 +77,24 @@ char	*ftoa(float value, int decimals, char *buf)
 	float	rounding;
 
 	index = -1;
-	rounding = 0.5;
+	rounding = 0.5f;
 	if (value < 0)
 	{
 		buf[++index] = '-';
 		value = -value;
 	}
-	d = -1;
-	while (++d < decimals)
-		rounding /= 10.0;
-	value += rounding;
+	roundg(decimals, &rounding, &value);
 	index += itoa_s((int)(value), buf + index);
 	buf[index++] = '.';
 	value = value - (int)(value);
-	ival = ival_count(decimals);
+	ival = 1;
+	d = -1;
+	while (++d < decimals)
+		ival *= 10;
 	ival *= value;
 	index += insert_zeros(ival, decimals, buf + index);
 	index += itoa_s(ival, buf + index);
 	buf[index] = '\0';
 	return (buf);
 }
+
