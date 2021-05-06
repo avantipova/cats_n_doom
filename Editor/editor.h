@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 16:11:05 by Chorange          #+#    #+#             */
-/*   Updated: 2021/03/27 19:36:33 by ldeirdre         ###   ########.fr       */
+/*   Updated: 2021/05/06 18:25:44 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EDITOR_H
 # define EDITOR_H
-
-
 
 # define RENDER_MODE_POINTS 0
 # define RENDER_MODE_WALLS 1
@@ -44,12 +42,12 @@
 # include "bsp_helpers.h"
 # include "duke.h"
 
-typedef struct		s_bs_cc
+typedef struct s_bs_cc
 {
 	t_vt_tr			new;
 	t_vertex		vt;
 	t_vertex		uv;
-	float 			top;
+	float			top;
 	float			bottom;
 	int				flag;
 	int				i;
@@ -57,18 +55,17 @@ typedef struct		s_bs_cc
 	t_bsp			*link;
 }					t_bs_cc;
 
-
-typedef struct		s_cc
+typedef struct s_cc
 {
 	int				i;
 	int				j;
 	t_vertex		base;
-	int 			res[2];
+	int				res[2];
 }					t_cc;
 
-typedef struct		s_w_zz
+typedef struct s_w_zz
 {
-	t_vertex 		p;
+	t_vertex		p;
 	t_vertex		ort_line;
 	t_vertex		in;
 	t_vertex		ort1;
@@ -78,8 +75,7 @@ typedef struct		s_w_zz
 	int				ret;
 }					t_w_zz;
 
-
-typedef struct		s_req_s
+typedef struct s_req_s
 {
 	t_circuit		*front;
 	t_circuit		*back;
@@ -91,21 +87,18 @@ typedef struct		s_req_s
 	t_wall			cutter;
 	t_wall			new1;
 	t_wall			new2;
-	t_vertex 		cutter_line;
+	t_vertex		cutter_line;
 	t_vertex		inter;
 }					t_req_s;
 
-
-
-
-typedef struct		s_m_e_object
+typedef struct s_m_e_object
 {
 	t_vertex		pos;
 	int				index;
-	int 			exir;
+	int				exir;
 }					t_m_e_object;
 
-typedef struct		s_map
+typedef struct s_map
 {
 	t_circuit		circuits[20];
 
@@ -130,21 +123,20 @@ typedef struct		s_map
 
 }					t_map;
 
-typedef struct 		s_a_t_b
+typedef struct s_a_t_b
 {
-	t_vt_tr 		new;
-	t_vertex 		vt;
-	t_vertex 		uv;
-	float 			top;
-	float 			bottom;
-	int 			flag;
-	t_bsp 			*link;
-	t_wall 			wall;
-	t_bsp 			*root;
+	t_vt_tr			new;
+	t_vertex		vt;
+	t_vertex		uv;
+	float			top;
+	float			bottom;
+	int				flag;
+	t_bsp			*link;
+	t_wall			wall;
+	t_bsp			*root;
 }					t_a_t_b;
 
-
-typedef struct		s_map_editor
+typedef struct s_map_editor
 {
 	int				prev_x;
 	int				prev_y;
@@ -162,7 +154,7 @@ typedef struct		s_map_editor
 
 	int				edit_ceil_tex;
 	int				edit_floor_tex;
-		int			edit_wall_tex;
+	int				edit_wall_tex;
 
 	t_vertex		tv;
 	float			tv_beta;
@@ -178,7 +170,6 @@ typedef struct		s_map_editor
 	t_m_e_object	objects[40];
 	int				objects_count;
 
-
 	int				curr_object;
 
 	int				step;
@@ -187,19 +178,19 @@ typedef struct		s_map_editor
 }					t_map_editor;
 
 void				export_map(t_map_editor *ed);
+float				new_less_zero(t_vertex base, t_vertex new);
+float				end_less_zero(t_vertex base, t_vertex end);
 
 void				save_json(t_bsp *root, t_map_editor *ed);
-char 				*ftoa(float value, int decimals, char *buf);
-char 				*itoa(int value, char *buf);
-int 				itoa_s(int value, char *buf);
+char				*ftoa(float value, int decimals, char *buf);
+char				*itoa(int value, char *buf);
+int					itoa_s(int value, char *buf);
 
 void				editor_init(t_map_editor *ed);
 
-void    			set_hash();
-
+void				set_hash(void);
 
 void				draw_line(int *pixels, t_int_v f, t_int_v s, int color);
-
 
 void				draw_objects(t_map_editor *ed, int *pixels);
 void				draw_ammo(t_map_editor *ed, int *pixels);
@@ -214,21 +205,17 @@ void				draw_in_walls_mode(int i, int *pixels, t_map_editor *ed);
 void				draw_elements(t_map_editor *ed, int *pixels);
 
 void				draw_point(t_vertex pos, int color, int *pixels);
-
-
+void				check_sign_x(t_int_v *f, t_int_v *sign, t_int_v *s);
+void				check_sign_y(t_int_v *f, t_int_v *sign, t_int_v *s);
+int					draw_walls_color(int i, t_map_editor *ed);
 
 void				mouse_motion(t_map_editor *ed);
 void				mouse_button_down(t_map_editor *ed);
-
-
-
 
 void				add_aid(t_vertex pos, t_map_editor *ed);
 void				add_ammo(t_vertex pos, t_map_editor *ed);
 void				add_enemy(t_vertex pos, t_map_editor *ed);
 void				add_object(t_vertex pos, int number, t_map_editor *ed);
-
-
 
 void				write_instructions(t_map_editor *ed);
 void				write_object_num(t_map_editor *ed);
@@ -238,57 +225,50 @@ void				write_floor_tex(t_map_editor *ed);
 void				write_ceil_tex(t_map_editor *ed);
 void				write_wall_tex(t_map_editor *ed);
 
-
-
 int					cursor_on_line(t_map_editor *ed);
 int					cursor_on_point(t_map_editor *ed);
 
-
-
 int					bsp_select_circuit_traversal(t_bsp *node, t_vertex pos);
 
-
 void				map_new_point(t_map *map, float x, float y, int flag);
-
 
 void				key_minus_down(t_map_editor *ed);
 void				key_plus_down(t_map_editor *ed);
 void				key_enter_down(t_map_editor *ed);
 
-
-
 void				bsp_compile(t_map_editor *ed);
 t_wall				get_big_wall(t_wall wall, t_bsp *bsp, t_vertex *line);
-void				bsp_recurse(t_bsp *bsp, t_circuit *circuits, int circuits_count, t_map *map);
-int					classify_wall(t_vertex line, t_vertex n, t_wall wall, t_vertex *inter);
-void				get_cutter(t_circuit *circuits, int circuits_count, int *cutter_cir, int *cutter_wall);
-void				reconstruct_circuits(t_circuit *circuits, int circuits_count);
+void				bsp_recurse(t_bsp *bsp, t_circuit *circuits,
+						int circuits_count, t_map *map);
+void				bsp_recurse_malloc(t_req_s *s, t_bsp *bsp,
+						t_circuit *circuits, int circuits_count);
+int					classify_wall(t_vertex line, t_vertex n, t_wall wall,
+						t_vertex *inter);
+void				get_cutter(t_circuit *circuits, int circuits_count,
+						int *cutter_cir, int *cutter_wall);
+void				reconstruct_circuits(t_circuit *circuits,
+						int circuits_count);
 
+void				add_tops_bottoms(t_bsp *node, t_map *map, t_bsp *root);
+t_bsp				*get_node_by_wall_traversal(t_bsp *node, t_wall wall);
+int					add_vt(t_map *map, t_vertex vt);
+int					add_n(t_map *map, t_vertex n);
+int					add_uv(t_map *map, t_vertex uv);
 
-void	add_tops_bottoms(t_bsp *node, t_map *map, t_bsp *root);
-t_bsp *get_node_by_wall_traversal(t_bsp *node, t_wall wall);
-int add_vt(t_map *map, t_vertex vt);
-int add_n(t_map *map, t_vertex n);
-int add_uv(t_map *map, t_vertex uv);
+void				do_vt_sec(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
+void				do_uv_sec(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
 
-void		do_vt_sec(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
-void		do_uv_sec(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
+void				do_vt_2(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
+void				do_vt_3(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
+void				do_vt_4(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
 
-void		do_vt_2(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
-void		do_vt_3(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
-void		do_vt_4(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
-
-void to_obj_format(t_bsp *node, t_map *map);
-
+void				to_obj_format(t_bsp *node, t_map *map);
 
 void				key_down(t_map_editor *ed, SDL_Event *event);
 
-
 void				get_cutter(t_circuit *circuits, int circuits_count,
-								int *cutter_cir, int *cutter_wall);
+						int *cutter_cir, int *cutter_wall);
 void				transform_data(t_map_editor *ed);
-
-
 
 void				check_enemies(t_map_editor *ed, int fd);
 void				check_ammo(t_map_editor *ed, int fd);
@@ -303,17 +283,13 @@ void				write_data_2(t_bsp *node, int fd);
 void				check_walls(t_bsp *node, int i, int fd);
 void				bsp_save_traversal(t_bsp *node, int fd);
 
-
-
 void				floor_tr(t_bsp *node, t_map *map, t_vt_tr *new, int i);
 
 void				ceil_tr(t_bsp *node, t_map *map, t_vt_tr *new, int i);
 void				ceil_tr_vts(t_bsp *node, t_map *map, t_vt_tr *new, int i);
 
-void					err(char *str);
+void				err(char *str);
 void				set_hash_1(char *str1, char *str2);
 void				set_hash_2(char *str1, char *str2, int hash_n);
-
-
 
 #endif

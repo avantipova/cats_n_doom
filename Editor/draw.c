@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 14:16:52 by Chorange          #+#    #+#             */
-/*   Updated: 2021/02/04 15:03:40 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/05/06 16:41:23 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,8 @@ void	draw_line(int *pixels, t_int_v f, t_int_v s, int color)
 	int		error2;
 
 	delta = (t_int_v){abs(s.x - f.x), abs(s.y - f.y)};
-	if (f.x < s.x)
-		sign.x = 1;
-	else
-		sign.x = -1;
-	if (f.y < s.y)
-		sign.y = 1;
-	else
-		sign.y = -1;
+	check_sign_x(&f, &sign, &s);
+	check_sign_y(&f, &sign, &s);
 	error = delta.x - delta.y;
 	put_pixel(pixels, s.x, s.y, color);
 	while (f.x != s.x || f.y != s.y)
@@ -94,10 +88,7 @@ void	draw_in_walls_mode(int i, int *pixels, t_map_editor *ed)
 		p2.y = (int)(ed->map.circuits[i].walls[j].points[1].y * \
 				MAP_EDITOR_SCALE);
 		n = ed->map.circuits[i].walls[j].normal;
-		if (i == ed->map.selected_circuit)
-			color = 0xFF0000;
-		else
-			color = 0xFFFF00;
+		color = draw_walls_color(i, ed);
 		draw_line(pixels, p1, p2, color);
 		draw_line(pixels,
 			(t_int_v){p1.x + (p2.x - p1.x) / 2, p1.y + (p2.y - p1.y) / 2},

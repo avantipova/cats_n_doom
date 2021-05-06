@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   bsp_recurse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 16:48:58 by Chorange          #+#    #+#             */
-/*   Updated: 2021/03/27 19:24:53 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/05/06 15:17:54 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-int		if_leaf(t_bsp *bsp, t_map *map, t_int_v q, t_circuit *circuits)
+int	if_leaf(t_bsp *bsp, t_map *map, t_int_v q, t_circuit *circuits)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	if (q.x == -1)
 	{
@@ -78,8 +78,8 @@ void	if_complanar(t_circuit *circuits, t_req_s *s)
 		{
 			circuits[s->i].walls[s->j].circuit = s->cutter_cir;
 		}
-		s->back[s->i].walls[s->back[s->i].walls_count] =
-					circuits[s->i].walls[s->j];
+		s->back[s->i].walls[s->back[s->i].walls_count]
+			= circuits[s->i].walls[s->j];
 		s->back[s->i].walls_count++;
 	}
 	else
@@ -87,8 +87,8 @@ void	if_complanar(t_circuit *circuits, t_req_s *s)
 		if (circuits[s->i].walls[s->j].type == WALL_TYPE_SECTOR_BORDER)
 			circuits[s->i].walls[s->j].circuit = -1;
 		circuits[s->i].walls[s->j].used_in_bsp = 1;
-		s->front[s->i].walls[s->front[s->i].walls_count] =
-			circuits[s->i].walls[s->j];
+		s->front[s->i].walls[s->front[s->i].walls_count]
+			= circuits[s->i].walls[s->j];
 		s->front[s->i].walls_count++;
 	}
 }
@@ -108,12 +108,12 @@ void	cycle(t_bsp *bsp, t_circuit *circuits, int circuits_count,
 				if_cutted(bsp, circuits, s);
 			else if (s->result == FRONT)
 			{
-				s->front[s->i].walls[s->front[s->i].walls_count++] =
-						circuits[s->i].walls[s->j];
+				s->front[s->i].walls[s->front[s->i].walls_count++]
+					= circuits[s->i].walls[s->j];
 			}
 			else if (s->result == BACK)
-				s->back[s->i].walls[s->back[s->i].walls_count++] =
-						circuits[s->i].walls[s->j];
+				s->back[s->i].walls[s->back[s->i].walls_count++]
+					= circuits[s->i].walls[s->j];
 			else
 				if_complanar(circuits, s);
 			s->j++;
@@ -125,7 +125,7 @@ void	cycle(t_bsp *bsp, t_circuit *circuits, int circuits_count,
 void	bsp_recurse(t_bsp *bsp, t_circuit *circuits, int circuits_count,
 						t_map *map)
 {
-	t_req_s s;
+	t_req_s	s;
 
 	reconstruct_circuits(circuits, circuits_count);
 	get_cutter(circuits, circuits_count, &s.cutter_cir, &s.cutter_wall);
@@ -134,18 +134,8 @@ void	bsp_recurse(t_bsp *bsp, t_circuit *circuits, int circuits_count,
 	if (if_leaf(bsp, map, (t_int_v){s.cutter_cir, circuits_count}, circuits))
 		return ;
 	s.cutter = get_big_wall(circuits[s.cutter_cir].walls[s.cutter_wall], bsp,
-				&s.cutter_line);
-	if (!(s.front = malloc(sizeof(t_circuit) * circuits_count)) ||
-			!(s.back = malloc(sizeof(t_circuit) * circuits_count)))
-		exit(-2);
-	ft_bzero(s.front, sizeof(t_circuit) * circuits_count);
-	ft_bzero(s.back, sizeof(t_circuit) * circuits_count);
-	bsp->is_leaf = 0;
-	bsp->walls_count = 0;
-	bsp->normal = circuits[s.cutter_cir].walls[s.cutter_wall].normal;
-	if (!(bsp->back = malloc(sizeof(t_bsp))) ||
-			!(bsp->front = malloc(sizeof(t_bsp))))
-		exit(-2);
+			&s.cutter_line);
+	bsp_recurse_malloc(&s, bsp, circuits, circuits_count);
 	cycle(bsp, circuits, circuits_count, &s);
 	free(circuits);
 	bsp_recurse(bsp->back, s.back, circuits_count, map);
