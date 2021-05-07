@@ -42,7 +42,7 @@
 #include <fcntl.h>
 #include "libft.h"
 #include "get_next_line.h"
-
+#include "../frameworks/SDL2_image.framework/Headers/SDL_image.h"
 
 void	render_init(t_scene *scene);
 void	clipping_planes_init(t_scene *scene);
@@ -168,5 +168,13 @@ void	update(void *doom_ptr, int *pixels);
 int		check_leaf(t_bsp *node, t_vertex pos);
 int		check_enemy(t_doom *doom, t_vertex pos);
 void	fire(t_doom *doom);
+int		menu_opened(t_doom *doom);
+void	doom_pressed(t_doom *doom, t_vertex *new_pos, float path);
+void	sounds_events(t_doom *doom);
+void	key_down_src(t_doom *doom, SDL_Event *event);
+void	arrow_keys(t_doom *doom, SDL_Event *event, int value);
+void	event_naruto(t_doom *doom);
+int		doom_menu(SDL_Event *event, t_doom *doom, int *quit);
+void	screen_png(SDL_Surface *srf, int num);
 
 #endif

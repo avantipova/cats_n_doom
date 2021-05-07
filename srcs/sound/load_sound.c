@@ -13,11 +13,37 @@
 #include "mixer_init.h"
 #include "libft.h"
 
+static void	load_naruto(t_music *music)
+{
+	Mix_Chunk	*naruto;
+
+	naruto = Mix_LoadWAV(NARUTO_SOUND);
+	if (naruto == NULL)
+	{
+		ft_putstr("Error load naruto sound\n");
+		ft_putstr(Mix_GetError());
+		exit(EXIT_FAILURE);
+	}
+	music->naruto = naruto;
+}
+
+static void	load_anime_tyan(t_music *music)
+{
+	Mix_Chunk	*anime_tyan;
+
+	anime_tyan = Mix_LoadWAV(ANIME_TYAN);
+	if (anime_tyan == NULL)
+	{
+		ft_putstr("Error load anime_tyan sound\n");
+		ft_putstr(Mix_GetError());
+		exit(EXIT_FAILURE);
+	}
+	music->anime_tyan = anime_tyan;
+}
+
 void	load_sound(t_music *music)
 {
 	Mix_Chunk	*shotgun;
-	Mix_Chunk	*naruto;
-	Mix_Chunk	*anime_tyan;
 
 	shotgun = Mix_LoadWAV(SHOTGUN_SOUND);
 	if (shotgun == NULL)
@@ -27,20 +53,6 @@ void	load_sound(t_music *music)
 		exit(EXIT_FAILURE);
 	}
 	music->shotgun = shotgun;
-	naruto = Mix_LoadWAV(NARUTO_SOUND);
-	if (naruto == NULL)
-	{
-		ft_putstr("Error load naruto sound\n");
-		ft_putstr(Mix_GetError());
-		exit(EXIT_FAILURE);
-	}
-	music->naruto = naruto;
-	anime_tyan = Mix_LoadWAV(ANIME_TYAN);
-	if (anime_tyan == NULL)
-	{
-		ft_putstr("Error load anime_tyan sound\n");
-		ft_putstr(Mix_GetError());
-		exit(EXIT_FAILURE);
-	}
-	music->anime_tyan = anime_tyan;
+	load_naruto(music);
+	load_anime_tyan(music);
 }
