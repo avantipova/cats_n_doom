@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 21:04:34 by mjoss             #+#    #+#             */
-/*   Updated: 2021/04/11 17:16:55 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/05/07 04:54:49 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	put_pixel(int *image_data, int x, int y, int color)
 	int	index;
 
 	index = ((H_2 - y - 1) * W + W_2 + x);
-	if (index >= 0 && index < HxW && x > -W_2 && x < W_2)
+	if (index >= 0 && index < H_W && x > -W_2 && x < W_2)
 		image_data[index] = color;
 }
 

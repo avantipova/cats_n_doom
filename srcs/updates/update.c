@@ -6,7 +6,7 @@
 /*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:46:29 by npetrell          #+#    #+#             */
-/*   Updated: 2021/05/07 03:37:29 by baylak           ###   ########.fr       */
+/*   Updated: 2021/05/07 04:54:49 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	update(void *doom_ptr, int *pixels)
 	doom->for_sprites = make_oy_rot_matrix(doom->gamma);
 	doom->scene.camera.orientation = multiply_m_m(doom->for_sprites, \
 									make_ox_rot_matrix(doom->alpha));
-	ft_bzero(pixels, sizeof(int) * HxW);
+	ft_bzero(pixels, sizeof(int) * H_W);
 	updates(pixels, doom);
 	speed = 6.0;
 	if (doom->sit)
