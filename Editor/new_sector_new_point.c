@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   new_sector_new_point.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 14:11:10 by Chorange          #+#    #+#             */
-/*   Updated: 2021/01/14 14:12:00 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:32:21 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-static void		map_new_circuit(t_map *map)
+static void	map_new_circuit(t_map *map)
 {
 	map->circuits[map->circuits_count].points_count = 0;
 	map->circuits[map->circuits_count].walls_count = 0;
@@ -37,23 +37,23 @@ static t_vertex	get_nearest(t_vertex f, t_vertex s, float x, float y)
 	return (ret);
 }
 
-static void		correct_point_coords(t_map *map, float *x,
+static void	correct_point_coords(t_map *map, float *x,
 					float *y, int flag)
 {
-	t_vertex first;
-	t_vertex second;
-	t_vertex new;
+	t_vertex	first;
+	t_vertex	second;
+	t_vertex	new;
 
 	if (map->on_line && !flag)
 	{
 		first = map->circuits[map->on_circuit_i].points[map->on_point_i];
 		second = map->circuits[map->on_circuit_i].points[
-				get_i_plus_1(map->on_point_i,
-					map->circuits[map->on_circuit_i].points_count)];
+			get_i_plus_1(map->on_point_i,
+				map->circuits[map->on_circuit_i].points_count)];
 		new = get_nearest(first, second, *x, *y);
 		insert_by_index(map->circuits[map->on_circuit_i].points,
 			get_i_plus_1(map->on_point_i,
-					map->circuits[map->on_circuit_i].points_count),
+				map->circuits[map->on_circuit_i].points_count),
 			&map->circuits[map->on_circuit_i].points_count,
 			new);
 		*x = new.x;
@@ -66,9 +66,9 @@ static void		correct_point_coords(t_map *map, float *x,
 	}
 }
 
-void			map_new_point(t_map *map, float x, float y, int flag)
+void	map_new_point(t_map *map, float x, float y, int flag)
 {
-	int index;
+	int		index;
 
 	if (!map->active)
 	{

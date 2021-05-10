@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_json_3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 22:52:01 by Chorange          #+#    #+#             */
-/*   Updated: 2021/04/03 18:21:19 by ldeirdre         ###   ########.fr       */
+/*   Updated: 2021/05/10 22:15:47 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_walls(t_bsp *node, int i, int fd)
 {
-	char str[64];
+	char	str[64];
 
 	ft_putstr_fd("{\n\t\t\t\"type\":", fd);
 	itoa(node->walls[i].type, str);
@@ -43,32 +43,10 @@ void	check_walls(t_bsp *node, int i, int fd)
 
 void	check_objects(t_map_editor *ed, int fd)
 {
-	int		i;
 	char	str[64];
 
-	i = 0;
 	ft_putstr_fd("\"objects\": [", fd);
-	while (i < ed->objects_count)
-	{
-		ft_putstr_fd("{\n\t\t\t\"index\":", fd);
-		if (ed->objects[i].exir == 1)
-			ed->objects[i].index = 8;
-		else 
-			ed->objects[i].index = (i + 8) % 8; 
-		itoa(ed->objects[i].index, str);
-		ft_putstr_fd(str, fd);
-		ft_putstr_fd(", ", fd);
-		ft_putstr_fd("\n\t\t\t\"pos\": [", fd);
-		ftoa(ed->objects[i].pos.x, 8, str);
-		ft_putstr_fd(str, fd);
-		ft_putstr_fd(", ", fd);
-		ftoa(ed->objects[i].pos.y, 8, str);
-		ft_putstr_fd(str, fd);
-		ft_putstr_fd("]}", fd);
-		if (i < ed->objects_count - 1)
-			ft_putstr_fd(",", fd);
-		i++;
-	}
+	check_objects_while(ed, fd);
 	ft_putstr_fd("],", fd);
 }
 

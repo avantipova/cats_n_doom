@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_json_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 22:49:11 by Chorange          #+#    #+#             */
-/*   Updated: 2021/01/14 22:55:19 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/05/10 22:10:35 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	check_aid(t_map_editor *ed, int fd)
 
 void	check_player(t_map_editor *ed, int fd)
 {
-	char str[64];
+	char	str[64];
 
 	ft_putstr_fd("\"player\": [", fd);
 	ftoa(ed->player.x, 8, str);
@@ -52,7 +52,7 @@ void	check_player(t_map_editor *ed, int fd)
 
 void	check_aim(t_map_editor *ed, int fd)
 {
-	char str[64];
+	char	str[64];
 
 	ft_putstr_fd("\"aim\": [", fd);
 	ftoa(ed->aim.x, 8, str);
@@ -65,7 +65,7 @@ void	check_aim(t_map_editor *ed, int fd)
 
 void	check_tv(t_map_editor *ed, int fd)
 {
-	char str[64];
+	char	str[64];
 
 	ft_putstr_fd("\"tv\": { \"pos\":", fd);
 	ft_putstr_fd("[", fd);
@@ -83,7 +83,7 @@ void	check_tv(t_map_editor *ed, int fd)
 
 void	save_json(t_bsp *root, t_map_editor *ed)
 {
-	int fd;
+	int		fd;
 
 	fd = open("data.json", O_CREAT | O_RDWR | O_TRUNC, 0644);
 	ft_putstr_fd("{\n", fd);

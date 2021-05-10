@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   hash.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 03:50:48 by razin-ivan9       #+#    #+#             */
-/*   Updated: 2021/03/21 19:22:39 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:18:51 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "duke.h"
 #include "editor.h"
 
-int		hash(const char *str)
+int	hash(const char *str)
 {
-	unsigned int hash;
+	unsigned int	hash;
 
 	hash = 0;
 	while (*str)
@@ -38,8 +38,9 @@ void	set_hash(void)
 	char	*str2;
 	int		hash_n;
 
-	if (!(str1 = (char *)malloc(1000001)) ||
-			!(str2 = (char *)malloc(500001)))
+	str1 = (char *)malloc(1000001);
+	str2 = (char *)malloc(500001);
+	if (str1 == NULL || str2 == NULL)
 		exit(-2);
 	set_hash_1(str1, str2);
 	ft_strcat(str1, str2);
@@ -54,7 +55,7 @@ void	set_hash(void)
 
 t_int_v	check_hash_1(char *foldername, char *path)
 {
-	t_int_v fd;
+	t_int_v	fd;
 
 	ft_strcpy(path, foldername);
 	ft_strcat(path, "/geometry.obj");
@@ -65,9 +66,9 @@ t_int_v	check_hash_1(char *foldername, char *path)
 	return (fd);
 }
 
-int		check_hash_free(char *str1, char *str2, int hash_n)
+int	check_hash_free(char *str1, char *str2, int hash_n)
 {
-	char *ptr;
+	char	*ptr;
 
 	ptr = ft_strchr(str1, '\n') + 1;
 	ft_strcpy(str1, ptr);
@@ -84,7 +85,7 @@ int		check_hash_free(char *str1, char *str2, int hash_n)
 	return (0);
 }
 
-int		check_hash(char *foldername)
+int	check_hash(char *foldername)
 {
 	char	path[1024];
 	t_int_v	fd;
@@ -92,15 +93,17 @@ int		check_hash(char *foldername)
 	char	*str2;
 	int		hash_n;
 
-	if (!(str1 = (char *)malloc(1000001)) ||
-			!(str2 = (char *)malloc(500001)))
+	str1 = (char *)malloc(1000001);
+	str2 = (char *)malloc(500001);
+	if (str1 == NULL || str2 == NULL)
 		exit(-2);
 	fd = check_hash_1(foldername, path);
 	if (fd.x < 0 || fd.y < 0)
 		exit(-2);
 	str1[read(fd.x, str1, 1000000)] = 0;
 	str2[read(fd.y, str2, 500000)] = 0;
-	if ((hash_n = ft_atoi(str1)) != ft_atoi(str2))
+	hash_n = ft_atoi(str1);
+	if (hash_n != ft_atoi(str2))
 		exit(-2);
 	return (check_hash_free(str1, str2, hash_n));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_down.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 18:11:28 by Chorange          #+#    #+#             */
-/*   Updated: 2021/01/14 18:15:25 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:23:25 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,14 @@ void	key_down(t_map_editor *ed, SDL_Event *event)
 {
 	key_down_1(ed, event);
 	key_down_2(ed, event);
-
 	if (event->key.keysym.sym == SDLK_e)
 	{
 		if (ed->step == STEP_1_DRAW)
 		{
 			map_new_point(&ed->map, ed->map.circuits[
 				ed->map.circuits_count - 1].points[0].x,
-			ed->map.circuits[ed->map.circuits_count -
-								1].points[0].y, 1);
+				ed->map.circuits[ed->map.circuits_count
+				- 1].points[0].y, 1);
 			ed->map.active = 0;
 		}
 	}

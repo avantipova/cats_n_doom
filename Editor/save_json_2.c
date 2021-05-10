@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_json_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 22:52:01 by Chorange          #+#    #+#             */
-/*   Updated: 2021/01/14 22:54:32 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/05/10 22:10:56 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	check_vt_trs(t_bsp *node, int i, int fd)
 
 void	check_not_leaf(t_bsp *node, int fd)
 {
-	char str[64];
+	char	str[64];
 
 	ft_putstr_fd("\t\"isLeaf\": ", fd);
 	itoa(node->is_leaf, str);
@@ -84,7 +84,7 @@ void	check_not_leaf(t_bsp *node, int fd)
 
 void	write_data_1(t_bsp *node, int fd)
 {
-	char str[64];
+	char	str[64];
 
 	ft_putstr_fd("\t\"isLeaf\": ", fd);
 	itoa(node->is_leaf, str);

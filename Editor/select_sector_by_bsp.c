@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   select_sector_by_bsp.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 14:15:24 by Chorange          #+#    #+#             */
-/*   Updated: 2021/01/15 19:22:15 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/05/10 22:16:35 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-int			classify_point(t_vertex cam, t_vertex line, t_vertex normal)
+int	classify_point(t_vertex cam, t_vertex line, t_vertex normal)
 {
-	t_vertex new;
+	t_vertex	new;
 
 	cam.z = 0.0;
 	normal.z = 0.0;
@@ -24,7 +24,7 @@ int			classify_point(t_vertex cam, t_vertex line, t_vertex normal)
 	return (FRONT);
 }
 
-int			bsp_select_circuit_traversal(t_bsp *node, t_vertex pos)
+int	bsp_select_circuit_traversal(t_bsp *node, t_vertex pos)
 {
 	if (node->is_leaf)
 	{

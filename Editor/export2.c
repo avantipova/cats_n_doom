@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 17:57:18 by ldeirdre          #+#    #+#             */
-/*   Updated: 2021/01/15 19:01:09 by ldeirdre         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:05:55 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,7 @@ void	do_uv_3(t_a_t_b *tatb, t_bsp *node, t_map *map, int i)
 	tatb->new.type = TR_TYPE_WALL;
 	node->vt_trs[node->vt_trs_count] = tatb->new;
 	(node->vt_trs_count)++;
-	tatb->vt = (t_vertex){
-		node->walls[i].points[0].x, node->walls[i].points[0].y, \
-								map->circuits[node->circuit].ceil};
-	tatb->new.ids[0] = add_vt(map, tatb->vt);
-	tatb->vt = (t_vertex){node->walls[i].points[1].x, node->walls[i].points[1].y, \
-					map->circuits[node->circuit].floor};
-	tatb->new.ids[1] = add_vt(map, tatb->vt);
-	tatb->vt = (t_vertex){
-		node->walls[i].points[1].x, node->walls[i].points[1].y, \
-					map->circuits[node->circuit].ceil};
-	tatb->new.ids[2] = add_vt(map, tatb->vt);
-	tatb->vt = triangle_normal(map->vts[tatb->new.ids[2]], map->vts[tatb->new.ids[1]], \
-					map->vts[tatb->new.ids[0]]);
-	tatb->new.n_ids[0] = add_n(map, tatb->vt);
-	tatb->new.n_ids[1] = tatb->new.n_ids[0];
-	tatb->new.n_ids[2] = tatb->new.n_ids[0];
+	do_uv3_next(tatb, node, map, i);
 }
 
 void	do_uv_4(t_a_t_b *tatb, t_bsp *node, t_map *map, int i)
@@ -79,6 +64,25 @@ void	do_uv_4(t_a_t_b *tatb, t_bsp *node, t_map *map, int i)
 	tatb->new.type = TR_TYPE_WALL;
 	node->vt_trs[node->vt_trs_count] = tatb->new;
 	(node->vt_trs_count)++;
+}
+
+void	to_obj_format_uv_vt(t_bsp *node, t_map *map, t_a_t_b *tatb)
+{
+	int		i;
+
+	i = 0;
+	while (i < node->walls_count)
+	{
+		if (node->walls[i].type != WALL_TYPE_WALL)
+		{
+			i++;
+			continue ;
+		}
+		do_vt_4(tatb, node, map, i);
+		do_uv_3(tatb, node, map, i);
+		do_uv_4(tatb, node, map, i);
+		i++;
+	}
 }
 
 void	to_obj_format(t_bsp *node, t_map *map)
@@ -104,17 +108,5 @@ void	to_obj_format(t_bsp *node, t_map *map)
 		(node->vt_trs_count)++;
 		i++;
 	}
-	i = 0;
-	while (i < node->walls_count)
-	{
-		if (node->walls[i].type != WALL_TYPE_WALL)
-		{
-			i++;
-			continue ;
-		}
-		do_vt_4(tatb, node, map, i);
-		do_uv_3(tatb, node, map, i);
-		do_uv_4(tatb, node, map, i);
-		i++;
-	}
+	to_obj_format_uv_vt(node, map, tatb);
 }

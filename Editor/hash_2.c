@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 02:41:02 by Chorange          #+#    #+#             */
-/*   Updated: 2021/04/03 00:31:06 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:21:20 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	set_hash_1(char *str1, char *str2)
 {
-	int fd1;
-	int fd2;
+	int		fd1;
+	int		fd2;
 
 	fd1 = open("geometry.obj", O_RDWR);
 	fd2 = open("data.json", O_RDWR);
@@ -32,8 +32,8 @@ void	set_hash_1(char *str1, char *str2)
 
 void	set_hash_2(char *str1, char *str2, int hash_n)
 {
-	int fd1;
-	int fd2;
+	int		fd1;
+	int		fd2;
 
 	fd1 = open("geometry.obj", O_RDWR | O_TRUNC);
 	fd2 = open("data.json", O_RDWR | O_TRUNC);
@@ -57,5 +57,4 @@ void	set_hash_2(char *str1, char *str2, int hash_n)
 	free(str2);
 	ft_putendl("Защитный хеш создан!");
 	ft_putendl("Архивация...");
-
 }

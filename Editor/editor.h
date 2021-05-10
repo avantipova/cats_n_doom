@@ -6,7 +6,7 @@
 /*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 16:11:05 by Chorange          #+#    #+#             */
-/*   Updated: 2021/05/06 18:25:44 by sreicher         ###   ########.fr       */
+/*   Updated: 2021/05/10 22:15:04 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,9 @@ void				export_map(t_map_editor *ed);
 float				new_less_zero(t_vertex base, t_vertex new);
 float				end_less_zero(t_vertex base, t_vertex end);
 
+void				save_archive(t_map_editor *ed);
 void				save_json(t_bsp *root, t_map_editor *ed);
+
 char				*ftoa(float value, int decimals, char *buf);
 char				*itoa(int value, char *buf);
 int					itoa_s(int value, char *buf);
@@ -225,6 +227,17 @@ void				write_floor_tex(t_map_editor *ed);
 void				write_ceil_tex(t_map_editor *ed);
 void				write_wall_tex(t_map_editor *ed);
 
+void				write_to_file_nrmls(char *ptr, int fd, t_map *map);
+void				write_to_file_vts(char *ptr, int fd, t_map *map);
+void				export_map_errors(char *str, t_map_editor *ed);
+void				write_to_file(t_map *map, int fd);
+void				put_vt_trs_count(int fd, int i, t_bsp *node);
+int					check_in_figure(t_vertex *pts, int pts_count, int i);
+
+void				back_transform(t_bsp *node, t_vertex *pts, int *pts_count);
+void				triangulate(t_bsp *node, t_vertex *pts, int *pts_count);
+void				write_vt_trs_to_file(t_bsp *node, int fd);
+
 int					cursor_on_line(t_map_editor *ed);
 int					cursor_on_point(t_map_editor *ed);
 
@@ -261,6 +274,11 @@ void				do_uv_sec(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
 void				do_vt_2(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
 void				do_vt_3(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
 void				do_vt_4(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
+void				do_vt(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
+void				do_uv(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
+void				do_uv3_next(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
+
+void				do_result(t_a_t_b *tatb, t_bsp *node, t_map *map, int i);
 
 void				to_obj_format(t_bsp *node, t_map *map);
 
@@ -273,6 +291,7 @@ void				transform_data(t_map_editor *ed);
 void				check_enemies(t_map_editor *ed, int fd);
 void				check_ammo(t_map_editor *ed, int fd);
 void				check_objects(t_map_editor *ed, int fd);
+void				check_objects_while(t_map_editor *ed, int fd);
 void				check_aid(t_map_editor *ed, int fd);
 void				check_player(t_map_editor *ed, int fd);
 void				check_aim(t_map_editor *ed, int fd);

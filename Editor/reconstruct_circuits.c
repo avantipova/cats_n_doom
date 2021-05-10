@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reconstruct_circuits.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 17:50:59 by Chorange          #+#    #+#             */
-/*   Updated: 2021/01/14 18:03:16 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/05/10 22:09:58 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	insert_cycle(t_circuit *circuits, int i)
 	while (j < circuits[i].walls_count)
 	{
 		p1 = circuits[i].walls[get_i_plus_1(j,
-						circuits[i].walls_count)].points[0];
+				circuits[i].walls_count)].points[0];
 		p2 = circuits[i].walls[j].points[1];
 		if (!(length(sub(p1, p2)) < 0.01))
 		{
@@ -33,60 +33,68 @@ static void	insert_cycle(t_circuit *circuits, int i)
 			wall.points[1] = p1;
 			wall.normal = (t_vertex){0.0, 0.0, 0.0};
 			insert_wall_by_index(circuits[i].walls, j + 1,
-								&circuits[i].walls_count, wall);
+				&circuits[i].walls_count, wall);
 		}
 		j++;
 	}
 }
 
+static void	union_cycle_next(t_circuit *circuits, int i, int j)
+{
+	circuits[i].walls[j].points[1] = circuits[i].walls[get_i_plus_1(j,
+			circuits[i].walls_count)].points[1];
+	delete_wall_by_index(circuits[i].walls,
+		get_i_plus_1(j, circuits[i].walls_count),
+		&circuits[i].walls_count);
+}
+
 static void	union_cycle(t_circuit *circuits, int i)
 {
-	int j;
+	int		j;
 
 	j = 0;
 	while (j < circuits[i].walls_count)
 	{
 		if (fabsf(dot(normalize(sub(circuits[i].walls[j].points[1],
-		circuits[i].walls[j].points[0])), normalize(sub(circuits[i].walls[
-			get_i_plus_1(j, circuits[i].walls_count)].points[1],
-		circuits[i].walls[get_i_plus_1(j,
-				circuits[i].walls_count)].points[0])))) > 0.9999 &&
-		((circuits[i].walls[get_i_plus_1(j,
-					circuits[i].walls_count)].type == WALL_TYPE_FICTIVE &&
-		circuits[i].walls[j].type == WALL_TYPE_FICTIVE) ||
-		(circuits[i].walls[get_i_plus_1(j,
-					circuits[i].walls_count)].type == WALL_TYPE_WALL &&
-		circuits[i].walls[j].type == WALL_TYPE_WALL)))
+							circuits[i].walls[j].points[0])),
+					normalize(sub(circuits[i].walls[get_i_plus_1(j,
+									circuits[i].walls_count)].points[1],
+							circuits[i].walls[get_i_plus_1(j,
+									circuits[i].walls_count)].points[0]))))
+			> 0.9999
+			&& ((circuits[i].walls[get_i_plus_1(j,
+							circuits[i].walls_count)].type == WALL_TYPE_FICTIVE
+					&& circuits[i].walls[j].type == WALL_TYPE_FICTIVE)
+				|| (circuits[i].walls[get_i_plus_1(j,
+							circuits[i].walls_count)].type == WALL_TYPE_WALL
+					&& circuits[i].walls[j].type == WALL_TYPE_WALL)))
 		{
-			circuits[i].walls[j].points[1] = circuits[i].walls[get_i_plus_1(j,
-							circuits[i].walls_count)].points[1];
-			delete_wall_by_index(circuits[i].walls,
-			get_i_plus_1(j, circuits[i].walls_count), &circuits[i].walls_count);
+			union_cycle_next(circuits, i, j);
 			j--;
 		}
 		j++;
 	}
 }
 
-void		pointed_wals_cycle(t_circuit *circuits, int i)
+void	pointed_wals_cycle(t_circuit *circuits, int i)
 {
-	int j;
+	int		j;
 
 	j = 0;
 	while (j < circuits[i].walls_count)
 	{
 		if (length(sub(circuits[i].walls[j].points[1],
-							circuits[i].walls[j].points[0])) < 0.01)
+					circuits[i].walls[j].points[0])) < 0.01)
 		{
 			delete_wall_by_index(circuits[i].walls, j,
-					&circuits[i].walls_count);
+				&circuits[i].walls_count);
 			j--;
 		}
 		j++;
 	}
 }
 
-void		reconstruct_circuits(t_circuit *circuits, int circuits_count)
+void	reconstruct_circuits(t_circuit *circuits, int circuits_count)
 {
 	int			i;
 

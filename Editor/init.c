@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 14:08:46 by Chorange          #+#    #+#             */
-/*   Updated: 2021/01/14 14:08:48 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:21:58 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	map_init(t_map *map)
 	map->selected_circuit = 0;
 }
 
-void		editor_init(t_map_editor *ed)
+void	editor_init(t_map_editor *ed)
 {
 	ed->mode = RENDER_MODE_POINTS;
 	ed->edit_ceil = 0;

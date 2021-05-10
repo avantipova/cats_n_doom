@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 14:10:02 by Chorange          #+#    #+#             */
-/*   Updated: 2021/04/03 01:46:08 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:29:42 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-void		mouse_motion(t_map_editor *ed)
+void	mouse_motion(t_map_editor *ed)
 {
 	if (cursor_on_point(ed))
 	{
@@ -43,8 +43,8 @@ void		mouse_motion(t_map_editor *ed)
 static void	mouse_b_d_select_sector(t_map_editor *ed)
 {
 	ed->map.selected_circuit = bsp_select_circuit_traversal(&ed->root,
-		(t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
-				(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0});
+			(t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
+			(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0});
 	if (ed->step == STEP_2_FLOOR)
 		write_floor_height(ed);
 	else if (ed->step == STEP_3_CEIL)
@@ -67,10 +67,19 @@ static void	mouse_b_d_new_point(t_map_editor *ed)
 		ft_putendl("Больше нельзя");
 	}
 	map_new_point(&ed->map, (float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
-				(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0);
+		(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0);
 }
 
-void		mouse_button_down(t_map_editor *ed)
+void	button_down_step_aim(t_map_editor *ed)
+{
+	ed->aim = (t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
+		(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0};
+	add_object((t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
+		(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0},
+		ed->curr_object, ed);
+}
+
+void	mouse_button_down(t_map_editor *ed)
 {
 	if (ed->step == STEP_1_DRAW)
 		mouse_b_d_new_point(ed);
@@ -78,27 +87,23 @@ void		mouse_button_down(t_map_editor *ed)
 		mouse_b_d_select_sector(ed);
 	else if (ed->step == STEP_5_PLAYER)
 		ed->player = (t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
-					(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0};
+			(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0};
 	else if (ed->step == STEP_8_AIM)
-	{
-		ed->aim = (t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
-					(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0};
-		add_object((t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
-	(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0}, ed->curr_object, ed);
-	}
+		button_down_step_aim(ed);
 	else if (ed->step == STEP_6_AMMO)
 		add_ammo((t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
-					(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0}, ed);
+			(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0}, ed);
 	else if (ed->step == STEP_7_AID)
 		add_aid((t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
-					(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0}, ed);
+			(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0}, ed);
 	else if (ed->step == STEP_9_DECOR)
 		ed->tv = (t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
-					(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0};
+			(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0};
 	else if (ed->step == STEP_10_OBJECTS)
 		add_object((t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
-	(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0}, ed->curr_object, ed);
+			(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0},
+			ed->curr_object, ed);
 	else if (ed->step == STEP_11_ENEMIES)
 		add_enemy((t_vertex){(float)(ed->prev_x - W_2) / MAP_EDITOR_SCALE,
-					(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0}, ed);
+			(float)(H_2 - ed->prev_y) / MAP_EDITOR_SCALE, 0.0}, ed);
 }

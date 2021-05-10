@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 16:11:02 by ldeirdre          #+#    #+#             */
-/*   Updated: 2021/02/04 14:34:18 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/05/10 20:53:52 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,7 @@ void	do_circuit(t_a_t_b *tatb, t_bsp *node, t_map *map, int i)
 		tatb->top = map->circuits[node->walls[i].circuit].ceil;
 		tatb->flag = 1;
 	}
-	do_vt_sec(tatb, node, map, i);
-	do_uv(tatb, node, map, i);
-	tatb->link->vt_trs[tatb->link->vt_trs_count] = tatb->new;
-	(tatb->link->vt_trs_count)++;
-	do_vt(tatb, node, map, i);
-	do_uv_sec(tatb, node, map, i);
-	tatb->link->vt_trs[tatb->link->vt_trs_count] = tatb->new;
-	(tatb->link->vt_trs_count)++;
+	do_result(tatb, node, map, i);
 }
 
 void	do_floor(t_a_t_b *tatb, t_bsp *node, t_map *map, int i)
@@ -97,14 +90,7 @@ void	do_floor(t_a_t_b *tatb, t_bsp *node, t_map *map, int i)
 		tatb->top = map->circuits[node->walls[i].circuit].floor;
 		tatb->flag = 0;
 	}
-	do_vt_sec(tatb, node, map, i);
-	do_uv(tatb, node, map, i);
-	tatb->link->vt_trs[tatb->link->vt_trs_count] = tatb->new;
-	(tatb->link->vt_trs_count)++;
-	do_vt(tatb, node, map, i);
-	do_uv_sec(tatb, node, map, i);
-	tatb->link->vt_trs[tatb->link->vt_trs_count] = tatb->new;
-	(tatb->link->vt_trs_count)++;
+	do_result(tatb, node, map, i);
 }
 
 void	add_tops_bottoms(t_bsp *node, t_map *map, t_bsp *root)

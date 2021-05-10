@@ -6,7 +6,7 @@
 /*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 18:43:18 by sreicher          #+#    #+#             */
-/*   Updated: 2021/05/06 18:59:00 by sreicher         ###   ########.fr       */
+/*   Updated: 2021/05/08 19:28:19 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,37 +30,8 @@ void	write_to_file(t_map *map, int fd)
 		ft_putstr_fd("\n", fd);
 		i++;
 	}
-	i = 0;
-	while (i < map->nrmls_count)
-	{
-		ft_putstr_fd("vn ", fd);
-		ptr = ftoa(map->nrmls[i].x, 8, ptr);
-		ft_putstr_fd(ptr, fd);
-		ft_putstr_fd(" ", fd);
-		ptr = ftoa(map->nrmls[i].z, 8, ptr);
-		ft_putstr_fd(ptr, fd);
-		ft_putstr_fd(" ", fd);
-		ptr = ftoa(map->nrmls[i].y, 8, ptr);
-		ft_putstr_fd(ptr, fd);
-		ft_putstr_fd("\n", fd);
-		i++;
-	}
-	i = 0;
-	printf("%d\n\n", map->vts_count); /*DELETE ME */
-	while (i < map->vts_count)
-	{
-		ft_putstr_fd("v ", fd);
-		ptr = ftoa(map->vts[i].x, 8, ptr);
-		ft_putstr_fd(ptr, fd);
-		ft_putstr_fd(" ", fd);
-		ptr = ftoa(map->vts[i].z, 8, ptr);
-		ft_putstr_fd(ptr, fd);
-		ft_putstr_fd(" ", fd);
-		ptr = ftoa(map->vts[i].y, 8, ptr);
-		ft_putstr_fd(ptr, fd);
-		ft_putstr_fd("\n", fd);
-		i++;
-	}
+	write_to_file_nrmls(ptr, fd, map);
+	write_to_file_vts(ptr, fd, map);
 	free(ptr);
 }
 
@@ -138,29 +109,7 @@ void	export_map(t_map_editor *ed)
 	bsp_top_bottom_traversal(&ed->root, &ed->map, &ed->root);
 	bsp_write_traversal(&ed->root, &ed->map, &ed->root, fd);
 	close(fd);
-	fd = open("geometry.obj", O_RDWR);
-	if (fd < 0)
-	{
-		ft_putendl("Ошибка сохранения");
-		exit(-2);
-	}
-	str[read(fd, str, 100000)] = 0;
-	close(fd);
-	ft_putendl(str);
-	fd = open("geometry.obj", O_RDWR | O_TRUNC);
-	if (fd < 0)
-	{
-		ft_putendl("Ошибка сохранения");
-		exit(-2);
-	}
-	write_to_file(&ed->map, fd);
-	close(fd);
-	fd = open("geometry.obj", O_RDWR | O_APPEND);
-	if (fd < 0)
-	{
-		ft_putendl("Ошибка сохранения");
-		exit(-2);
-	}
+	export_map_errors(str, ed);
 	ft_putendl_fd("", fd);
 	ft_putendl_fd(str, fd);
 	close(fd);
