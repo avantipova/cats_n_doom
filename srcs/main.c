@@ -25,10 +25,8 @@ int	main(int ac, char **av)
 	mgl = mgl_init("Doom_Quaekem", W, H, SCREEN_MULTIPLICATOR);
 	doom.music = sound_init();
 	doom.screen_nmb = 0;
-
+	
 //загрузка музона
-
-
 
 	play_music(doom.music->background, PLAY_FOREVER);
 	mgl.show_fps = 1;

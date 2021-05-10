@@ -20,6 +20,8 @@ SRC_NAMES = srcs/main.c srcs/image_handle.c \
  				srcs/updates/update_bullets.c \
 				srcs/updates/update_enemies.c \
 				srcs/updates/update_sprites.c \
+				srcs/updates/menu_opened.c \
+				srcs/updates/doom_pressed.c \
 				srcs/draw/draw.c srcs/draw/transforms.c srcs/draw/render_scene.c \
 				srcs/draw/pthread.c srcs/draw/draw_hud.c srcs/draw/draw_smth.c\
 				srcs/math/interpolate.c srcs/math/linear_algebra.c \
@@ -46,7 +48,12 @@ SRC_NAMES = srcs/main.c srcs/image_handle.c \
                 srcs/sound/load_sound.c Archiver/dearchiver.c\
 				srcs/init/aid_init.c srcs/init/ammo_init.c srcs/init/bullets_init.c srcs/init/drb_init.c \
 				srcs/creates/create_enemies.c srcs/creates/create_objects.c srcs/creates/create_tv.c \
-				srcs/events/event_handle.c srcs/events/restart.c \
+				srcs/events/event_handle.c \
+				srcs/events/restart.c \
+				srcs/events/sounds_events.c \
+				srcs/events/key_down.c \
+				srcs/events/screen_png.c \
+				srcs/events/doom_menu.c \
 				srcs/clear/clean_objects.c \
 
 

@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   screen_png.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/08 21:01:00 by chorange          #+#    #+#             */
-/*   Updated: 2021/05/07 04:58:19 by baylak           ###   ########.fr       */
+/*   Created: 2021/05/07 04:14:08 by baylak            #+#    #+#             */
+/*   Updated: 2021/05/07 04:16:41 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "../libft/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# define BUFF_SIZE 21
+#include "duke.h"
 
-# define MALL_CHECK(x) if (!(x)) return (-1);
-# define VAL_FILE(f, l, r) if ((f) < 0 || (l) == NULL || (r) < 0) return (-1);
+static char	*get_name(int nmb)
+{
+	char	*tmp;
 
-int						get_next_line(const int fd, char **line);
+	tmp = ft_itoa(nmb);
+	tmp = ft_strjoin(tmp, "_doom_screenshot.png");
+	if (!tmp)
+		return (NULL);
+	return (tmp);
+}
 
-#endif
+void	screen_png(SDL_Surface *srf, int num)
+{
+	char	*name;
+
+	name = get_name(num);
+	IMG_SavePNG(srf, name);
+	free(name);
+}
