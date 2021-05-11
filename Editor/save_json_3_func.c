@@ -6,7 +6,7 @@
 /*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 22:13:45 by sreicher          #+#    #+#             */
-/*   Updated: 2021/05/11 21:23:47 by sreicher         ###   ########.fr       */
+/*   Updated: 2021/05/11 21:59:48 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,4 @@ void	check_objects_while(t_map_editor *ed, int fd)
 			ft_putstr_fd(",", fd);
 		i++;
 	}
-	free(str);
 }
