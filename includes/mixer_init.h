@@ -18,10 +18,10 @@
 
 # define CHUNK_SIZE 4096
 # define CHANNELS 1
-# define BACKGROUND_MUSIC ASSETS_FOLDER_NAME "/sounds/E2M3_intermission.mp3"
-# define SHOTGUN_SOUND ASSETS_FOLDER_NAME "/sounds/shotgun.wav"
-# define NARUTO_SOUND ASSETS_FOLDER_NAME "/sounds/naruto.wav"
-# define ANIME_TYAN ASSETS_FOLDER_NAME "/sounds/anime_tyan.wav"
+# define BACKGROUND_MUSIC "ASSETS_TMP/sounds/E2M3_intermission.mp3"
+# define SHOTGUN_SOUND "ASSETS_TMP/sounds/shotgun.wav"
+# define NARUTO_SOUND "ASSETS_TMP/sounds/naruto.wav"
+# define ANIME_TYAN "ASSETS_TMP/sounds/anime_tyan.wav"
 # define PLAY_FOREVER -1
 
 typedef struct s_music
