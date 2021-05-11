@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_u.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 16:08:17 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/10 18:37:52 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/11 23:24:08 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void				prec_less_width(t_printf *f, int length, int res)
+static void	prec_less_width(t_printf *f, int length, int res)
 {
 	if (!f->fz && (f->precis <= length))
 	{
@@ -30,7 +30,7 @@ static void				prec_less_width(t_printf *f, int length, int res)
 	}
 }
 
-static void				print_flags_width(t_printf *f, int length, int res)
+static void	print_flags_width(t_printf *f, int length, int res)
 {
 	if (f->fz || (f->precis >= f->width))
 	{
@@ -53,7 +53,20 @@ static void				print_flags_width(t_printf *f, int length, int res)
 		prec_less_width(f, length, res);
 }
 
-void					ft_print_uint(t_printf *f)
+void	ft_print_uint_if(t_printf *f, unsigned int length, uintmax_t res)
+{
+	if (f->width >= 0 && !f->fm)
+		print_flags_width(f, length, res);
+	if (f->width > 0 && f->fm)
+	{
+		if (f->precis >= f->width)
+			ft_ispacing('0', f, length + 1);
+		else
+			ft_ispacing('0', f, (f->width - f->precis + length));
+	}
+}
+
+void	ft_print_uint(t_printf *f)
 {
 	uintmax_t			res;
 	unsigned int		length;
@@ -62,22 +75,22 @@ void					ft_print_uint(t_printf *f)
 	res = ft_get_unum_modlen(f);
 	s = ftbaseull(res, 10, 'a');
 	length = ft_strlen(s);
-	if (f->width >= 0 && !f->fm)
-		print_flags_width(f, length, res);
-	if (f->width > 0 && f->fm)
-		(f->precis >= f->width) ? ft_ispacing('0', f, length + 1)\
-		: ft_ispacing('0', f, (f->width - f->precis + length));
-	(f->precis == 0 && res == 0) ? 0 : ft_putstr(s);
+	ft_print_uint_if(f, length, res);
+	if (!(f->precis == 0 && res == 0))
+		ft_putstr(s);
 	if (f->width > 0 && f->fm)
 	{
 		if (f->precis <= length)
-			(f->precis == 0 && res == 0) ? \
-			ft_ispacing(' ', f, 0) : \
-			ft_ispacing(' ', f, length);
+		{
+			if (f->precis == 0 && res == 0)
+				ft_ispacing(' ', f, 0);
+			else
+				ft_ispacing(' ', f, length);
+		}
 		else if (f->precis < f->width)
 			ft_ispacing(' ', f, f->precis);
 	}
-	(f->precis == 0 && res == 0 && !f->fh) ? \
-	(f->len += 0) : (f->len += length);
+	if (!(f->precis == 0 && res == 0 && !f->fh))
+		f->len += length;
 	free(s);
 }

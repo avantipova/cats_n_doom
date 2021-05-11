@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_x.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 16:11:26 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/10 18:53:53 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/11 23:33:41 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int				case_zero(t_printf *f, int res)
+int	case_zero(t_printf *f, int res)
 {
 	if (f->fh && res != 0)
 	{
@@ -23,13 +23,15 @@ static int				case_zero(t_printf *f, int res)
 	return (f->len);
 }
 
-static void				x_print_fl_with_fm(t_printf *f, int length, int res)
+static void	x_print_fl_with_fm(t_printf *f, int length, int res)
 {
 	if (f->fz && f->precis < 0)
 	{
 		case_zero(f, res);
-		(f->fh && res != 0) ? ft_ispacing('0', f, length + 2)\
-		: ft_ispacing('0', f, length);
+		if (f->fh && res != 0)
+			ft_ispacing('0', f, length + 2);
+		else
+			ft_ispacing('0', f, length);
 	}
 	else if (f->precis >= f->width)
 	{
@@ -38,21 +40,15 @@ static void				x_print_fl_with_fm(t_printf *f, int length, int res)
 	}
 	else if (f->precis <= length)
 	{
-		(f->fh && res != 0) ? ft_ispacing(' ', f, (length + 2))\
-		: ft_ispacing(' ', f, length);
-		case_zero(f, res);
-		(!f->fh && res == 0) ? ft_ispacing(' ', f, length + 3) : 0;
+		x_print_fl_with_fm_if_len(f, length, res);
 	}
 	else if (f->precis < f->width)
 	{
-		(f->fh && res != 0) ? ft_ispacing(' ', f, f->precis + 2)\
-		: ft_ispacing(' ', f, f->precis);
-		case_zero(f, res);
-		ft_ispacing('0', f, (f->width - f->precis + length));
+		x_print_fl_with_fm_if_width(f, length, res);
 	}
 }
 
-static void				x_pr_fl_with_fm(t_printf *f, int length, int res)
+static void	x_pr_fl_with_fm(t_printf *f, int length, int res)
 {
 	if (f->precis >= f->width)
 	{
@@ -70,39 +66,50 @@ static void				x_pr_fl_with_fm(t_printf *f, int length, int res)
 	}
 }
 
-static void				width_fm(t_printf *f, int length, int res)
+static void	width_fm(t_printf *f, int length, int res)
 {
 	if (f->precis <= length)
 	{
 		if (res == 0 && f->precis == 0)
 			ft_ispacing(' ', f, 0);
 		else
-			(f->fh && res != 0) ? ft_ispacing(' ', f, (length + 2))\
-			: ft_ispacing(' ', f, length);
+		{
+			if (f->fh && res != 0)
+				ft_ispacing(' ', f, (length + 2));
+			else
+				ft_ispacing(' ', f, length);
+		}
 	}
 	else if (f->precis < f->width)
-		(f->fh && res != 0) ? ft_ispacing(' ', f, f->precis + 2)\
-		: ft_ispacing(' ', f, f->precis);
+	{
+		if (f->fh && res != 0)
+			ft_ispacing(' ', f, f->precis + 2);
+		else
+			ft_ispacing(' ', f, f->precis);
+	}
 }
 
-void					ft_print_xint(t_printf *f)
+void	ft_print_xint(t_printf *f)
 {
 	uintmax_t			res;
 	unsigned int		length;
 	char				*s;
 
 	res = ft_get_unum_modlen(f);
-	s = (f->convs == 'x') ? ftbaseull(res, 16, 'a') : \
-	ftbaseull(res, 16, 'A');
+	if (f->convs == 'x')
+		s = ftbaseull(res, 16, 'a');
+	else
+		s = ftbaseull(res, 16, 'A');
 	length = ft_strlen(s);
 	if (f->width >= 0 && !f->fm)
 		x_print_fl_with_fm(f, length, res);
 	if (f->width >= 0 && f->fm)
 		x_pr_fl_with_fm(f, length, res);
-	(f->precis == 0 && res == 0) ? 0 : ft_putstr(s);
+	if (!(f->precis == 0 && res == 0))
+		ft_putstr(s);
 	if (f->width > 0 && f->fm)
 		width_fm(f, length, res);
-	(f->precis == 0 && res == 0) ? (f->len += 0)\
-	: (f->len += length);
+	if (f->precis == 0 && res == 0)
+		f->len += length;
 	free(s);
 }

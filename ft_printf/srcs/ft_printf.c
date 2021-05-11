@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 16:15:59 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/10 19:46:51 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/12 00:15:46 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int				ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
 	t_printf	*f;
 	int			length;
 
 	length = 0;
-	if (!(f = ft_init(format)))
+	f = ft_init(format);
+	if (f == NULL)
 		return (-1);
 	if (format)
 	{
@@ -30,11 +31,12 @@ int				ft_printf(const char *format, ...)
 	return (length);
 }
 
-t_printf		*ft_init(const char *format)
+t_printf	*ft_init(const char *format)
 {
 	t_printf	*new;
 
-	if (!(new = (t_printf*)malloc(sizeof(t_printf))))
+	new = (t_printf *)malloc(sizeof(t_printf));
+	if (new == NULL)
 		return (0);
 	new->cpy = format;
 	new->width = 0;
@@ -55,7 +57,7 @@ t_printf		*ft_init(const char *format)
 	return (new);
 }
 
-int				ft_parse_format(t_printf *f)
+int	ft_parse_format(t_printf *f)
 {
 	while (f->cpy[f->i])
 	{
@@ -84,7 +86,7 @@ int				ft_parse_format(t_printf *f)
 	return (f->len);
 }
 
-t_printf		*ft_reset_init(t_printf *f)
+t_printf	*ft_reset_init(t_printf *f)
 {
 	f->width = 0;
 	f->precis = -1;
@@ -102,7 +104,7 @@ t_printf		*ft_reset_init(t_printf *f)
 	return (f);
 }
 
-int				ft_get_all_flags(t_printf *f)
+int	ft_get_all_flags(t_printf *f)
 {
 	f->i++;
 	if (f->cpy[f->i] == '\0')

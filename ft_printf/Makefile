@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: poatmeal <poatmeal@student.42.fr>          +#+  +:+       +#+         #
+#    By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/05 17:12:11 by aagrivan          #+#    #+#              #
-#    Updated: 2020/08/30 15:41:10 by poatmeal         ###   ########.fr        #
+#    Updated: 2021/05/11 23:28:44 by sreicher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,9 @@ SRCS = ft_get_flags.c \
 		round.c \
 		round_change.c \
 		nan_inf.c \
-		ft_print_other.c
+		ft_print_other.c \
+		ft_print_di_func.c \
+		ft_print_x_func.c
 SRC_DIR = srcs/
 SRCS_P = $(addprefix $(SRC_DIR),$(SRCS))
 

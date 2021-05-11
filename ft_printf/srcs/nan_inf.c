@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   nan_inf.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 17:47:09 by poatmeal          #+#    #+#             */
-/*   Updated: 2020/08/09 18:30:14 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/12 00:31:24 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		width_inf_nan(char *arg, t_printf *get)
+void	width_inf_nan(char *arg, t_printf *get)
 {
-	int i;
-	int n;
-	int m;
+	int		i;
+	int		n;
+	int		m;
 
 	i = 0;
 	n = get->width;
@@ -36,11 +36,11 @@ void		width_inf_nan(char *arg, t_printf *get)
 	}
 }
 
-void		align_inf_nan(char *arg, t_printf *get)
+void	align_inf_nan(char *arg, t_printf *get)
 {
-	int i;
-	int n;
-	int m;
+	int		i;
+	int		n;
+	int		m;
 
 	i = 0;
 	n = get->width;
@@ -59,10 +59,10 @@ void		align_inf_nan(char *arg, t_printf *get)
 	}
 }
 
-void		print_inf_nan(char *arg, t_printf *get)
+void	print_inf_nan(char *arg, t_printf *get)
 {
-	int len;
-	int i;
+	int		len;
+	int		i;
 
 	i = 0;
 	len = ft_strlen(arg);
@@ -86,14 +86,14 @@ void		print_inf_nan(char *arg, t_printf *get)
 	}
 }
 
-int			is_this_number(t_mask bits, t_printf *get)
+int	is_this_number(t_mask bits, t_printf *get)
 {
 	if (bits.bits.e == 32767)
 	{
 		if (bits.bits.m == 0x8000000000000000 && bits.bits.s == 0 && get->fp)
 			print_inf_nan("+inf", get);
-		else if (bits.bits.m == 0x8000000000000000 && bits.bits.s == 0 &&
-		!get->fp)
+		else if (bits.bits.m == 0x8000000000000000 && bits.bits.s == 0
+			&& !get->fp)
 			print_inf_nan("inf", get);
 		else if (bits.bits.m == 0x8000000000000000 && bits.bits.s == 1)
 			print_inf_nan("-inf", get);

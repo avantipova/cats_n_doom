@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pow_2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 10:35:00 by poatmeal          #+#    #+#             */
-/*   Updated: 2020/08/08 15:15:14 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/12 00:32:03 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		plus_number_2(t_buf *buf)
+void	plus_number_2(t_buf *buf)
 {
 	size_t				i;
 	long long int		x;
@@ -20,8 +20,8 @@ void		plus_number_2(t_buf *buf)
 
 	i = 0;
 	coef = 0;
-	while (buf->wh_num[BIG_BUFF - i] != -1 ||
-	buf->pow_2[BIG_BUFF - i] != -1 || coef > 0)
+	while (buf->wh_num[BIG_BUFF - i] != -1
+		|| buf->pow_2[BIG_BUFF - i] != -1 || coef > 0)
 	{
 		if (buf->wh_num[BIG_BUFF - i] == -1 && buf->pow_2[BIG_BUFF - i] == -1)
 			x = 0;
@@ -40,7 +40,7 @@ void		plus_number_2(t_buf *buf)
 	}
 }
 
-void		fill_to_2(t_buf *buf, long long int coef, long long int x)
+void	fill_to_2(t_buf *buf, long long int coef, long long int x)
 {
 	int					y;
 
@@ -61,7 +61,7 @@ void		fill_to_2(t_buf *buf, long long int coef, long long int x)
 	}
 }
 
-void		take_to_2(t_buf *buf, int pw)
+void	take_to_2(t_buf *buf, int pw)
 {
 	long long int		x;
 	long long int		coef;

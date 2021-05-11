@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_f.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:13:46 by poatmeal          #+#    #+#             */
-/*   Updated: 2020/08/09 18:24:19 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/12 00:23:02 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int				conversion(t_mask bits, t_buf *buf, t_printf *get)
+int	conversion(t_mask bits, t_buf *buf, t_printf *get)
 {
 	int					e;
 	int					i;
@@ -37,7 +37,7 @@ int				conversion(t_mask bits, t_buf *buf, t_printf *get)
 	return (1);
 }
 
-void			init_f(t_printf *get)
+void	init_f(t_printf *get)
 {
 	t_mask				bit_num;
 	t_buf				buf;

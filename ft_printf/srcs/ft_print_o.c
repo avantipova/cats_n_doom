@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_o.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 15:50:54 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/10 18:15:48 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/12 00:37:30 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void				precision_less_width(t_printf *f, int length, int res)
+static void	precision_less_width_if(t_printf *f, int length, int res)
 {
 	if (f->precis <= length)
 	{
-		(f->fh && res != 0) ? \
-		ft_ispacing(' ', f, (length + 1)) : \
-		ft_ispacing(' ', f, length);
+		if (f->fh && res != 0)
+			ft_ispacing(' ', f, (length + 1));
+		else
+			ft_ispacing(' ', f, length);
 		if (f->fh && res != 0)
 		{
 			ft_putchar('0');
@@ -27,10 +28,20 @@ static void				precision_less_width(t_printf *f, int length, int res)
 		else if (!f->fh && res == 0)
 			ft_ispacing(' ', f, length + 3);
 	}
+}
+
+static void	precision_less_width(t_printf *f, int length, int res)
+{
+	if (f->precis <= length)
+	{
+		precision_less_width_if(f, length, res);
+	}
 	else if (f->precis < f->width)
 	{
-		(f->fh && res != 0) ? ft_ispacing(' ', f, f->precis + 1) \
-		: ft_ispacing(' ', f, f->precis);
+		if (f->fh && res != 0)
+			ft_ispacing(' ', f, f->precis + 1);
+		else
+			ft_ispacing(' ', f, f->precis);
 		if (f->fh && res != 0)
 		{
 			ft_putchar('0');
@@ -40,7 +51,7 @@ static void				precision_less_width(t_printf *f, int length, int res)
 	}
 }
 
-static void				o_print_fl_with_fm(t_printf *f, int length, int res)
+static void	o_print_fl_with_fm(t_printf *f, int length, int res)
 {
 	if (f->fz)
 	{
@@ -49,9 +60,10 @@ static void				o_print_fl_with_fm(t_printf *f, int length, int res)
 			ft_putchar('0');
 			f->len++;
 		}
-		(f->fh && res != 0) ? \
-		ft_ispacing('0', f, (length + 1)) :\
-		ft_ispacing('0', f, length);
+		if (f->fh && res != 0)
+			ft_ispacing('0', f, (length + 1));
+		else
+			ft_ispacing('0', f, length);
 	}
 	else if (!f->fz && (f->precis >= f->width))
 	{
@@ -66,7 +78,7 @@ static void				o_print_fl_with_fm(t_printf *f, int length, int res)
 		precision_less_width(f, length, res);
 }
 
-static void				o_pr_fl_without_fm(t_printf *f, int length, int res)
+static void	o_pr_fl_without_fm(t_printf *f, int length, int res)
 {
 	if (f->precis >= f->width)
 	{
@@ -75,8 +87,10 @@ static void				o_pr_fl_without_fm(t_printf *f, int length, int res)
 			ft_putchar('0');
 			f->len++;
 		}
-		(f->fh && res != 0) ? ft_ispacing('0', f, length) \
-		: ft_ispacing('0', f, length + 1);
+		if (f->fh && res != 0)
+			ft_ispacing('0', f, length);
+		else
+			ft_ispacing('0', f, length + 1);
 	}
 	else
 	{
@@ -85,12 +99,12 @@ static void				o_pr_fl_without_fm(t_printf *f, int length, int res)
 			ft_putchar('0');
 			f->len++;
 		}
-		(f->precis <= length) ? 0 : \
-		ft_ispacing('0', f, (f->width - f->precis + length));
+		if (!(f->precis <= length))
+			ft_ispacing('0', f, (f->width - f->precis + length));
 	}
 }
 
-void					ft_print_oint(t_printf *f)
+void	ft_print_oint(t_printf *f)
 {
 	uintmax_t			res;
 	unsigned int		length;
@@ -103,17 +117,10 @@ void					ft_print_oint(t_printf *f)
 		o_print_fl_with_fm(f, length, res);
 	else if (f->width >= 0 && f->fm)
 		o_pr_fl_without_fm(f, length, res);
-	(f->precis == 0 && res == 0 && !f->fh) ? 0 : ft_putstr(s);
-	if (f->width > 0 && f->fm)
-	{
-		if (f->precis <= length)
-			(f->fh && res != 0) ? ft_ispacing(' ', f, (length + 1)) \
-			: ft_ispacing(' ', f, length);
-		else if (f->precis < f->width)
-			(f->fh && res != 0) ? ft_ispacing(' ', f, f->precis + 1) \
-			: ft_ispacing(' ', f, f->precis);
-	}
-	(f->precis == 0 && res == 0 && !f->fh) ?\
-	(f->len += 0) : (f->len += length);
+	if (!(f->precis == 0 && res == 0 && !f->fh))
+		ft_putstr(s);
+	ft_print_oint_if(f, length, res);
+	if (!(f->precis == 0 && res == 0 && !f->fh))
+		f->len += length;
 	free(s);
 }

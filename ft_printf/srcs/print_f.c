@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   print_f.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:10:36 by poatmeal          #+#    #+#             */
-/*   Updated: 2020/08/10 16:33:14 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/12 00:34:34 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void			print_div(t_buf *buf, t_printf *get)
+void	print_div(t_buf *buf, t_printf *get)
 {
 	int		i;
 
@@ -32,7 +32,7 @@ void			print_div(t_buf *buf, t_printf *get)
 	get->len += i;
 }
 
-void			print(t_buf *buf, t_printf *get)
+void	print(t_buf *buf, t_printf *get)
 {
 	int		i;
 
@@ -59,9 +59,9 @@ void			print(t_buf *buf, t_printf *get)
 	}
 }
 
-void			print_align(t_buf *buf, t_printf *get, int k, int i)
+void	print_align(t_buf *buf, t_printf *get, int k, int i)
 {
-	int n;
+	int		n;
 
 	n = get->width - get->f_prec;
 	if (get->f_prec != 0 || (get->f_prec == 0 && get->fh))
@@ -87,11 +87,8 @@ void			print_align(t_buf *buf, t_printf *get, int k, int i)
 	}
 }
 
-void			print_f(t_buf *buf, t_printf *get)
+void	print_f_if(t_buf *buf, t_printf *get, int k)
 {
-	int k;
-
-	k = 1;
 	if (get->f_prec >= 0)
 		ft_round(buf, get);
 	if (get->fm)
@@ -99,6 +96,14 @@ void			print_f(t_buf *buf, t_printf *get)
 		print_align(buf, get, k, 0);
 		return ;
 	}
+}
+
+void	print_f(t_buf *buf, t_printf *get)
+{
+	int		k;
+
+	k = 1;
+	print_f_if(buf, get, k);
 	if (get->width > 0)
 		fill_width(buf, get);
 	else if (!get->fp && get->fs && get->sign > 0)
@@ -107,10 +112,12 @@ void			print_f(t_buf *buf, t_printf *get)
 		get->len++;
 	}
 	if ((get->fp && get->width <= 0) || (get->fp && get->fz))
+	{
 		if (get->sign > 0)
 		{
 			ft_putchar('+');
 			get->len++;
 		}
+	}
 	print(buf, get);
 }

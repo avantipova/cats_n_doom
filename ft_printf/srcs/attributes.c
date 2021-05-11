@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   attributes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:35:25 by poatmeal          #+#    #+#             */
-/*   Updated: 2020/08/09 15:51:23 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/11 21:34:23 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		fill_plus(t_buf *buf, t_printf *get, int i)
+int	fill_plus(t_buf *buf, t_printf *get, int i)
 {
 	if (get->sign < 0)
 	{
@@ -49,7 +49,8 @@ void	fill_width(t_buf *buf, t_printf *get)
 	n = get->width - get->f_prec;
 	if (!get->fp && get->fs && get->sign > 0 && i < n)
 		n = get->width - get->f_prec - 1;
-	n = get->f_prec != 0 ? n - 1 : n;
+	if (get->f_prec != 0)
+		n = n - 1;
 	while (buf->wh_num[BIG_BUFF - i] != -1)
 		i++;
 	if (get->fz)
@@ -67,7 +68,7 @@ void	fill_width(t_buf *buf, t_printf *get)
 	}
 }
 
-int		check_plus_space(t_printf *get)
+int	check_plus_space(t_printf *get)
 {
 	if (get->sign < 0 && get->fz)
 		return (1);

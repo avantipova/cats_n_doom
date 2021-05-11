@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_flags.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: student <student@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 19:23:04 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/10 10:30:39 by student          ###   ########.fr       */
+/*   Updated: 2021/05/11 21:34:48 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static t_printf		*check_flags_hzmps(t_printf *f)
+static t_printf	*check_flags_hzmps(t_printf *f)
 {
 	if (f->cpy[f->i] == '#')
 		f->fh = '#';
@@ -27,7 +27,7 @@ static t_printf		*check_flags_hzmps(t_printf *f)
 	return (f);
 }
 
-t_printf			*get_flags_hzmps(t_printf *f)
+t_printf	*get_flags_hzmps(t_printf *f)
 {
 	t_count			pl;
 
@@ -50,7 +50,7 @@ t_printf			*get_flags_hzmps(t_printf *f)
 	return (f);
 }
 
-t_printf			*get_width(t_printf *f)
+t_printf	*get_width(t_printf *f)
 {
 	while ((f->cpy[f->i] >= '0' && f->cpy[f->i] <= '9') || f->cpy[f->i] == '*')
 	{
@@ -63,7 +63,7 @@ t_printf			*get_width(t_printf *f)
 	return (f);
 }
 
-t_printf			*get_precision(t_printf *f)
+t_printf	*get_precision(t_printf *f)
 {
 	f->i++;
 	f->precis = 0;
@@ -83,7 +83,7 @@ t_printf			*get_precision(t_printf *f)
 	return (f);
 }
 
-t_printf			*get_mod_length(t_printf *f)
+t_printf	*get_mod_length(t_printf *f)
 {
 	t_count			m;
 	char			*lh;

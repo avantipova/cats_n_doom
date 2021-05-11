@@ -3,42 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_support.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 16:17:55 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/10 18:21:41 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/12 00:22:24 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void			ft_ispacing(char c, t_printf *f, int length)
+void	ft_ispacing(char c, t_printf *f, int length)
 {
 	int			lensp;
 
 	if (f->precis < f->width)
 	{
-		if ((lensp = f->width - length) > 0)
+		lensp = f->width - length;
+		if (lensp > 0)
+		{
 			while (lensp > 0)
 			{
 				ft_putchar(c);
 				f->len++;
 				lensp--;
 			}
+		}
 	}
 	else
 	{
-		if ((lensp = f->precis - (length - 1)) > 0)
-			while (lensp > 0)
-			{
-				ft_putchar(c);
-				f->len++;
-				lensp--;
-			}
+		ft_ispacing_else(c, f, length);
 	}
 }
 
-uintmax_t		ft_get_unum_modlen(t_printf *f)
+uintmax_t	ft_get_unum_modlen(t_printf *f)
 {
 	uintmax_t	num;
 
@@ -63,7 +60,7 @@ uintmax_t		ft_get_unum_modlen(t_printf *f)
 	return (num);
 }
 
-t_printf		*get_conversion(t_printf *f)
+t_printf	*get_conversion(t_printf *f)
 {
 	int			count;
 
@@ -87,7 +84,7 @@ t_printf		*get_conversion(t_printf *f)
 	return (f);
 }
 
-intmax_t		ft_get_num_modlen(t_printf *f)
+intmax_t	ft_get_num_modlen(t_printf *f)
 {
 	intmax_t	num;
 
@@ -110,11 +107,14 @@ intmax_t		ft_get_num_modlen(t_printf *f)
 	return (num);
 }
 
-void			print_sign(t_printf *f, long long res, int length)
+void	print_sign(t_printf *f, long long res, int length)
 {
 	if (f->fp || res < 0)
 	{
-		(res < 0) ? ft_putchar('-') : ft_putchar('+');
+		if (res < 0)
+			ft_putchar('-');
+		else
+			ft_putchar('+');
 		f->len++;
 	}
 	else if (f->fs && !f->fp)
@@ -123,9 +123,11 @@ void			print_sign(t_printf *f, long long res, int length)
 		f->len++;
 	}
 	else if (!f->fp && !f->fs)
+	{
 		if (length < f->width && f->precis < 0)
 		{
 			ft_putchar('0');
 			f->len++;
 		}
+	}
 }

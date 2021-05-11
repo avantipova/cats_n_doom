@@ -42,7 +42,7 @@ $(NAME): $(OBJECTS) $(LIBRARY)
 	@gcc $(FLAGS) $(OBJECTS) $(INCLUDES) $(LIBS) $(FRAMEWORKS) -o $(NAME)
 
 $(OBJECTS): $(SOURCES)
-	@gcc $(FLAGS) $(INCLUDES) -c $(SOURCES) 
+	@gcc $(FLAGS) $(INCLUDES) -c $(SOURCES)
 
 $(LIBRARY):
 	@make -C ../libft

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: poatmeal <poatmeal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 16:36:37 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/30 14:23:01 by poatmeal         ###   ########.fr       */
+/*   Updated: 2021/05/12 00:21:55 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define NEEDED "#0-+ cspdiouUxXf%Z.123456789lhLjz*"
 # define BIG_BUFF 60000
 
-typedef struct			s_printf
+typedef struct s_printf
 {
 	const char			*cpy;
 	char				fh;
@@ -44,27 +44,27 @@ typedef struct			s_printf
 	va_list				avs;
 }						t_printf;
 
-typedef struct			s_count
+typedef struct s_count
 {
 	int					l;
 	int					j;
 	int					k;
 }						t_count;
 
-typedef struct			s_dbl
+typedef struct s_dbl
 {
-	unsigned long long	m: 64;
-	unsigned long long	e: 15;
-	unsigned long long	s: 1;
+	unsigned long long	m : 64;
+	unsigned long long	e : 15;
+	unsigned long long	s : 1;
 }						t_dbl;
 
-typedef union			u_mask
+typedef union u_mask
 {
 	t_dbl				bits;
 	long double			num;
 }						t_mask;
 
-typedef	struct			s_buf
+typedef struct s_buf
 {
 	char				*wh_num;
 	char				*div_num;
@@ -95,6 +95,16 @@ void					ft_print_oint(t_printf *f);
 void					ft_print_xint(t_printf *f);
 void					ft_print_percent(t_printf *f);
 void					ft_print_other(t_printf *f);
+
+void					pr_fl_with_wi_next(t_printf *f, long long res, int length);
+void					t_print_int_if_res(intmax_t res, char *s);
+void					ft_print_address_if(t_printf *f, int length);
+void					ft_print_oint_if(t_printf *f, unsigned int length, uintmax_t res);
+void					x_print_fl_with_fm_if_len(t_printf *f, int length, int res);
+void					x_print_fl_with_fm_if_width(t_printf *f, int length, int res);
+int						case_zero(t_printf *f, int res);
+void					ft_ispacing_else(char c, t_printf *f, int length);
+
 
 void					ft_spacing(char c, t_printf *f, int length);
 void					ft_ispacing(char c, t_printf *f, int length);

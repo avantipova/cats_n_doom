@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   round_change.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:28:26 by poatmeal          #+#    #+#             */
-/*   Updated: 2020/08/08 15:15:27 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/12 00:35:05 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void			change_whole(t_buf *buf)
+void	change_whole(t_buf *buf)
 {
 	int		j;
 
@@ -31,7 +31,7 @@ void			change_whole(t_buf *buf)
 		buf->wh_num[BIG_BUFF - j] = buf->wh_num[BIG_BUFF - j] + 1;
 }
 
-void			change_div(t_buf *buf, int i)
+void	change_div(t_buf *buf, int i)
 {
 	if (buf->div_num[i] + 1 > 9)
 	{

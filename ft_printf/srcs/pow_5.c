@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pow_5.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 10:35:52 by poatmeal          #+#    #+#             */
-/*   Updated: 2020/08/08 15:15:18 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/12 00:32:24 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			count_nul(t_buf *buf, int nul)
+int	count_nul(t_buf *buf, int nul)
 {
 	int					i;
 	int					n;
@@ -34,7 +34,7 @@ int			count_nul(t_buf *buf, int nul)
 	return (n);
 }
 
-void		plus_number_5(t_buf *buf, int nul, int j)
+void	plus_number_5(t_buf *buf, int nul, int j)
 {
 	int					i;
 	long long int		x;
@@ -62,7 +62,7 @@ void		plus_number_5(t_buf *buf, int nul, int j)
 	}
 }
 
-int			fill_to_5(t_buf *buf, long long int coef, long long int x)
+int	fill_to_5(t_buf *buf, long long int coef, long long int x)
 {
 	int					y;
 
@@ -84,7 +84,7 @@ int			fill_to_5(t_buf *buf, long long int coef, long long int x)
 	return (y);
 }
 
-void		take_to_5(t_buf *buf, int pow, int nul)
+void	take_to_5(t_buf *buf, int pow, int nul)
 {
 	long long int		x;
 	int					y;

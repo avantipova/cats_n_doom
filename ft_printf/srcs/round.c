@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   round.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:25:21 by poatmeal          #+#    #+#             */
-/*   Updated: 2020/08/08 17:25:20 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/12 00:35:40 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void			check_round(t_buf *buf, int i)
+void	check_round(t_buf *buf, int i)
 {
 	while (i < BIG_BUFF && buf->div_num[i] == 0)
 		i++;
@@ -20,9 +20,9 @@ void			check_round(t_buf *buf, int i)
 		change_whole(buf);
 }
 
-void			check_round_div(t_buf *buf, int i)
+void	check_round_div(t_buf *buf, int i)
 {
-	int j;
+	int		j;
 
 	j = i;
 	while (i < BIG_BUFF && buf->div_num[i] == 0)
@@ -31,7 +31,7 @@ void			check_round_div(t_buf *buf, int i)
 		change_div(buf, j - 2);
 }
 
-void			round_whole(t_buf *buf, int i)
+void	round_whole(t_buf *buf, int i)
 {
 	if (buf->div_num[i] > 5)
 		change_whole(buf);
@@ -44,7 +44,7 @@ void			round_whole(t_buf *buf, int i)
 		check_round(buf, i + 1);
 }
 
-void			round_div(t_buf *buf, int i)
+void	round_div(t_buf *buf, int i)
 {
 	if (buf->div_num[i] > 5)
 		change_div(buf, i - 1);
@@ -57,10 +57,10 @@ void			round_div(t_buf *buf, int i)
 		check_round_div(buf, i + 1);
 }
 
-void			ft_round(t_buf *buf, t_printf *get)
+void	ft_round(t_buf *buf, t_printf *get)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	j = 0;
 	i = get->f_prec;
