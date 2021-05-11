@@ -6,7 +6,7 @@
 /*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 22:13:45 by sreicher          #+#    #+#             */
-/*   Updated: 2021/05/10 22:16:06 by sreicher         ###   ########.fr       */
+/*   Updated: 2021/05/11 21:59:48 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	check_objects_while(t_map_editor *ed, int fd)
 {
+	char	str[64];
 	int		i;
 
 	i = 0;
