@@ -25,7 +25,10 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 	{
 		while (n-- != 0)
 		{
-			if ((*p_dst++ = *p_src++) == u_c)
+			*p_dst = *p_src;
+			p_dst++;
+			p_src++;
+			if (*p_dst == u_c)
 				return (p_dst);
 		}
 	}

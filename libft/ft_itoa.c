@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static int		count_of_chars(int n)
+static int	count_of_chars(int n)
 {
 	int		count;
 
@@ -30,7 +30,7 @@ static int		count_of_chars(int n)
 	return (count);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*res;
 	int		c;
@@ -41,7 +41,8 @@ char			*ft_itoa(int n)
 	else
 		neg = 1;
 	c = count_of_chars(n);
-	if (!(res = (char *)malloc((c + 1) * sizeof(char))))
+	res = (char *)malloc((c + 1) * sizeof(char));
+	if (!res)
 		return (NULL);
 	res += (c);
 	*res = '\0';

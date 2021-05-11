@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-int		ft_print_params(int argc, char **argv)
+int	ft_print_params(int argc, char **argv)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (i < argc)

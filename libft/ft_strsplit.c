@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static int		ft_cnt_parts(const char *s, char c)
+static int	ft_cnt_parts(const char *s, char c)
 {
 	int		cnt;
 	int		in_substring;
@@ -34,7 +34,7 @@ static int		ft_cnt_parts(const char *s, char c)
 	return (cnt);
 }
 
-static int		ft_wlen(const char *s, char c)
+static int	ft_wlen(const char *s, char c)
 {
 	int		len;
 
@@ -47,7 +47,7 @@ static int		ft_wlen(const char *s, char c)
 	return (len);
 }
 
-char			**ft_strsplit(char const *s, char c)
+char	**ft_strsplit(char const *s, char c)
 {
 	char	**t;
 	int		nb_word;

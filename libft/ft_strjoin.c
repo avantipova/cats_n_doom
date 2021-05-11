@@ -13,9 +13,9 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static int		row_saver(char *dest, const char *src, int len, int position)
+static int	row_saver(char *dest, const char *src, int len, int position)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < len)
@@ -27,17 +27,18 @@ static int		row_saver(char *dest, const char *src, int len, int position)
 	return (i + position);
 }
 
-char			*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*fresh;
 	int		len;
 
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	if (!(fresh = (char*)malloc(ft_strlen(s2) + ft_strlen(s1))))
+	fresh = (char *)malloc(ft_strlen(s2) + ft_strlen(s1));
+	if (!fresh)
 		return (NULL);
 	len = row_saver(fresh, s2, ft_strlen(s2),
-	row_saver(fresh, s1, ft_strlen(s1), 0));
+			row_saver(fresh, s1, ft_strlen(s1), 0));
 	*(fresh + len) = 0;
 	return (fresh);
 }
