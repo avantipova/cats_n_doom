@@ -6,7 +6,7 @@
 /*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 22:52:01 by Chorange          #+#    #+#             */
-/*   Updated: 2021/05/10 22:15:47 by sreicher         ###   ########.fr       */
+/*   Updated: 2021/05/11 21:24:05 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void	check_walls(t_bsp *node, int i, int fd)
 
 void	check_objects(t_map_editor *ed, int fd)
 {
-	char	str[64];
-
 	ft_putstr_fd("\"objects\": [", fd);
 	check_objects_while(ed, fd);
 	ft_putstr_fd("],", fd);
