@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base_ll.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 15:32:25 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/10 15:32:39 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/12 22:10:19 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char				fill_string(long long prod)
+static char	fill_string(long long prod)
 {
 	char				c;
 
@@ -29,8 +29,14 @@ static unsigned long	get_length_num(long long nbr, int base, long long num)
 	unsigned long		l;
 	int					sign;
 
-	l = (num == 0) ? 1 : 0;
-	sign = (num < 0) ? 1 : 0;
+	if (num == 0)
+		l = 1;
+	else
+		l = 0;
+	if (num < 0)
+		sign = 1;
+	else
+		sign = 0;
 	while (nbr)
 	{
 		l++;
@@ -39,7 +45,18 @@ static unsigned long	get_length_num(long long nbr, int base, long long num)
 	return (l + sign);
 }
 
-char					*ft_itoa_base_ll(long long num, int base)
+int	ft_itoa_plus_minus_nbr_ll(long long num)
+{
+	long	nbr;
+
+	if (num < 0)
+		nbr = -num;
+	else
+		nbr = num;
+	return (nbr);
+}
+
+char	*ft_itoa_base_ll(long long num, int base)
 {
 	char				*str;
 	unsigned long		len;
@@ -48,9 +65,10 @@ char					*ft_itoa_base_ll(long long num, int base)
 
 	if (base < 2 || base > 36)
 		return (NULL);
-	nbr = (num < 0) ? -num : num;
+	nbr = ft_itoa_plus_minus_nbr_ll(num);
 	len = get_length_num(nbr, base, num);
-	if (!(str = ft_strnew(len)))
+	str = ft_strnew(len);
+	if (!str)
 		return (NULL);
 	len--;
 	while (nbr)
@@ -59,7 +77,9 @@ char					*ft_itoa_base_ll(long long num, int base)
 		nbr /= base;
 		str[len--] = fill_string(prod);
 	}
-	(len == 0) ? str[len] = '-' : 0;
-	(num == 0) ? str[len] = '0' : 0;
+	if (len == 0)
+		str[len] = '-';
+	if (num == 0)
+		str[len] = '0';
 	return (str);
 }
