@@ -29,6 +29,7 @@ SRC_NAMES = srcs/main.c srcs/image_handle.c \
 				srcs/math/linear_algebra_3.c srcs/math/matrix.c \
 				srcs/depth_buffer.c \
 				srcs/get_next_line/get_next_line.c \
+				srcs/get_next_line/support_gnl_functions.c \
 				srcs/load_obj/load_obj.c srcs/load_obj/get_smth.c \
 				srcs/my_graphics_lib/my_graphics_lib.c\
 				srcs/render/render_init.c srcs/render/render_init_1.c \
@@ -55,7 +56,9 @@ SRC_NAMES = srcs/main.c srcs/image_handle.c \
 				srcs/events/screen_png.c \
 				srcs/events/doom_menu.c \
 				srcs/clear/clean_objects.c \
-
+				srcs/check_arguments.c \
+				srcs/render_text.c \
+				srcs/welcome_screen.c \
 
 OBJ = $(SRC_NAMES:.c=.o)
 

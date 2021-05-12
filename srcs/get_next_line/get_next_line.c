@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 18:27:42 by chorange          #+#    #+#             */
-/*   Updated: 2021/04/11 18:15:10 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/05/12 23:29:43 by mjoss            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,6 @@ static t_list	*get_struct(t_list **file, int fd)
 /*
 ** ft_strplus - create fresh string with size = old_size + add
 */
-
-static int	ft_strplus(char **str, size_t add)
-{
-	char	*tmp;
-	size_t	len;
-
-	tmp = ft_strdup(*str);
-	len = ft_strlen(tmp);
-	free(*str);
-	*str = ft_strnew(len + add);
-	ft_strncpy(*str, tmp, len);
-	ft_strdel(&tmp);
-	return (1);
-}
 
 /*
 ** copy_to_chr -	add read the characters in destination
@@ -147,19 +133,16 @@ int	get_next_line(const int fd, char **line)
 	char			buf[BUFF_SIZE + 1];
 	static t_list	*fd_lst;
 	t_list			*curr;
+	int				ret;
 
-	VAL_FILE(fd, line, read(fd, buf, 0));
+	ret = read(fd, buf, 0);
+	if (val_file(fd, line, ret) == -1)
+		return (-1);
 	curr = get_struct(&fd_lst, fd);
 	curr->read_bytes = read(fd, buf, BUFF_SIZE);
-	while (curr->read_bytes)
-	{
-		buf[curr->read_bytes] = '\0';
-		MALL_CHECK(ft_strplus((char **)(&curr->content), curr->read_bytes));
-		ft_strncat((char *)curr->content, buf, curr->read_bytes);
-		if (ft_strchr(buf, '\n'))
-			break ;
-		curr->read_bytes = read(fd, buf, BUFF_SIZE);
-	}
+	ret = loop(curr, buf, fd);
+	if (ret == -1)
+		return (-1);
 	if (curr->read_bytes < BUFF_SIZE && !ft_strlen((char *)curr->content))
 		return (0);
 	curr->read_bytes = copy_to_chr(line, (char **)&curr->content, '\n');

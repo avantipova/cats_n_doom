@@ -162,5 +162,8 @@ void			arrow_keys(t_doom *doom, SDL_Event *event, int value);
 void			event_naruto(t_doom *doom);
 int				doom_menu(SDL_Event *event, t_doom *doom, int *quit);
 void			screen_png(SDL_Surface *srf, int num);
+void			check_arguments(int	ac, char **av);
+void			welcome_screen(t_doom *doom, SDL_Texture	**tex);
+void			render_text(t_doom *doom);
 
 #endif

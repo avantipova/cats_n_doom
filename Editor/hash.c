@@ -104,6 +104,9 @@ int	check_hash(char *foldername)
 	str2[read(fd.y, str2, 500000)] = 0;
 	hash_n = ft_atoi(str1);
 	if (hash_n != ft_atoi(str2))
+	{
+		ft_putendl("usage: ./DoomNukem your map");
 		exit(-2);
+	}
 	return (check_hash_free(str1, str2, hash_n));
 }

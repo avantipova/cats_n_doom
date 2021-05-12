@@ -5,6 +5,7 @@
 #include <sys/stat.h>
 #include "archiver.h"
 #include "duke.h"
+#include "archiver.h"
 
 
 void	creat_folders_by_filepath(char *path)
@@ -42,7 +43,7 @@ void	dearchivate_file(t_archiver *arc, char *filename)
 	creat_folders_by_filepath(filename_with_assets_folder);
 
 	arc->file_fd = open(filename_with_assets_folder,
-				O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);////////
+				O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
 		
 	write(arc->file_fd, arc->archive + arc->file_index, arc->file_length);
 	close(arc->file_fd);
@@ -55,9 +56,17 @@ void	dearchivate(char *archivename)
 	char		filename[64];
 	int			files_count;
 
-	arc.archive = malloc(99999999);///////
-	arc.archive_fd = open(archivename, O_RDONLY);///////
-	read(arc.archive_fd, arc.archive, 99999999);
+	arc.archive = malloc(99999999);
+	if ((arc.archive_fd = open(archivename, O_RDONLY)) < 0)
+	{
+		ft_putendl("usage: ./DoomNukem [your_map]");
+		exit(-2);
+	}
+	if ((read(arc.archive_fd, arc.archive, 99999999)) < 0)
+	{
+		ft_putendl("usage: ./DoomNukem [your_map]");
+		exit(-2);
+	}
 	i = 0;
 	files_count = ft_atoi(arc.archive);
 	arc.list_index = 10;

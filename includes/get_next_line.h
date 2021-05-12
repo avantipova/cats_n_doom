@@ -17,9 +17,8 @@
 # include <unistd.h>
 # define BUFF_SIZE 21
 
-# define MALL_CHECK(x) if (!(x)) return (-1);
-# define VAL_FILE(f, l, r) if ((f) < 0 || (l) == NULL || (r) < 0) return (-1);
-
-int						get_next_line(const int fd, char **line);
+int	get_next_line(const int fd, char **line);
+int	val_file(int f, char **line, int ret);
+int	loop(t_list *curr, char *buf, int fd);
 
 #endif
