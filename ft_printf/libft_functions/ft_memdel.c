@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: poatmeal <poatmeal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/30 14:11:41 by poatmeal          #+#    #+#             */
-/*   Updated: 2020/08/30 14:11:57 by poatmeal         ###   ########.fr       */
+/*   Updated: 2021/05/12 22:14:38 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		ft_memdel(void **ap)
+void	ft_memdel(void **ap)
 {
 	if (ap)
 	{

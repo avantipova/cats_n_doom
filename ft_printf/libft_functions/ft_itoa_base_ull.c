@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base_ull.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 15:35:57 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/10 15:48:56 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/12 22:14:17 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char				fill_string(unsigned long long prod, char a)
+static char	fill_string(unsigned long long prod, char a)
 {
 	char				c;
 
@@ -30,7 +30,10 @@ static unsigned long	get_length_num(unsigned long long num, int base)
 {
 	unsigned long		l;
 
-	l = (num == 0) ? 1 : 0;
+	if (num == 0)
+		l = 1;
+	else
+		l = 0;
 	while (num)
 	{
 		l++;
@@ -39,7 +42,7 @@ static unsigned long	get_length_num(unsigned long long num, int base)
 	return (l);
 }
 
-char					*ftbaseull(unsigned long long num, int base, char c)
+char	*ftbaseull(unsigned long long num, int base, char c)
 {
 	char				*str;
 	unsigned long		len;
@@ -48,7 +51,8 @@ char					*ftbaseull(unsigned long long num, int base, char c)
 	if (base < 2 || base > 36)
 		return (NULL);
 	len = get_length_num(num, base);
-	if (!(str = ft_strnew(len)))
+	str = ft_strnew(len);
+	if (!str)
 		return (NULL);
 	len--;
 	while (num)
@@ -57,6 +61,7 @@ char					*ftbaseull(unsigned long long num, int base, char c)
 		num /= base;
 		str[len--] = fill_string(prod, c);
 	}
-	(num == 0) ? str[len] = '0' : 0;
+	if (num == 0)
+		str[len] = '0';
 	return (str);
 }

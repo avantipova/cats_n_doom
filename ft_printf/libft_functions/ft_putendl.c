@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 15:57:09 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/07 21:16:04 by aagrivan         ###   ########.fr       */
+/*   Updated: 2021/05/12 22:14:47 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		ft_putendl(char const *s)
+void	ft_putendl(char const *s)
 {
 	int		i;
 

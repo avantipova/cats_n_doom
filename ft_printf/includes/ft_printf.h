@@ -6,7 +6,7 @@
 /*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 16:36:37 by aagrivan          #+#    #+#             */
-/*   Updated: 2021/05/12 00:21:55 by sreicher         ###   ########.fr       */
+/*   Updated: 2021/05/12 22:18:00 by sreicher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,18 @@ void					ft_print_xint(t_printf *f);
 void					ft_print_percent(t_printf *f);
 void					ft_print_other(t_printf *f);
 
-void					pr_fl_with_wi_next(t_printf *f, long long res, int length);
+void					pr_fl_with_wi_next(t_printf *f, long long res,
+							int length);
 void					t_print_int_if_res(intmax_t res, char *s);
 void					ft_print_address_if(t_printf *f, int length);
-void					ft_print_oint_if(t_printf *f, unsigned int length, uintmax_t res);
-void					x_print_fl_with_fm_if_len(t_printf *f, int length, int res);
-void					x_print_fl_with_fm_if_width(t_printf *f, int length, int res);
+void					ft_print_oint_if(t_printf *f, unsigned int length,
+							uintmax_t res);
+void					x_print_fl_with_fm_if_len(t_printf *f, int length,
+							int res);
+void					x_print_fl_with_fm_if_width(t_printf *f, int length,
+							int res);
 int						case_zero(t_printf *f, int res);
 void					ft_ispacing_else(char c, t_printf *f, int length);
-
 
 void					ft_spacing(char c, t_printf *f, int length);
 void					ft_ispacing(char c, t_printf *f, int length);
