@@ -6,7 +6,7 @@
 /*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:58:06 by npetrell          #+#    #+#             */
-/*   Updated: 2021/05/13 22:56:15 by baylak           ###   ########.fr       */
+/*   Updated: 2021/05/13 23:50:17 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_enemy(t_doom *doom, t_vertex pos)
 			{
 				damage = 100 / length(sub(doom->scene.camera.position, \
 				pos));
-				ft_printf("damage: %d\n", damage);
+				printf("damage: %d\n", damage);
 				doom->enemies[i].health -= damage;
 				if (doom->enemies[i].health <= 0)
 					doom->kills++;

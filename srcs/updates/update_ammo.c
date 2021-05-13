@@ -6,7 +6,7 @@
 /*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:45:05 by npetrell          #+#    #+#             */
-/*   Updated: 2021/05/13 22:56:13 by baylak           ###   ########.fr       */
+/*   Updated: 2021/05/13 23:51:02 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	update_ammo(t_doom *doom)
 				doom->scene.camera.position)) < 1.5)
 			{
 				doom->player_ammo += 10;
-				ft_printf("ammo: %d\n", doom->player_ammo);
+				printf("ammo: %d\n", doom->player_ammo);
 				doom->ammo[i].enable = 0;
 			}
 		}
