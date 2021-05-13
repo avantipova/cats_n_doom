@@ -6,7 +6,7 @@
 /*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:55:14 by npetrell          #+#    #+#             */
-/*   Updated: 2021/05/07 04:29:17 by baylak           ###   ########.fr       */
+/*   Updated: 2021/05/13 21:47:19 by maxim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,10 @@ void	event_hand(SDL_Event *event, void *doom_ptr, int *quit)
 		return ;
 	if (doom->win || doom->lose)
 	{
-		if (event->type == SDL_KEYDOWN && event->key.keysym.sym == SDLK_RETURN)
-		{
-			doom->lose = 0;
-			doom->win = 0;
-			doom->menu_opened = 1;
-			restart(doom);
-		}
-		return ;
+		doom->lose = 0;
+		doom->win = 0;
+		doom->menu_opened = 1;
+		restart(doom);
 	}
 	event_hand_1(doom, event);
 }
