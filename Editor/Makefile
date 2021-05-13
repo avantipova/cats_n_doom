@@ -11,7 +11,7 @@ OBJECTS = editor.o my_graphics_lib.o image_handle.o linear_algebra.o \
 				console_instructions_1.o console_instructions_2.o cursor_on_line_on_point.o \
 				new_sector_new_point.o select_sector_by_bsp.o plus_minus_enter_keys.o bsp_recurse.o bsp_recurse_malloc.o \
 				reconstruct_circuits.o key_down.o get_cutter.o computing_walls_1.o computing_walls_2.o \
-				save_json_1.o save_json_2.o save_json_3.o save_json_3_func.o hash_2.o archiver.o get_next_line.o\
+				save_json_1.o save_json_2.o save_json_3.o save_json_3_func.o hash_2.o archiver.o get_next_line.o support_gnl_functions.o \
 
 SOURCES = editor.c ../srcs/my_graphics_lib/my_graphics_lib.c ../srcs/image_handle.c ../srcs/math/linear_algebra.c \
 				../srcs/math/linear_algebra.c ../srcs/math/linear_algebra_1.c \
@@ -22,7 +22,7 @@ SOURCES = editor.c ../srcs/my_graphics_lib/my_graphics_lib.c ../srcs/image_handl
 				console_instructions_1.c console_instructions_2.c cursor_on_line_on_point.c \
 				new_sector_new_point.c select_sector_by_bsp.c plus_minus_enter_keys.c bsp_recurse.c bsp_recurse_malloc.c \
 				reconstruct_circuits.c key_down.c get_cutter.c computing_walls_1.c computing_walls_2.c \
-				save_json_1.c save_json_2.c save_json_3.c save_json_3_func.c hash_2.c ../Archiver/archiver.c ../srcs/get_next_line/get_next_line.c\
+				save_json_1.c save_json_2.c save_json_3.c save_json_3_func.c hash_2.c ../Archiver/archiver.c ../srcs/get_next_line/get_next_line.c ../srcs/get_next_line/support_gnl_functions.c \
 
 LIBS = -L ../libft -lft -lm -framework OpenGL\
 	-framework AppKit -framework OpenCL -framework OpenGL
