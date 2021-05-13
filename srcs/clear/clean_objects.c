@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:53:26 by npetrell          #+#    #+#             */
-/*   Updated: 2021/04/14 21:23:31 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/05/13 22:56:16 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	clean_enemies(t_doom *doom)
 	int	j;
 
 	i = 0;
-	printf(" count %d\n", doom->enemies_count);
+	ft_printf(" count %d\n", doom->enemies_count);
 	while (i < doom->enemies_count)
 	{
 		free(doom->enemies[i].sprite.instance.model.vertexes);

@@ -7,11 +7,10 @@
 #include "duke.h"
 #include "archiver.h"
 
-
 void	creat_folders_by_filepath(char *path)
 {
-	char folderpath[64];
-	char *ptr;
+	char	folderpath[64];
+	char	*ptr;
 
 	ptr = path;
 	while (1)
@@ -22,29 +21,25 @@ void	creat_folders_by_filepath(char *path)
 		ptr += 1;
 		ft_bzero(folderpath, 64);
 		ft_memcpy(folderpath, path, ptr - path);
-		mkdir(folderpath, S_IRWXU);	
+		mkdir(folderpath, S_IRWXU);
 	}
 }
 
 void	dearchivate_file(t_archiver *arc, char *filename)
 {
-	char filename_with_assets_folder[128];
+	char	filename_with_assets_folder[128];
 
 	ft_strcpy(filename_with_assets_folder, ASSETS_FOLDER_NAME "/");
 	ft_memcpy(filename, arc->archive + arc->list_index, 64);
 	ft_strcat(filename_with_assets_folder, filename);
-
 	arc->list_index += 64;
 	arc->file_index = ft_atoi(arc->archive + arc->list_index);
 	arc->list_index += 10;
 	arc->file_length = ft_atoi(arc->archive + arc->list_index);
 	arc->list_index += 10;
-
 	creat_folders_by_filepath(filename_with_assets_folder);
-
-	arc->file_fd = open(filename_with_assets_folder,
+	arc->file_fd = open(filename_with_assets_folder, \
 				O_RDWR | O_CREAT | O_TRUNC, S_IRWXU);
-		
 	write(arc->file_fd, arc->archive + arc->file_index, arc->file_length);
 	close(arc->file_fd);
 }
@@ -57,26 +52,23 @@ void	dearchivate(char *archivename)
 	int			files_count;
 
 	arc.archive = malloc(99999999);
-	if ((arc.archive_fd = open(archivename, O_RDONLY)) < 0)
+	arc.archive_fd = open(archivename, O_RDONLY);
+	if (arc.archive_fd < 0)
 	{
 		ft_putendl("usage: ./DoomNukem [your_map]");
 		exit(-2);
 	}
-	if ((read(arc.archive_fd, arc.archive, 99999999)) < 0)
+	i = read(arc.archive_fd, arc.archive, 99999999);
+	if (i < 0)
 	{
 		ft_putendl("usage: ./DoomNukem [your_map]");
 		exit(-2);
 	}
-	i = 0;
+	i = -1;
 	files_count = ft_atoi(arc.archive);
 	arc.list_index = 10;
-
-	while (i < files_count)
-	{
+	while (++i < files_count)
 		dearchivate_file(&arc, filename);
-		i++;
-	}
-
 	free(arc.archive);
 	close(arc.archive_fd);
 }

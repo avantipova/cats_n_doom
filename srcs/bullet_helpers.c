@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bullet_helpers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:59:32 by npetrell          #+#    #+#             */
-/*   Updated: 2021/04/24 21:57:08 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/05/13 22:56:20 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	fire(t_doom *doom)
 		doom->bullets[index].alpha = doom->alpha;
 		doom->bullets[index].enable = 1;
 		doom->player_ammo--;
-		printf("ammo: %d\n", doom->player_ammo);
+		ft_printf("ammo: %d\n", doom->player_ammo);
 	}
 	doom->drb_anim.curr = 0;
 	doom->drb_anim.curr_f = 0.0;

@@ -21,9 +21,9 @@
 		и потом идут сами файлики, побайтово записанные в строчечку
 */
 
-void			free_archive_files_list(t_archive_files_list *files_list)
+void	free_archive_files_list(t_archive_files_list *files_list)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < files_list->files_count)
@@ -34,11 +34,10 @@ void			free_archive_files_list(t_archive_files_list *files_list)
 	free(files_list->files);
 }
 
-
 void	archivate_file(int file_index, t_archiver *arc, char *tmp,
 				t_archive_files_list *files_list)
 {
-	arc->file_fd = open(files_list->files[file_index], O_RDONLY);///////
+	arc->file_fd = open(files_list->files[file_index], O_RDONLY);
 	if (arc->file_fd < 0)
 	{
 		ft_putstr("Ошибка открытия файла ");
@@ -61,15 +60,14 @@ void	archivate_file(int file_index, t_archiver *arc, char *tmp,
 	close(arc->file_fd);
 }
 
-
 void	archivate(t_archive_files_list *files_list, char *archive_name)
 {
 	t_archiver	arc;
 	char		tmp[64];
 	int			i;
 
-	arc.file = malloc(99999999);///////
-	arc.archive = malloc(999999999);////////
+	arc.file = malloc(99999999);
+	arc.archive = malloc(999999999);
 	ft_bzero(arc.archive, 999999999);
 	arc.list_index = 0;
 	arc.file_index = 84 * files_list->files_count + 10;
@@ -81,7 +79,7 @@ void	archivate(t_archive_files_list *files_list, char *archive_name)
 		archivate_file(i, &arc, tmp, files_list);
 		i++;
 	}
-	arc.archive_fd = open(archive_name, O_RDWR | O_CREAT, S_IRWXU);/////////
+	arc.archive_fd = open(archive_name, O_RDWR | O_CREAT, S_IRWXU);
 	write(arc.archive_fd, arc.archive, arc.file_index);
 	close(arc.archive_fd);
 	free(arc.archive);

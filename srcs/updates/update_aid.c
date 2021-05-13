@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_aid.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:45:47 by npetrell          #+#    #+#             */
-/*   Updated: 2021/04/24 20:06:22 by npetrell         ###   ########.fr       */
+/*   Updated: 2021/05/13 22:56:15 by baylak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	update_aid(t_doom *doom)
 				doom->scene.camera.position)) < 1.5)
 			{
 				doom->health += 30;
-				printf("health: %d\n", doom->health);
+				ft_printf("health: %d\n", doom->health);
 				doom->aid[i].enable = 0;
 			}
 		}
