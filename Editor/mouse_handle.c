@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_handle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 14:10:02 by Chorange          #+#    #+#             */
-/*   Updated: 2021/05/10 21:29:42 by sreicher         ###   ########.fr       */
+/*   Updated: 2021/05/14 20:28:36 by ldeirdre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void	mouse_b_d_select_sector(t_map_editor *ed)
 
 static void	mouse_b_d_new_point(t_map_editor *ed)
 {
+	ed->click_count++;
 	if (ed->map.circuits[ed->map.active].points_count > 90)
 	{
 		ft_putendl("Больше нельзя");

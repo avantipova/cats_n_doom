@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 14:08:46 by Chorange          #+#    #+#             */
-/*   Updated: 2021/05/10 21:21:58 by sreicher         ###   ########.fr       */
+/*   Updated: 2021/05/14 20:25:22 by ldeirdre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	editor_init(t_map_editor *ed)
 	ed->tv = (t_vertex){0.0, 0.0, 0.0};
 	ed->aim = (t_vertex){0.0, 10.0, 0.0};
 	ed->step = STEP_1_DRAW;
+	ed->click_count = 0;
 	map_init(&ed->map);
 }

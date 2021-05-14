@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 16:11:05 by Chorange          #+#    #+#             */
-/*   Updated: 2021/05/10 22:15:04 by sreicher         ###   ########.fr       */
+/*   Updated: 2021/05/14 20:25:08 by ldeirdre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ typedef struct s_map_editor
 	int				step;
 
 	int				mode;
+	int				click_count;
 }					t_map_editor;
 
 void				export_map(t_map_editor *ed);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Chorange <Chorange@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 19:42:13 by Chorange          #+#    #+#             */
-/*   Updated: 2021/04/03 01:46:19 by Chorange         ###   ########.fr       */
+/*   Updated: 2021/05/14 20:29:21 by ldeirdre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	bsp_compile(t_map_editor *ed)
 	transform_data(ed);
 	ft_memcpy(circuits, ed->map.circuits, sizeof(t_circuit) * \
 				ed->map.circuits_count);
+	if (ed->click_count < 3)
+		exit(2);
 	bsp_recurse(&ed->root, circuits, ed->map.circuits_count, &ed->map);
 }
 
