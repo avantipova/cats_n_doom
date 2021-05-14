@@ -6,7 +6,7 @@
 /*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 18:11:28 by Chorange          #+#    #+#             */
-/*   Updated: 2021/05/14 20:28:00 by ldeirdre         ###   ########.fr       */
+/*   Updated: 2021/05/14 21:44:33 by ldeirdre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,6 @@ void	key_down(t_map_editor *ed, SDL_Event *event)
 			ed->map.active = 0;
 		}
 	}
+	if (event->key.keysym.sym == SDLK_ESCAPE)
+		exit(0);
 }

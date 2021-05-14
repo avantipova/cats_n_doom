@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plus_minus_enter_keys1.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sreicher <sreicher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 21:41:17 by sreicher          #+#    #+#             */
-/*   Updated: 2021/05/10 21:41:39 by sreicher         ###   ########.fr       */
+/*   Updated: 2021/05/14 20:45:54 by ldeirdre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	key_minus_down(t_map_editor *ed)
 	{
 		ed->curr_object -= 1;
 		if (ed->curr_object < 0)
-			ed->curr_object = 3;
+			ed->curr_object = 8;
 		write_object_num(ed);
 	}
 	if (ed->step == STEP_9_DECOR)
@@ -104,7 +104,7 @@ static void	key_plus_down_2(t_map_editor *ed)
 	if (ed->step == STEP_10_OBJECTS)
 	{
 		ed->curr_object += 1;
-		if (ed->curr_object > 3)
+		if (ed->curr_object > 8)
 			ed->curr_object = 0;
 		write_object_num(ed);
 	}
