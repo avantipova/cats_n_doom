@@ -6,7 +6,7 @@
 /*   By: npetrell <npetrell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 15:54:00 by mjoss             #+#    #+#             */
-/*   Updated: 2021/04/29 08:29:42 by maxim            ###   ########.fr       */
+/*   Updated: 2021/05/15 16:43:14 by mjoss            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_music	*sound_init(void)
 		exit(EXIT_FAILURE);
 	}
 	mixer_init();
+	Mix_VolumeMusic(20);
 	load_sound(music);
 	load_music(music);
 	music->playing_naruto = 0;

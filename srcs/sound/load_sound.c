@@ -6,7 +6,7 @@
 /*   By: ldeirdre <ldeirdre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 15:52:40 by mjoss             #+#    #+#             */
-/*   Updated: 2021/05/01 22:31:50 by ldeirdre         ###   ########.fr       */
+/*   Updated: 2021/05/15 16:36:59 by mjoss            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	load_naruto(t_music *music)
 		ft_putstr(Mix_GetError());
 		exit(EXIT_FAILURE);
 	}
+	Mix_VolumeChunk(naruto, MIX_MAX_VOLUME);
 	music->naruto = naruto;
 }
 
@@ -38,6 +39,7 @@ static void	load_anime_tyan(t_music *music)
 		ft_putstr(Mix_GetError());
 		exit(EXIT_FAILURE);
 	}
+	Mix_VolumeChunk(anime_tyan, MIX_MAX_VOLUME);
 	music->anime_tyan = anime_tyan;
 }
 
