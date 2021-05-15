@@ -6,7 +6,7 @@
 /*   By: baylak <baylak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:53:26 by npetrell          #+#    #+#             */
-/*   Updated: 2021/05/13 23:51:08 by baylak           ###   ########.fr       */
+/*   Updated: 2021/05/15 15:24:28 by mjoss            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	clean_enemies(t_doom *doom)
 	int	j;
 
 	i = 0;
-	printf(" count %d\n", doom->enemies_count);
 	while (i < doom->enemies_count)
 	{
 		free(doom->enemies[i].sprite.instance.model.vertexes);
